@@ -96,5 +96,5 @@ export default StyleSheet.create({
 		fontFamily:'Product',
 		color: '#777',
 		marginTop:18
-	}
+	},
 });
