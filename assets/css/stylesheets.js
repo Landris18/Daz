@@ -4,23 +4,23 @@ import { StyleSheet} from 'react-native';
 export default StyleSheet.create({
 //Page de chargement//
 	container:{
-		backgroundColor: '#ffffff',
+		backgroundColor: '#fafafa',
 		alignItems: 'center',
 		flex: 2,
 		justifyContent:'center'
 	},
 	logoView:{
-		backgroundColor: '#ffffff',
+		backgroundColor: '#fafafa',
 		alignItems: 'center',
 		flex: 2,
 		justifyContent:'center',
      },
      logo:{
-		width:140,
-		height:140,
+		width:160,
+		height:160,
 		borderRadius:80,
 		justifyContent:'center',
-		alignItems: 'center',
+          alignItems: 'center',
      },
 	madeView:{
 		position:'absolute',
@@ -30,7 +30,7 @@ export default StyleSheet.create({
      dazing:{
           fontFamily: 'ProductBold',
 		color: '#999',
-		fontSize: 14,
+          fontSize: 14,
      },
 	made:{
 		fontFamily: 'Product',
