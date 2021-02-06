@@ -4,13 +4,13 @@ import { StyleSheet} from 'react-native';
 export default StyleSheet.create({
 //Page de chargement//
 	container:{
-		backgroundColor: '#fafafa',
+		backgroundColor: '#ffffff',
 		alignItems: 'center',
 		flex: 2,
 		justifyContent:'center'
 	},
 	logoView:{
-		backgroundColor: '#fafafa',
+		backgroundColor: '#ffffff',
 		alignItems: 'center',
 		flex: 2,
 		justifyContent:'center',
@@ -38,9 +38,10 @@ export default StyleSheet.create({
 		fontSize: 14,
 	},
 
+
 //Page de Login//
      loginPage:{
-          backgroundColor: '#fafafa',
+          backgroundColor: '#ffffff',
           alignItems: 'center',
           flex: 2,
           justifyContent:'center',
@@ -57,11 +58,12 @@ export default StyleSheet.create({
 		color: '#999',
 		fontSize: 20,
 		width:275,
-		textAlign:'center'
+		textAlign:'center',
+		marginTop:14,
 	},
 	inputUser:{
 		fontFamily: 'Product',
-		backgroundColor: '#ffffff',
+		backgroundColor: '#fafafa',
 		width:280,
 		height:45,
 		borderRadius:25,
@@ -71,7 +73,7 @@ export default StyleSheet.create({
 	},
 	inputPass:{
 		fontFamily: 'Product',
-		backgroundColor: '#ffffff',
+		backgroundColor: '#fafafa',
 		width:280,
 		height:45,
 		borderRadius:25,

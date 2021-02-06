@@ -45,7 +45,7 @@ function splash({navigation}){
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
-				<Image style={styles.logo} source={require('./assets/images/dlogo.png')} ></Image>
+				<Image style={styles.logo} source={require('./assets/images/playlogo.png')} ></Image>
 			</View>
 			<View style={styles.madeView}>
 				<Text style={styles.dazing}>DAZING</Text>
@@ -59,7 +59,7 @@ function splash({navigation}){
 function login({navigation}) {
 	return (
 		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/dlogo.png')} ></Image>
+			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
 			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
 			<TextInput style={styles.inputPass} placeholder="Password"/>
