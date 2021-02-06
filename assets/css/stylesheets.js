@@ -40,9 +40,59 @@ export default StyleSheet.create({
 
 //Page de Login//
      loginPage:{
-          backgroundColor: '#ffffff',
+          backgroundColor: '#fafafa',
           alignItems: 'center',
           flex: 2,
           justifyContent:'center',
-     },
+	},
+	logoLogin:{
+		width:140,
+		height:140,
+		borderRadius:80,
+		justifyContent:'center',
+          alignItems: 'center',
+	},
+	textLogin:{
+		fontFamily: 'Product',
+		color: '#999',
+		fontSize: 20,
+		width:275,
+		textAlign:'center'
+	},
+	inputUser:{
+		fontFamily: 'Product',
+		backgroundColor: '#ffffff',
+		width:280,
+		height:45,
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#555',
+		marginTop:27,
+	},
+	inputPass:{
+		fontFamily: 'Product',
+		backgroundColor: '#ffffff',
+		width:280,
+		height:45,
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#555',
+		marginTop:15
+	},
+	btnLogin:{
+		fontFamily:'ProductBold',
+		backgroundColor:'#901d78',
+		fontSize:13,
+		color:'#fff',
+		padding:12,
+		borderRadius:20,
+		paddingLeft:45,
+		paddingRight:45,
+		marginTop:45
+	},
+	forgot:{
+		fontFamily:'Product',
+		color: '#777',
+		marginTop:18
+	}
 });

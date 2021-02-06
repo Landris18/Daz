@@ -4,9 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, {Component} from 'react';
 import styles from './assets/css/stylesheets'
-import { StyleSheet, View, Text, Image, Button} from 'react-native';
+import {View, Text, Image, Button} from 'react-native';
 import * as Font from 'expo-font';
 import { Feather } from '@expo/vector-icons';
+import { TextInput } from 'react-native-gesture-handler';
 
 
 //Inmporter le font Product Sans
@@ -38,9 +39,9 @@ export default function App({navigation}){
 //Page de Chargement
 function splash({navigation}){
 	//On navigue vers la page login après 8000ms soit 8s
-	/*setTimeout(function () {
+	setTimeout(function () {
 		navigation.navigate('login');
-	},8000);*/
+	},8000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
@@ -58,7 +59,12 @@ function splash({navigation}){
 function login({navigation}) {
 	return (
 		<View style={styles.loginPage}>
-			<Button title="Go" onPress={() => navigation.navigate('splash')}/>
+			<Image style={styles.logoLogin} source={require('./assets/images/dlogo.png')} ></Image>
+			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
+			<TextInput style={styles.inputUser} placeholder="Username"/>
+			<TextInput style={styles.inputPass} placeholder="Password"/>
+			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>LOGIN</Text>
+			<Text style={styles.forgot}>Forgot Password ?</Text>
 		</View>
 	)  
 }
