@@ -32,7 +32,23 @@ export default function App ({navigation}){
 				<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 				<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
 				<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
-				<Stack.Screen name="forgot" component={forgot} options={{ title:'Forgot' }}/>
+				<Stack.Screen 
+					name="forgot" 
+					component={forgot} 
+					options={{ 	
+							headerShown:true,
+							title:'Forgot password',
+							headerStyle: {  
+								backgroundColor: '#901d78',
+								elevation:3,  
+							},  
+							headerTintColor: '#ffffff',  
+							headerTitleStyle: {  
+								fontFamily:'Product',
+								fontSize:16,
+							},   
+					}}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	)
