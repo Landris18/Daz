@@ -8,11 +8,11 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/playlogo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

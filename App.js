@@ -3,8 +3,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, {Component} from 'react';
-import styles from './assets/css/stylesheets'
-import {View, Text, Image, Button} from 'react-native';
+import styles from './assets/css/stylesheets';
+import { BottomNavigation } from 'react-native-paper';
+import { View, Text, Image } from 'react-native';
 import * as Font from 'expo-font';
 import { Feather } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
@@ -65,9 +66,9 @@ function login({navigation}) {
 			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
 			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Password"/>
-			<Text style={styles.btnLogin} onPress={() => navigation.navigate('create')}>LOGIN</Text>
-			<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
+			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
+			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>LOGIN</Text>
+			<Text style={styles.forgot}>Forgot Password ?</Text>
 		</View>
 	)  
 }
