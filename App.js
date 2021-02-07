@@ -3,8 +3,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, {Component} from 'react';
-import styles from './assets/css/stylesheets'
-import {View, Text, Image, Button} from 'react-native';
+import styles from './assets/css/stylesheets';
+import { BottomNavigation } from 'react-native-paper';
+import { View, Text, Image } from 'react-native';
 import * as Font from 'expo-font';
 import { Feather } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
