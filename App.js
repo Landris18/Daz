@@ -2,9 +2,8 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { BottomNavigation } from 'react-native-paper';
 import { View, Text, Image } from 'react-native';
 import * as Font from 'expo-font';
 import { Feather } from '@expo/vector-icons';
@@ -29,11 +28,11 @@ const Stack = createStackNavigator();
 export default function App ({navigation}){
 	return(
 		<NavigationContainer>
-			<Stack.Navigator headerMode="none">
-				<Stack.Screen name="splash" component={splash}/>
-				<Stack.Screen name="login" component={login}/>
-				<Stack.Screen name="create" component={create}/>
-				<Stack.Screen name="forgot" component={forgot}/>
+			<Stack.Navigator>
+				<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
+				<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
+				<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
+				<Stack.Screen name="forgot" component={forgot} options={{ title:'Forgot' }}/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	)
@@ -41,7 +40,7 @@ export default function App ({navigation}){
 
 
 //Page de Chargement
-function splash({navigation}){
+function splash({ navigation }){
 	//On navigue vers la page login après 8000ms soit 8s
 	setTimeout(function () {
 		navigation.navigate('login');
@@ -61,7 +60,7 @@ function splash({navigation}){
 
 
 //Page Login
-function login({navigation}) {
+function login({ navigation }) {
 	return (
 		<View style={styles.loginPage}>
 			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
@@ -76,7 +75,7 @@ function login({navigation}) {
 
 
 //Page création de compte
-function create({navigation}){
+function create({ navigation }){
 	return(
 		<View style={styles.loginPage}>
 			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
@@ -92,7 +91,7 @@ function create({navigation}){
 
 
 //Page Forgot password
-function forgot({navigation}){
+function forgot({ navigation }){
 	return(
 		<View style={styles.loginPage}>
 			<Text style={styles.textForgot}>Entrez votre adresse mail !</Text>
@@ -101,3 +100,12 @@ function forgot({navigation}){
 		</View>
 	)
 }
+
+//Main page
+// function mainPage({ }){
+// 	return(
+// 		<View>
+
+// 		</View>
+// 	)
+// }
