@@ -59,7 +59,7 @@ export default StyleSheet.create({
 		fontSize: 20,
 		width:275,
 		textAlign:'center',
-		marginTop:14,
+		marginTop:5,
 	},
 	inputUser:{
 		fontFamily: 'Product',

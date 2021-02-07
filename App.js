@@ -30,7 +30,9 @@ export default function App({navigation}){
 		<NavigationContainer>
 			<Stack.Navigator headerMode="none">
 				<Stack.Screen name="splash" component={splash}/>
-				<Stack.Screen name="login" component={login}/>	
+				<Stack.Screen name="login" component={login}/>
+				<Stack.Screen name="create" component={create}/>
+				<Stack.Screen name="forgot" component={forgot}/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	)
@@ -41,7 +43,7 @@ function splash({navigation}){
 	//On navigue vers la page login après 8000ms soit 8s
 	setTimeout(function () {
 		navigation.navigate('login');
-	},8000);
+	},7000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
@@ -55,6 +57,7 @@ function splash({navigation}){
 	)
 }
 
+
 //Page Login
 function login({navigation}) {
 	return (
@@ -63,8 +66,37 @@ function login({navigation}) {
 			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
 			<TextInput style={styles.inputPass} placeholder="Password"/>
-			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>LOGIN</Text>
-			<Text style={styles.forgot}>Forgot Password ?</Text>
+			<Text style={styles.btnLogin} onPress={() => navigation.navigate('create')}>LOGIN</Text>
+			<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
 		</View>
 	)  
+}
+
+
+//Page création de compte
+function create({navigation}){
+	return(
+		<View style={styles.loginPage}>
+			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
+			<Text style={styles.textLogin}>C'est simple et rapide !</Text>
+			<TextInput style={styles.inputUser} placeholder="Username"/>
+			<TextInput style={styles.inputUser} placeholder="Email"/>
+			<TextInput style={styles.inputPass} placeholder="Password"/>
+			<TextInput style={styles.inputPass} placeholder="Confirm password"/>
+			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
+		</View>
+	)
+}
+
+
+//Page Forgot password
+function forgot({navigation}){
+	return(
+		<View style={styles.loginPage}>
+			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
+			<Text style={styles.textLogin}>Entrez ici le code de confirmation envoyé dans votre adresse mail.</Text>
+			<TextInput style={styles.inputUser} placeholder="Username"/>
+			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CONFIRMER</Text>
+		</View>
+	)
 }
