@@ -22,6 +22,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android":{
+      "package": "com.blackmavericks.daz",
+      "versionCode": 0
+    },
     "ios": {
       "supportsTablet": true
     }
