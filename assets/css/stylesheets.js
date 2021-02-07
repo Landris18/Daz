@@ -92,9 +92,20 @@ export default StyleSheet.create({
 		paddingRight:45,
 		marginTop:45
 	},
+
+
+//Page Forgot Password
 	forgot:{
 		fontFamily:'Product',
 		color: '#777',
 		marginTop:18
+	},
+	textForgot:{
+		fontFamily: 'Product',
+		color: '#999',
+		fontSize: 20,
+		width:150,
+		textAlign:'center',
+		marginTop:5,
 	},
 });

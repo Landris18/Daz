@@ -10,7 +10,7 @@ import { Feather } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
-//Inmporter le font Product Sans
+//Importer le font Product Sans
 function LoadProduct() {
 	Font.loadAsync({
 		'Product': require('./assets/fonts/PS.ttf'),
@@ -25,7 +25,7 @@ const Stack = createStackNavigator();
 
 
 //Gestion des pages (screen)
-export default function App({navigation}){
+export default function App ({navigation}){
 	return(
 		<NavigationContainer>
 			<Stack.Navigator headerMode="none">
@@ -37,6 +37,7 @@ export default function App({navigation}){
 		</NavigationContainer>
 	)
 }
+
 
 //Page de Chargement
 function splash({navigation}){
@@ -65,7 +66,7 @@ function login({navigation}) {
 			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
 			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Password"/>
+			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
 			<Text style={styles.btnLogin} onPress={() => navigation.navigate('create')}>LOGIN</Text>
 			<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
 		</View>
@@ -81,8 +82,8 @@ function create({navigation}){
 			<Text style={styles.textLogin}>C'est simple et rapide !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
 			<TextInput style={styles.inputUser} placeholder="Email"/>
-			<TextInput style={styles.inputPass} placeholder="Password"/>
-			<TextInput style={styles.inputPass} placeholder="Confirm password"/>
+			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
+			<TextInput style={styles.inputPass} placeholder="Confirm password" secureTextEntry/>
 			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
 		</View>
 	)
@@ -93,9 +94,8 @@ function create({navigation}){
 function forgot({navigation}){
 	return(
 		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Entrez ici le code de confirmation envoyé dans votre adresse mail.</Text>
-			<TextInput style={styles.inputUser} placeholder="Username"/>
+			<Text style={styles.textForgot}>Entrez votre adresse mail !</Text>
+			<TextInput style={styles.inputUser} placeholder="Adresse mail"/>
 			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CONFIRMER</Text>
 		</View>
 	)
