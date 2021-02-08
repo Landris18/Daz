@@ -57,7 +57,7 @@ export default function App ({navigation}){
 
 //Page de Chargement
 function splash({ navigation }){
-	//On navigue vers la page login après 8000ms soit 8s
+	//On navigue vers la page login après 7000ms soit 7s
 	setTimeout(function () {
 		navigation.navigate('login');
 	},7000);
