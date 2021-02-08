@@ -1,3 +1,4 @@
+import { relative } from 'path';
 import { StyleSheet} from 'react-native';
 
 
@@ -44,7 +45,7 @@ export default StyleSheet.create({
           backgroundColor: '#ffffff',
           alignItems: 'center',
           flex: 2,
-          justifyContent:'center',
+		justifyContent:'center',
 	},
 	logoLogin:{
 		width:140,
@@ -92,13 +93,20 @@ export default StyleSheet.create({
 		paddingRight:45,
 		marginTop:45
 	},
+	bottomTab:{
+		backgroundColor:'#2ebc4f',
+		position:'absolute',
+		bottom:-10,
+		alignSelf:'stretch',
+
+	},
 
 
 //Page Forgot Password
 	forgot:{
 		fontFamily:'Product',
 		color: '#777',
-		marginTop:18
+		marginTop:18,
 	},
 	textForgot:{
 		fontFamily: 'Product',
@@ -107,5 +115,16 @@ export default StyleSheet.create({
 		width:150,
 		textAlign:'center',
 		marginTop:5,
+	},
+
+//Page Main
+	coverImage:{
+		width:400,
+		height:200,
+		alignItems:'center',
+		justifyContent:'center',
+		borderRadius:45,
+		position:'absolute',
+		top:0,
 	},
 });

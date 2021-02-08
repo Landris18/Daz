@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
 import { View, Text, Image } from 'react-native';
 import * as Font from 'expo-font';
-import { Feather } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -20,11 +20,11 @@ function LoadProduct() {
 LoadProduct();
 
 
+
 //Déclaration de la variable Stack
 const Stack = createStackNavigator();
 
-
-//Gestion des pages (screen)
+//Gestion des screens
 export default function App ({navigation}){
 	return(
 		<NavigationContainer>
@@ -32,10 +32,12 @@ export default function App ({navigation}){
 				<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 				<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
 				<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
+				<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 				<Stack.Screen 
 					name="forgot" 
 					component={forgot} 
-					options={{ 	
+					options={
+						{ 	
 							headerShown:true,
 							title:'Forgot password',
 							headerStyle: {  
@@ -47,7 +49,8 @@ export default function App ({navigation}){
 								fontFamily:'Product',
 								fontSize:16,
 							},   
-					}}
+						}
+					}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>
@@ -83,7 +86,7 @@ function login({ navigation }) {
 			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
 			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
-			<Text style={styles.btnLogin} onPress={() => navigation.navigate('create')}>LOGIN</Text>
+			<Text style={styles.btnLogin} onPress={() => navigation.navigate('main')}>LOGIN</Text>
 			<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
 		</View>
 	)  
@@ -117,11 +120,12 @@ function forgot({ navigation }){
 	)
 }
 
-//Main page
-// function mainPage({ }){
-// 	return(
-// 		<View>
 
-// 		</View>
-// 	)
-// }
+//Page MainPage
+function main({navigation}){
+	return(
+		<View style={styles.container}>
+			<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
+		</View>
+	)
+}
