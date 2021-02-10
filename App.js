@@ -2,11 +2,12 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
 import { View, Text, Image } from 'react-native';
 import * as Font from 'expo-font';
-import { Feather, Ionicons } from '@expo/vector-icons';
+import { Ionicons,FontAwesome5 } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -23,6 +24,7 @@ LoadProduct();
 
 //Déclaration de la variable Stack
 const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 //Gestion des screens
 export default function App ({navigation}){
@@ -30,8 +32,7 @@ export default function App ({navigation}){
 		<NavigationContainer>
 			<Stack.Navigator>
 				<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
-				<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
-				<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
+				<Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/>
 				<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 				<Stack.Screen 
 					name="forgot" 
@@ -62,8 +63,8 @@ export default function App ({navigation}){
 function splash({ navigation }){
 	//On navigue vers la page login après 7000ms soit 7s
 	setTimeout(function () {
-		navigation.navigate('login');
-	},7000);
+		navigation.navigate('log_sign');
+	},1000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
@@ -74,6 +75,28 @@ function splash({ navigation }){
 				<Text style={styles.made}>Made by Black-Mavericks</Text>
 			</View>
 		</View>
+	)
+}
+
+// Naviguer entre login et signup
+function log_sign(){
+	return(
+	<Tab.Navigator shifting='true' barStyle={styles.bottomBar} >
+		<Tab.Screen name="login" component={login} 
+			options={{ 
+				headerShown: false, 
+				title: 'Signin',
+				tabBarIcon:({ color })=>(<FontAwesome5 name="sign-in-alt" size={24} color={color}/>)
+			}}
+		/>
+		<Tab.Screen name="create" component={create} 
+			options={{ 
+				headerShown: false, 
+				title: 'Signup', 
+				tabBarIcon:({ color })=>(<Ionicons name="create" size={24} color={color}/>)
+			}}
+		/>
+	</Tab.Navigator>
 	)
 }
 

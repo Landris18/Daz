@@ -9,7 +9,8 @@
 	},
 	"dependencies": {
 		"@react-native-community/masked-view": "0.1.10",
-		"@react-navigation/native": "^5.1.0",
+		"@react-navigation/material-bottom-tabs": "^5.3.13",
+		"@react-navigation/native": "^5.9.2",
 		"@react-navigation/stack": "^5.2.2",
 		"expo": "^40.0.0",
 		"react": "16.13.1",
@@ -25,7 +26,9 @@
 		"react-native-safe-area-context": "3.1.9",
 		"react-native-screens": "~2.15.2",
 		"react-native-shimmer": "^0.5.0",
+		"react-native-vector-icons": "^8.0.0",
 		"react-native-web": "~0.13.12",
+		"rollup": "^2.38.5",
 		"styled-components": "^5.2.1"
 	},
 	"devDependencies": {

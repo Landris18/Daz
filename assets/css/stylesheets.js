@@ -1,4 +1,3 @@
-import { relative } from 'path';
 import { StyleSheet} from 'react-native';
 
 
@@ -93,13 +92,12 @@ export default StyleSheet.create({
 		paddingRight:45,
 		marginTop:45
 	},
-	bottomTab:{
-		backgroundColor:'#2ebc4f',
-		position:'absolute',
-		bottom:-10,
-		alignSelf:'stretch',
-
+	bottomBar:{
+		height:50,
+		backgroundColor: '#010c14',
+		fontSize:400
 	},
+
 
 
 //Page Forgot Password
@@ -123,7 +121,8 @@ export default StyleSheet.create({
 		height:200,
 		alignItems:'center',
 		justifyContent:'center',
-		borderRadius:45,
+		borderBottomLeftRadius:45,
+		borderBottomRightRadius:45,
 		position:'absolute',
 		top:0,
 	},
