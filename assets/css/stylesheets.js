@@ -118,7 +118,7 @@ export default StyleSheet.create({
 
 //Page Main
 	coverImage:{
-		width:412,
+		width:1000,
 		height:200,
 		alignItems:'center',
 		justifyContent:'center',
@@ -149,6 +149,17 @@ export default StyleSheet.create({
 		borderRadius:50,
 		borderWidth:2,
 		borderColor:'#fff'
-	}
-
+	},
+	editCover:{
+		top:150,
+		right:20,
+		position:'absolute',
+		color:'#fff',
+		fontSize:20,
+		borderColor:'#fff',
+		borderWidth:1,
+		paddingVertical:5,
+		paddingHorizontal:15,
+		borderRadius:10,
+	},
 });
