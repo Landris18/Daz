@@ -90,12 +90,12 @@ export default StyleSheet.create({
 		borderRadius:20,
 		paddingLeft:45,
 		paddingRight:45,
-		marginTop:45
+		marginTop:45,
 	},
 	bottomBar:{
 		height:50,
 		backgroundColor: '#010c14',
-		fontSize:400
+		fontSize:400,
 	},
 
 
@@ -115,15 +115,40 @@ export default StyleSheet.create({
 		marginTop:5,
 	},
 
+
 //Page Main
 	coverImage:{
-		width:400,
+		width:412,
 		height:200,
 		alignItems:'center',
 		justifyContent:'center',
-		borderBottomLeftRadius:45,
-		borderBottomRightRadius:45,
+		borderBottomLeftRadius:55,
+		borderBottomRightRadius:55,
 		position:'absolute',
 		top:0,
 	},
+	menuIcon:{
+		position:'absolute',
+		top:15,
+		left:15,
+	},
+	textAvatar:{
+		color:'#fff',
+		fontFamily:'Product',
+		fontSize:18,
+		position:'absolute',
+		top:19,
+		right:55,
+	},
+	avatarImage:{
+		width:35,
+		height:35,
+		position:'absolute',
+		top:12,
+		right:15,
+		borderRadius:50,
+		borderWidth:2,
+		borderColor:'#fff'
+	}
+
 });

@@ -21,10 +21,8 @@ function LoadProduct() {
 LoadProduct();
 
 
-
 //Déclaration de la variable Stack
 const Stack = createStackNavigator();
-const Tab = createMaterialBottomTabNavigator();
 
 //Gestion des screens
 export default function App ({navigation}){
@@ -78,6 +76,9 @@ function splash({ navigation }){
 	)
 }
 
+//Déclaration de la variable Tab
+const Tab = createMaterialBottomTabNavigator();
+
 // Naviguer entre login et signup
 function log_sign(){
 	return(
@@ -121,7 +122,7 @@ function create({ navigation }){
 	return(
 		<View style={styles.loginPage}>
 			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>C'est simple et rapide !</Text>
+			<Text style={styles.textLogin}>Simple et rapide !</Text>
 			<TextInput style={styles.inputUser} placeholder="Username"/>
 			<TextInput style={styles.inputUser} placeholder="Email"/>
 			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
@@ -149,6 +150,11 @@ function main({navigation}){
 	return(
 		<View style={styles.container}>
 			<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
+				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
+			<container>
+				<Text style={styles.textAvatar}>Black7618</Text>
+				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
+			</container>
 		</View>
 	)
 }
