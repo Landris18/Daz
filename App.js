@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
 import { View, Text, Image } from 'react-native';
 import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons,FontAwesome5, Entypo} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -86,14 +86,14 @@ function log_sign(){
 		<Tab.Screen name="login" component={login} 
 			options={{ 
 				headerShown: false, 
-				title: 'Signin',
+				title: '',
 				tabBarIcon:({ color })=>(<FontAwesome5 name="sign-in-alt" size={24} color={color}/>)
 			}}
 		/>
 		<Tab.Screen name="create" component={create} 
 			options={{ 
 				headerShown: false, 
-				title: 'Signup', 
+				title: '', 
 				tabBarIcon:({ color })=>(<Ionicons name="create" size={24} color={color}/>)
 			}}
 		/>
@@ -151,10 +151,12 @@ function main({navigation}){
 		<View style={styles.container}>
 			<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
 				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-			<container>
 				<Text style={styles.textAvatar}>Black7618</Text>
 				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
-			</container>
+				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
+					<Entypo name="edit" size={17} color="#fff"/>
+					edit
+				</Text>
 		</View>
 	)
 }
