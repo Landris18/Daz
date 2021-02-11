@@ -5,9 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ScrollView } from 'react-native';
+import { Card, CardItem, Thumbnail , Button, Icon, Left, Body, Right } from 'native-base';
 import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5, Entypo} from '@expo/vector-icons';
+import { Ionicons,FontAwesome5, Entypo, MaterialIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -59,10 +60,10 @@ export default function App ({navigation}){
 
 //Page de Chargement
 function splash({ navigation }){
-	//On navigue vers la page login après 7000ms soit 7s
+	//On navigue vers la page login après 2000ms soit 2s
 	setTimeout(function () {
 		navigation.navigate('log_sign');
-	},1000);
+	},2000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
@@ -148,15 +149,53 @@ function forgot({ navigation }){
 //Page MainPage
 function main({navigation}){
 	return(
-		<View style={styles.container}>
-			<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-			<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-			<Text style={styles.textAvatar}>Black7618</Text>
-			<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
-			<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-				<Entypo name="edit" size={16} color="#222"/>
-				Edit
-			</Text>
+		<View>
+			<View style={styles.container}>
+				<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
+				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
+				<Text style={styles.textAvatar}>Black7618</Text>
+				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
+				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
+					<Entypo name="edit" size={13} color="#222">EDIT</Entypo>
+				</Text>
+			</View>
+			<Text style={styles.textContents}>Your contents</Text>
+			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
+				<Card style={{borderRadius:10}}>
+					<CardItem cardBody style={{borderRadius:10}}>
+						<Image source={require('./assets/images/mars.png')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
+					</CardItem>
+					<CardItem style={{borderRadius:10}}>
+						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="queue-music" color="#000"></MaterialIcons> Musics list</Text>
+					</CardItem>
+          		</Card>
+				<Card style={{borderRadius:10, marginLeft:5}}>
+					<CardItem cardBody style={{borderRadius:10}}>
+						<Image source={require('./assets/images/album.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
+					</CardItem>
+					<CardItem style={{borderRadius:10}}>
+						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="album" color="#000"></MaterialIcons>Albums</Text>
+					</CardItem>
+          		</Card>
+				<Card style={{borderRadius:10, marginLeft:5}}>
+					<CardItem cardBody style={{borderRadius:10}}>
+						<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
+					</CardItem>
+					<CardItem style={{borderRadius:10}}>
+						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
+					</CardItem>
+          		</Card>
+				<Card style={{borderRadius:10, marginLeft:5}}>
+					<CardItem cardBody style={{borderRadius:10}}>
+						<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
+					</CardItem>
+					<CardItem style={{borderRadius:10}}>
+						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="favorite" color='#000'></MaterialIcons>Favorites</Text>
+					</CardItem>
+          		</Card>
+			</ScrollView>
+			<Text style={styles.textNotifs}>Notifications</Text>
 		</View>
 	)
 }
+
