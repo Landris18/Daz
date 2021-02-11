@@ -150,13 +150,13 @@ function main({navigation}){
 	return(
 		<View style={styles.container}>
 			<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-				<Text style={styles.textAvatar}>Black7618</Text>
-				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
-				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-					<Entypo name="edit" size={17} color="#fff"/>
-					edit
-				</Text>
+			<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
+			<Text style={styles.textAvatar}>Black7618</Text>
+			<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
+			<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
+				<Entypo name="edit" size={16} color="#222"/>
+				Edit
+			</Text>
 		</View>
 	)
 }

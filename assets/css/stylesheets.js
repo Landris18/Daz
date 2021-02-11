@@ -151,15 +151,17 @@ export default StyleSheet.create({
 		borderColor:'#fff'
 	},
 	editCover:{
-		top:150,
+		fontFamily:'Product',
+		top:145,
 		right:20,
 		position:'absolute',
-		color:'#fff',
-		fontSize:20,
+		color:'#222',
+		fontSize:16,
 		borderColor:'#fff',
-		borderWidth:1,
+		borderWidth:0.5,
 		paddingVertical:5,
 		paddingHorizontal:15,
-		borderRadius:10,
+		borderRadius:20,
+		backgroundColor:'#fff'
 	},
 });
