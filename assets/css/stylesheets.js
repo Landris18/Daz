@@ -119,7 +119,7 @@ export default StyleSheet.create({
 //Page Main
 	coverImage:{
 		width:1000,
-		height:200,
+		height:150,
 		alignItems:'center',
 		justifyContent:'center',
 		borderBottomLeftRadius:55,
@@ -152,7 +152,7 @@ export default StyleSheet.create({
 	},
 	editCover:{
 		fontFamily:'Product',
-		top:154,
+		top:90,
 		right:20,
 		position:'absolute',
 		color:'#222',
@@ -165,12 +165,12 @@ export default StyleSheet.create({
 		backgroundColor:'#fff'
 	},
 	textContents:{
-		fontFamily:'ProductBold',
-		fontSize:26,
-		color:'#222',
+		fontFamily:'Product',
+		fontSize:17,
+		color:'#555',
 		position:'absolute',
-		top:230,
-		left:25,
+		top:170,
+		left:40,
 	},
 	scroll:{
 		paddingTop:15,
@@ -178,14 +178,26 @@ export default StyleSheet.create({
 		backgroundColor: '#fff',
 		marginHorizontal: 2,
 		height:180,
-		top:275,
+		top:205,
 	},
 	textNotifs:{
-		fontFamily:'ProductBold',
-		fontSize:26,
-		color:'#222',
+		fontFamily:'Product',
+		fontSize:17,
+		color:'#555',
 		position:'absolute',
-		top:465,
-		left:25,
+		top:395,
+		left:40,
 	},
+	clear:{
+		fontFamily:'Product',
+		color:'#666',
+		borderColor:'#666',
+		borderWidth:0.5,
+		borderRadius:20,
+		padding:5,
+		fontSize:11,
+		position:'absolute',
+		right:40,
+		top:397,
+	}
 });

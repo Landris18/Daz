@@ -3,10 +3,10 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import React, { Component } from 'react';
+import React, { /*Component*/ } from 'react';
 import styles from './assets/css/stylesheets';
 import { View, Text, Image, ScrollView } from 'react-native';
-import { Card, CardItem, Thumbnail , Button, Icon, Left, Body, Right } from 'native-base';
+import { Card, CardItem} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
@@ -15,8 +15,8 @@ import { TextInput } from 'react-native-gesture-handler';
 //Importer le font Product Sans
 function LoadProduct() {
 	Font.loadAsync({
-		'Product': require('./assets/fonts/PS.ttf'),
-		'ProductBold': require('./assets/fonts/PSBold.ttf'),
+		'Product': require('./assets/fonts/SF-Pro-Display-Medium.otf'),
+		'ProductBold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
 	});
 }
 LoadProduct();
@@ -156,10 +156,10 @@ function main({navigation}){
 				<Text style={styles.textAvatar}>Black7618</Text>
 				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-					<Entypo name="edit" size={13} color="#222">EDIT</Entypo>
+					<Entypo name="camera" size={13} color="#222"> EDIT</Entypo>
 				</Text>
 			</View>
-			<Text style={styles.textContents}>Your contents</Text>
+			<Text style={styles.textContents}><MaterialIcons style={styles.musicLogo} name="my-library-music" size={25} color="#f24671"/> Your contents</Text>
 			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
 				<Card style={{borderRadius:10}}>
 					<CardItem cardBody style={{borderRadius:10}}>
@@ -194,8 +194,8 @@ function main({navigation}){
 					</CardItem>
           		</Card>
 			</ScrollView>
-			<Text style={styles.textNotifs}>Notifications</Text>
+			<Text style={styles.textNotifs}><Ionicons name="md-notifications" size={25} color="#29d967"/> Notifications </Text>
+			<Text style={styles.clear}>CLEAR ALL</Text>
 		</View>
 	)
 }
-
