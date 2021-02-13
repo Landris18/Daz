@@ -2,6 +2,7 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { /*Component*/ } from 'react';
 import styles from './assets/css/stylesheets';
@@ -83,22 +84,36 @@ const Tab = createMaterialBottomTabNavigator();
 // Naviguer entre login et signup
 function log_sign(){
 	return(
-	<Tab.Navigator shifting='true' barStyle={styles.bottomBar} >
-		<Tab.Screen name="login" component={login} 
-			options={{ 
-				headerShown: false, 
-				title: '',
-				tabBarIcon:({ color })=>(<FontAwesome5 name="sign-in-alt" size={24} color={color}/>)
-			}}
-		/>
-		<Tab.Screen name="create" component={create} 
-			options={{ 
-				headerShown: false, 
-				title: '', 
-				tabBarIcon:({ color })=>(<Ionicons name="create" size={24} color={color}/>)
-			}}
-		/>
-	</Tab.Navigator>
+		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#2ebc4f" >
+			<Tab.Screen name="login" component={login} 
+				options={{ 
+					headerShown: false, 
+					title: '',
+					tabBarIcon:({ color })=>(<FontAwesome5 name="sign-in-alt" size={24} color={color}/>)
+				}}
+			/>
+			<Tab.Screen name="create" component={create} 
+				options={{ 
+					headerShown: false, 
+					title: '', 
+					tabBarIcon:({ color })=>(<Ionicons name="create" size={24} color={color}/>)
+				}}
+			/>
+		</Tab.Navigator>
+	)
+}
+
+
+//Navigation Drawer (sidebar)
+const Drawer = createDrawerNavigator()
+
+function nav_drawer(){
+	return(
+		<Drawer.Navigator initialRouteName="main" >
+			<Drawer.Screen name="main" component={main} />
+			<Drawer.Screen name="login" component={login} />
+			<Drawer.Screen name="create" component={create} />
+		</Drawer.Navigator>
 	)
 }
 
@@ -152,11 +167,11 @@ function main({navigation}){
 		<View>
 			<View style={styles.container}>
 				<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
+				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon} onPress={() => this.props.navigation.navigate('DrawerOpen') }/>
 				<Text style={styles.textAvatar}>Black7618</Text>
 				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-					<Entypo name="camera" size={13} color="#222"> EDIT</Entypo>
+					<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
 				</Text>
 			</View>
 			<Text style={styles.textContents}><MaterialIcons style={styles.musicLogo} name="my-library-music" size={25} color="#f24671"/> Your contents</Text>

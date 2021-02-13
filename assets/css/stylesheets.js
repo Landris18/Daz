@@ -83,7 +83,7 @@ export default StyleSheet.create({
 	},
 	btnLogin:{
 		fontFamily:'ProductBold',
-		backgroundColor:'#901d78',
+		backgroundColor:'#f25046',
 		fontSize:13,
 		color:'#fff',
 		padding:12,
@@ -94,7 +94,9 @@ export default StyleSheet.create({
 	},
 	bottomBar:{
 		height:50,
-		backgroundColor: '#010c14',
+		backgroundColor: '#fff',
+		borderColor:'#888',
+		borderTopWidth:0.01,
 		fontSize:400,
 	},
 
@@ -155,14 +157,13 @@ export default StyleSheet.create({
 		top:90,
 		right:20,
 		position:'absolute',
-		color:'#222',
 		fontSize:14,
-		borderColor:'#fff',
-		borderWidth:0.5,
+		borderColor:'#ffffff7c',
+		borderWidth:0,
 		paddingVertical:5,
 		paddingHorizontal:15,
 		borderRadius:20,
-		backgroundColor:'#fff'
+		backgroundColor:'#ffffff7c'
 	},
 	textContents:{
 		fontFamily:'Product',
