@@ -9,7 +9,7 @@ import styles from './assets/css/stylesheets';
 import { View, Text, Image, ScrollView } from 'react-native';
 import { Card, CardItem} from 'native-base';
 import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign} from '@expo/vector-icons';
+import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -138,12 +138,12 @@ function create({ navigation }){
 	return(
 		<View style={styles.loginPage}>
 			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Simple et rapide !</Text>
-			<TextInput style={styles.inputUser} placeholder="Username"/>
-			<TextInput style={styles.inputUser} placeholder="Email"/>
+			<Text style={styles.textLogin}>Inscrivez-vous !</Text>
+			<TextInput style={styles.inputUserCreate} placeholder="Username"/>
+			<TextInput style={styles.inputPass} placeholder="Email"/>
 			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
 			<TextInput style={styles.inputPass} placeholder="Confirm password" secureTextEntry/>
-			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
+			<Text style={styles.btnCreate} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
 		</View>
 	)
 }
@@ -174,7 +174,7 @@ function main({navigation}){
 					<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
 				</Text>
 			</View>
-			<Text style={styles.textContents}><MaterialIcons style={styles.musicLogo} name="my-library-music" size={25} color="#f24671"/> Your contents</Text>
+			<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f24671"/> Your contents</Text>
 			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
 				<Card style={{borderRadius:10}}>
 					<CardItem cardBody style={{borderRadius:10}}>
@@ -209,7 +209,7 @@ function main({navigation}){
 					</CardItem>
           		</Card>
 			</ScrollView>
-			<Text style={styles.textNotifs}><Ionicons name="md-notifications" size={25} color="#29d967"/> Notifications </Text>
+			<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#29d967"/> Notifications </Text>
 			<Text style={styles.clear}>CLEAR ALL</Text>
 		</View>
 	)

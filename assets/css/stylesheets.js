@@ -59,7 +59,7 @@ export default StyleSheet.create({
 		fontSize: 20,
 		width:275,
 		textAlign:'center',
-		marginTop:5,
+		marginTop:-10,
 	},
 	inputUser:{
 		fontFamily: 'Product',
@@ -70,6 +70,16 @@ export default StyleSheet.create({
 		paddingLeft:20,
 		color:'#555',
 		marginTop:27,
+	},
+	inputUserCreate:{
+		fontFamily: 'Product',
+		backgroundColor: '#fafafa',
+		width:280,
+		height:45,
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#555',
+		marginTop:10,
 	},
 	inputPass:{
 		fontFamily: 'Product',
@@ -98,6 +108,17 @@ export default StyleSheet.create({
 		borderColor:'#999',
 		borderTopWidth:0.01,
 		fontSize:400,
+	},
+	btnCreate:{
+		fontFamily:'ProductBold',
+		backgroundColor:'#f25046',
+		fontSize:13,
+		color:'#fff',
+		padding:12,
+		borderRadius:20,
+		paddingLeft:40,
+		paddingRight:40,
+		marginTop:13,
 	},
 
 
@@ -137,7 +158,7 @@ export default StyleSheet.create({
 	textAvatar:{
 		color:'#fff',
 		fontFamily:'Product',
-		fontSize:18,
+		fontSize:13,
 		position:'absolute',
 		top:38,
 		right:55,
@@ -154,7 +175,7 @@ export default StyleSheet.create({
 	},
 	editCover:{
 		fontFamily:'Product',
-		top:90,
+		top:110,
 		right:20,
 		position:'absolute',
 		fontSize:14,
