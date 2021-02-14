@@ -9,7 +9,7 @@ import styles from './assets/css/stylesheets';
 import { View, Text, Image, ScrollView } from 'react-native';
 import { Card, CardItem} from 'native-base';
 import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5, Entypo, MaterialIcons} from '@expo/vector-icons';
+import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -42,7 +42,7 @@ export default function App ({navigation}){
 							headerShown:true,
 							title:'Forgot password',
 							headerStyle: {  
-								backgroundColor: '#901d78',
+								backgroundColor: '#f25046',
 								elevation:3,  
 							},  
 							headerTintColor: '#ffffff',  
@@ -84,19 +84,19 @@ const Tab = createMaterialBottomTabNavigator();
 // Naviguer entre login et signup
 function log_sign(){
 	return(
-		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#2ebc4f" >
+		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
 			<Tab.Screen name="login" component={login} 
 				options={{ 
 					headerShown: false, 
 					title: '',
-					tabBarIcon:({ color })=>(<FontAwesome5 name="sign-in-alt" size={24} color={color}/>)
+					tabBarIcon:({ color })=>(<AntDesign name="login" size={24} color={color}/>)
 				}}
 			/>
 			<Tab.Screen name="create" component={create} 
 				options={{ 
 					headerShown: false, 
 					title: '', 
-					tabBarIcon:({ color })=>(<Ionicons name="create" size={24} color={color}/>)
+					tabBarIcon:({ color })=>(<Ionicons name="ios-create-outline" size={24} color={color}/>)
 				}}
 			/>
 		</Tab.Navigator>
@@ -153,7 +153,7 @@ function create({ navigation }){
 function forgot({ navigation }){
 	return(
 		<View style={styles.loginPage}>
-			<Text style={styles.textForgot}>Entrez votre adresse mail !</Text>
+			<Text style={styles.textForgot}>Entrez votre adresse mail pour récuperer votre compte !</Text>
 			<TextInput style={styles.inputUser} placeholder="Adresse mail"/>
 			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CONFIRMER</Text>
 		</View>
