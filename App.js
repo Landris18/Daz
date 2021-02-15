@@ -174,7 +174,7 @@ function main({navigation}){
 					<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
 				</Text>
 			</View>
-			<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f24671"/> Your contents</Text>
+			<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f25046"/> Your contents</Text>
 			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
 				<Card style={{borderRadius:10}}>
 					<CardItem cardBody style={{borderRadius:10}}>
@@ -183,7 +183,7 @@ function main({navigation}){
 					<CardItem style={{borderRadius:10}}>
 						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="queue-music" color="#000"></MaterialIcons> Musics list</Text>
 					</CardItem>
-          		</Card>
+				</Card>
 				<Card style={{borderRadius:10, marginLeft:5}}>
 					<CardItem cardBody style={{borderRadius:10}}>
 						<Image source={require('./assets/images/album.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
@@ -191,7 +191,7 @@ function main({navigation}){
 					<CardItem style={{borderRadius:10}}>
 						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="album" color="#000"></MaterialIcons>Albums</Text>
 					</CardItem>
-          		</Card>
+				</Card>
 				<Card style={{borderRadius:10, marginLeft:5}}>
 					<CardItem cardBody style={{borderRadius:10}}>
 						<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
@@ -199,7 +199,7 @@ function main({navigation}){
 					<CardItem style={{borderRadius:10}}>
 						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
 					</CardItem>
-          		</Card>
+				</Card>
 				<Card style={{borderRadius:10, marginLeft:5}}>
 					<CardItem cardBody style={{borderRadius:10}}>
 						<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
@@ -207,9 +207,9 @@ function main({navigation}){
 					<CardItem style={{borderRadius:10}}>
 						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="favorite" color='#000'></MaterialIcons>Favorites</Text>
 					</CardItem>
-          		</Card>
+				</Card>
 			</ScrollView>
-			<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#29d967"/> Notifications </Text>
+			<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#f25046"/> Notifications </Text>
 			<Text style={styles.clear}>CLEAR ALL</Text>
 		</View>
 	)
