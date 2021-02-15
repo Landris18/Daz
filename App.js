@@ -4,13 +4,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import React, { /*Component*/ } from 'react';
+import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, Alert } from 'react-native';
 import { Card, CardItem} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
+import { render } from 'react-dom';
+
+
+function data_test() {
+	fetch('http://192.168.10.112:3000/ecole')
+		.then(response => response.json())
+		.then(ecole => console.warn(ecole))   
+}
+data_test()
 
 
 //Importer le font Product Sans
@@ -27,35 +36,37 @@ LoadProduct();
 const Stack = createStackNavigator();
 
 //Gestion des screens
-export default function App ({navigation}){
-	return(
-		<NavigationContainer>
-			<Stack.Navigator>
-				<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
-				<Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/>
-				<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
-				<Stack.Screen 
-					name="forgot" 
-					component={forgot} 
-					options={
-						{ 	
-							headerShown:true,
-							title:'Forgot password',
-							headerStyle: {  
-								backgroundColor: '#f25046',
-								elevation:3,  
-							},  
-							headerTintColor: '#ffffff',  
-							headerTitleStyle: {  
-								fontFamily:'Product',
-								fontSize:16,
-							},   
+export default class App extends Component{
+	render(){
+		return(
+			<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
+					<Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/>
+					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
+					<Stack.Screen 
+						name="forgot" 
+						component={forgot} 
+						options={
+							{ 	
+								headerShown:true,
+								title:'Forgot password',
+								headerStyle: {  
+									backgroundColor: '#f25046',
+									elevation:3,  
+								},  
+								headerTintColor: '#ffffff',  
+								headerTitleStyle: {  
+									fontFamily:'Product',
+									fontSize:16,
+								},   
+							}
 						}
-					}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
-	)
+					/>
+				</Stack.Navigator>
+			</NavigationContainer>
+		)
+	}
 }
 
 
@@ -119,17 +130,32 @@ function nav_drawer(){
 
 
 //Page Login
-function login({ navigation }) {
-	return (
-		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
-			<TextInput style={styles.inputUser} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
-			<Text style={styles.btnLogin} onPress={() => navigation.navigate('main')}>LOGIN</Text>
-			<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
-		</View>
-	)  
+class login extends Component {
+	state = {
+		username: '',
+		password: ''
+		}
+		handleUser = (text) => {
+			this.setState({ username: text })
+		}
+		handlePassword = (text) => {
+			this.setState({ password: text })
+		}
+		Login = (email, password) => {
+			alert('username: ' + email + ' password: ' + password)
+	}
+	render(){
+		return (
+			<View style={styles.loginPage}>
+				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
+				<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
+				<TextInput onChangeText = {this.handleUser} style={styles.inputUser} placeholder="Username" />
+				<TextInput onChangeText = {this.handlePassword} style={styles.inputPass} placeholder="Password" secureTextEntry/>
+				<Text onPress = { () => this.Login(this.state.username, this.state.password)}style={styles.btnLogin}>LOGIN</Text>
+				<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
+			</View>
+		)  
+	}	
 }
 
 
