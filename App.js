@@ -11,13 +11,12 @@ import { Card, CardItem} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
-import { render } from 'react-dom';
 
 
 function data_test() {
 	fetch('http://192.168.10.112:3000/ecole')
 		.then(response => response.json())
-		.then(ecole => console.warn(ecole))   
+		.then(uers => console.warn(users))   
 }
 data_test()
 
@@ -141,8 +140,8 @@ class login extends Component {
 		handlePassword = (text) => {
 			this.setState({ password: text })
 		}
-		Login = (email, password) => {
-			alert('username: ' + email + ' password: ' + password)
+		Login = (username, password) => {
+			alert('username: ' + username + ' password: ' + password)
 	}
 	render(){
 		return (
