@@ -142,12 +142,12 @@ export default StyleSheet.create({
 
 //Page Main
 	coverImage:{
-		width:1000,
-		height:150,
+		width:390,
+		height:170,
 		alignItems:'center',
 		justifyContent:'center',
-		borderBottomLeftRadius:55,
-		borderBottomRightRadius:55,
+		borderBottomLeftRadius:50,
+		borderBottomRightRadius:50,
 		position:'absolute',
 		top:0,
 	},
@@ -172,6 +172,16 @@ export default StyleSheet.create({
 		left:10,
 		borderRadius:50,
 		borderWidth:2,
+		borderColor:'#fff'
+	},
+	avatarImage2:{
+		width:100,
+		height:100,
+		position:'absolute',
+		top:120,
+		left:40,
+		borderRadius:50,
+		borderWidth:5,
 		borderColor:'#fff'
 	},
 	comdata:{

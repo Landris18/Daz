@@ -9,7 +9,7 @@ import styles from './assets/css/stylesheets';
 import { View, Text, Image, ScrollView, Alert } from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Ionicons,FontAwesome5, Entypo,Feather, MaterialIcons, AntDesign, MaterialCommunityIcons, Octicons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 
@@ -94,7 +94,7 @@ function log_sign(){
 					tabBarIcon:({ color })=>(<AntDesign name="home" size={24} color={color}/>)
 				}}
 			/>
-			<Tab.Screen name="create" component={create} 
+			<Tab.Screen name="main" component={main} 
 				options={{ 
 					headerShown: false, 
 					title: '', 
@@ -152,22 +152,6 @@ class login extends Component {
 }
 
 
-//Page création de compte
-function create({ navigation }){
-	return(
-		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Inscrivez-vous !</Text>
-			<TextInput style={styles.inputUserCreate} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Email"/>
-			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
-			<TextInput style={styles.inputPass} placeholder="Confirm password" secureTextEntry/>
-			<Text style={styles.btnCreate} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
-		</View>
-	)
-}
-
-
 function chercher({ navigation }){
 	return(
 		<View style={styles.loginPage}>
@@ -198,53 +182,34 @@ function forgot({ navigation }){
 //Page MainPage
 function main({navigation}){
 	return(
-		<View>
-			<View style={styles.container}>
-				<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon} onPress={() => this.props.navigation.navigate('DrawerOpen') }/>
-				<Text style={styles.textAvatar}>Black7618</Text>
-				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
-				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-					<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
-				</Text>
-			</View>
-			<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f25046"/> Your contents</Text>
-			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
-				<Card style={{borderRadius:10}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/mars.png')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="queue-music" color="#000"></MaterialIcons> Musics list</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/album.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="album" color="#000"></MaterialIcons>Albums</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="favorite" color='#000'></MaterialIcons>Favorites</Text>
-					</CardItem>
-				</Card>
-			</ScrollView>
-			<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#f25046"/> Notifications </Text>
-			<Text style={styles.clear}>CLEAR ALL</Text>
+		<View style={styles.loginPage}>
+			<Image  style={styles.coverImage} source={require('./assets/images/leaf.jpeg')} ></Image>
+			<Image  style={styles.avatarImage2} source={require('./assets/images/ld.jpeg')} ></Image>
+			<Octicons name="primitive-dot" size={32} color={"#2ebc4f"} style={{position:"absolute", top:180, left:122}}></Octicons>
+			<MaterialIcons name="edit" size={22} color={"#777"} style={{position:"absolute", top:180, left:320}}/>
+			<Container style={{position:'absolute', top:230, left:15}}>
+				<Text style={{fontFamily:"ProductBold", color:"#777", fontSize:15}}>BAKARY Gaetan Jonathan </Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Etudiant à l'ESTI, Alternant à COMDATA</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Comdata Madagascar. ESTI</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Antananarivo, Madagascar</Text>
+			</Container>
+			<Container style={{position:'absolute', top:310, left:15, backgroundColor:'#eef5f0', borderRadius:6, width:330, height:90, borderWidth:1, borderColor:"#e0e7e2"}}>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>A l'écoute de nouvelles opporunités</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>Poste administrateur système et Développeur</Text>
+				<Text></Text>
+				<Text style={{fontFamily:"ProductBold", color:"#2ebc4f", fontSize:14, top:5, left:10}}>Voir tous les détails</Text>
+				<MaterialIcons name="edit" size={22} color={"#777"} style={{position:"absolute", top:4, left:301}}/>
+			</Container>
+			<Text style={{height:14, width:1000, backgroundColor:'#dde2df', position:'absolute', top:420}}></Text>
+			<Container style={{position:'absolute', top:440, left:15,  width:330, height:90,}}>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:16,}}>A propos</Text>
+				<Text></Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-15,backgroundColor:"#e6eeee", width:120, padding:4, paddingLeft:10,paddingRight:10, borderRadius:20}}>Promotion 2018</Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-42,backgroundColor:"#e6eeee", left:130, width:90, padding:4, paddingLeft:10, borderRadius:20}}>Fraternité 3</Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-30, backgroundColor:"#e6eeee", width:63, padding:4, paddingLeft:10, borderRadius:20}}>APS2A</Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-57, left:72,backgroundColor:"#e6eeee", width:96, padding:4, paddingLeft:10, borderRadius:20}}>Informatique</Text>
+				<MaterialIcons name="edit" size={22} color={"#777"} style={{position:"absolute", top:4, left:301}}/>
+			</Container>
 		</View>
 	)
 }
