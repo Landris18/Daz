@@ -1,3 +1,2 @@
 # MAQ-Sesame
-Application react-native made by Black-Mavericks
-
+React-native App built by Black-Mavericks

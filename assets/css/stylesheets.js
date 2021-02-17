@@ -18,7 +18,6 @@ export default StyleSheet.create({
      logo:{
 		width:160,
 		height:160,
-		borderRadius:80,
 		justifyContent:'center',
           alignItems: 'center',
      },
@@ -63,13 +62,15 @@ export default StyleSheet.create({
 	},
 	inputUser:{
 		fontFamily: 'Product',
-		backgroundColor: '#fafafa',
-		width:280,
-		height:45,
-		borderRadius:25,
+		backgroundColor: '#ecf0ee',
+		width:298,
+		height:35,
+		borderRadius:5,
 		paddingLeft:20,
-		color:'#555',
 		marginTop:27,
+		position:'absolute',
+		top:5,
+		left:50
 	},
 	inputUserCreate:{
 		fontFamily: 'Product',
@@ -167,8 +168,18 @@ export default StyleSheet.create({
 		width:35,
 		height:35,
 		position:'absolute',
-		top:31,
-		right:15,
+		top:33,
+		left:10,
+		borderRadius:50,
+		borderWidth:2,
+		borderColor:'#fff'
+	},
+	comdata:{
+		width:60,
+		height:60,
+		position:'absolute',
+		top:120,
+		left:10,
 		borderRadius:50,
 		borderWidth:2,
 		borderColor:'#fff'
