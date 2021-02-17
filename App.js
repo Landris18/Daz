@@ -155,13 +155,33 @@ class login extends Component {
 function chercher({ navigation }){
 	return(
 		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Inscrivez-vous !</Text>
-			<TextInput style={styles.inputUserCreate} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Email"/>
-			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
-			<TextInput style={styles.inputPass} placeholder="Confirm password" secureTextEntry/>
-			<Text style={styles.btnCreate} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
+			<Feather name="arrow-left" size={30} color={'#777'} style={{position:'absolute', top:30, left:15}} > </Feather>
+			<Text style={{fontSize:16, fontFamily:"Product", color:"#777", position:"absolute", top:33, left:55}}>Rechercher</Text>
+			<Text style={{height:1, width:1000, backgroundColor:'#dde2df', position:'absolute', top:67}}></Text>
+			<Container style={{top:90, left:-70}}>
+				<Text style={{fontFamily:"Product"}}>Recherches récentes</Text>
+				<Text></Text>
+				<Feather name="clock" size={15} color={'#777'} style={{fontFamily:"Product"}}><Text style={{fontFamily:"Product"}}> Informatique</Text></Feather>
+				<Text></Text>
+				<Feather name="clock" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Développeur</Text></Feather>
+				<Text></Text>
+				<Text style={{fontFamily:"Product"}}>Essayer de chercher</Text>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Avocat</Text></Feather>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Ressource Humaine</Text></Feather>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Landry Manankoraisina</Text></Feather>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Programmation</Text></Feather>
+			</Container>
+			<Text style={{fontFamily:"Product", position:"absolute", top:90, right:20}}>Effacer</Text>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:128, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:168, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:240, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:280, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:322, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:361, right:30}}></Feather>
 		</View>
 	)
 }
