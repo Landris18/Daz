@@ -1,4 +1,4 @@
 
 
 # Daz
-Application react-native buitt by Black-Mavericks
+Application react-native built by Black-Mavericks
