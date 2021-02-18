@@ -7,18 +7,10 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
 import { View, Text, Image, ScrollView, Alert } from 'react-native';
-import { Card, CardItem} from 'native-base';
+import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
+import { Ionicons,FontAwesome5, Entypo,Feather, MaterialIcons, AntDesign, MaterialCommunityIcons, Octicons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
-
-
-function data_test() {
-	fetch('http://192.168.10.112:3000/ecole')
-		.then(response => response.json())
-		.then(uers => console.warn(users))   
-}
-data_test()
 
 
 //Importer le font Product Sans
@@ -71,18 +63,18 @@ export default class App extends Component{
 
 //Page de Chargement
 function splash({ navigation }){
-	//On navigue vers la page login après 2000ms soit 2s
+	//On navigue vers la page login après 1000ms soit 2s
 	setTimeout(function () {
 		navigation.navigate('log_sign');
-	},2000);
+	},1000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
-				<Image style={styles.logo} source={require('./assets/images/playlogo.png')} ></Image>
+				<Image style={styles.logo} source={require('./assets/images/sesame.png')} ></Image>
 			</View>
 			<View style={styles.madeView}>
 				<Text style={styles.dazing}>DAZING</Text>
-				<Text style={styles.made}>Made by Black-Mavericks</Text>
+				<Text style={styles.made}>Built by Black-Mavericks</Text>
 			</View>
 		</View>
 	)
@@ -94,19 +86,26 @@ const Tab = createMaterialBottomTabNavigator();
 // Naviguer entre login et signup
 function log_sign(){
 	return(
-		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
+		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#2ebc4f" >
 			<Tab.Screen name="login" component={login} 
 				options={{ 
 					headerShown: false, 
 					title: '',
-					tabBarIcon:({ color })=>(<AntDesign name="login" size={24} color={color}/>)
+					tabBarIcon:({ color })=>(<AntDesign name="home" size={24} color={color}/>)
 				}}
 			/>
-			<Tab.Screen name="create" component={create} 
+			<Tab.Screen name="main" component={main} 
 				options={{ 
 					headerShown: false, 
 					title: '', 
-					tabBarIcon:({ color })=>(<Ionicons name="ios-create-outline" size={24} color={color}/>)
+					tabBarIcon:({ color })=>(<AntDesign name="user" size={24} color={color}/>)
+				}}
+			/>
+			<Tab.Screen name="chercher" component={chercher} 
+				options={{ 
+					headerShown: false, 
+					title: '', 
+					tabBarIcon:({ color })=>(<AntDesign name="search1" size={24} color={color}/>)
 				}}
 			/>
 		</Tab.Navigator>
@@ -114,61 +113,75 @@ function log_sign(){
 }
 
 
-//Navigation Drawer (sidebar)
-const Drawer = createDrawerNavigator()
-
-function nav_drawer(){
-	return(
-		<Drawer.Navigator initialRouteName="main" >
-			<Drawer.Screen name="main" component={main} />
-			<Drawer.Screen name="login" component={login} />
-			<Drawer.Screen name="create" component={create} />
-		</Drawer.Navigator>
-	)
-}
-
 
 //Page Login
 class login extends Component {
-	state = {
-		username: '',
-		password: ''
-		}
-		handleUser = (text) => {
-			this.setState({ username: text })
-		}
-		handlePassword = (text) => {
-			this.setState({ password: text })
-		}
-		Login = (username, password) => {
-			alert('username: ' + username + ' password: ' + password)
-	}
 	render(){
 		return (
 			<View style={styles.loginPage}>
-				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-				<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
-				<TextInput onChangeText = {this.handleUser} style={styles.inputUser} placeholder="Username" />
-				<TextInput onChangeText = {this.handlePassword} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-				<Text onPress = { () => this.Login(this.state.username, this.state.password)}style={styles.btnLogin}>LOGIN</Text>
-				<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
+				<Image style={styles.avatarImage} source={require('./assets/images/ld.jpeg')}/>
+				<TextInput  style={styles.inputUser} placeholder=""><Ionicons name="search" size={15} color={'#777'} > <Text style={{fontFamily:'Product', color:'#777'}}>Rechercher</Text></Ionicons></TextInput>
+				<Text style={{height:14, width:1000, backgroundColor:'#dde2df', position:'absolute', top:90}}></Text>
+				<Image style={styles.comdata} source={require('./assets/images/comdata.png')}/>
+				<Container style={{position:'absolute', top:122, left:70}}>
+					<Text style={{fontFamily:"ProductBold", color:"#555", fontSize:13}}> Comdata Madagascar</Text>
+					<Text style={{fontFamily:"Product", color:"#999", fontSize:13}}> 363 abonnés</Text>
+					<Text style={{fontFamily:"Product", color:"#999", fontSize:13}}> 4h</Text>
+				</Container>
+				<Container style={{position:'absolute', top:190, left:20}}>
+					<Text style={{fontFamily:"Product", color:"#555", fontSize:14}}><AntDesign name="checksquare" size={16} color={'#2ebc4f'} />Comdata cherche un développeur PHP</Text>
+					<Text style={{fontFamily:"Product", color:"#555", fontSize:14}}><AntDesign name="checksquare" size={16} color={'#2ebc4f'} />Vous vous sentez être à la hauteur ?</Text>
+				</Container>
+				<Container style={{position:'absolute', top:235, left:0, width:1000, height:200, backgroundColor:'#eaf0ec'}}>
+					<Image style={{width:320, height:200, left:20}} source={require('./assets/images/opo.jpg')}/>
+					<Text style={{fontFamily:'ProductBold', color:'#777', left:20, top:3, fontSize:11}}> <AntDesign name="like1" size={16} color={'#1c97df'}/>18</Text>
+					<Text style={{height:1.2, width:330, backgroundColor:'#dde2df', top:6, left:15}}></Text>
+					<AntDesign name="like2" size={16} color={'#777'} style={{top:13, left:40}}/>
+					<Text style={{fontFamily:"ProductBold", color:"#777", fontSize:11, top:10, left:30}} >J'aime </Text>
+					<FontAwesome5 name="comment" size={16} color={'#777'} style={{ position:'absolute',top:232, left:130}}/>
+					<Text style={{fontFamily:"ProductBold", color:"#777", fontSize:11, position:'absolute', top:245, left:108}} >Commenter </Text>
+					<Entypo name="share" size={16} color={'#777'} style={{ position:'absolute',top:232, left:220}}/>
+					<Text style={{fontFamily:"ProductBold", color:"#777", fontSize:11, position:'absolute', top:245, left:208}} >Partager </Text>
+					<MaterialCommunityIcons name="telegram" size={16} color={'#777'} style={{ position:'absolute',top:232, left:305}}/>
+					<Text style={{fontFamily:"ProductBold", color:"#777", fontSize:11, position:'absolute', top:245, left:293}} >Envoyer </Text>
+				</Container>
+				<Text style={{height:14, width:1000, backgroundColor:'#dde2df', position:'absolute', top:508}}></Text>
 			</View>
 		)  
 	}	
 }
 
 
-//Page création de compte
-function create({ navigation }){
+function chercher({ navigation }){
 	return(
 		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Inscrivez-vous !</Text>
-			<TextInput style={styles.inputUserCreate} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Email"/>
-			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
-			<TextInput style={styles.inputPass} placeholder="Confirm password" secureTextEntry/>
-			<Text style={styles.btnCreate} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
+			<Feather name="arrow-left" size={30} color={'#777'} style={{position:'absolute', top:30, left:15}} > </Feather>
+			<Text style={{fontSize:16, fontFamily:"Product", color:"#777", position:"absolute", top:33, left:55}}>Rechercher</Text>
+			<Text style={{height:1, width:1000, backgroundColor:'#dde2df', position:'absolute', top:67}}></Text>
+			<Container style={{top:90, left:-70}}>
+				<Text style={{fontFamily:"Product"}}>Recherches récentes</Text>
+				<Text></Text>
+				<Feather name="clock" size={15} color={'#777'} style={{fontFamily:"Product"}}><Text style={{fontFamily:"Product"}}> Informatique</Text></Feather>
+				<Text></Text>
+				<Feather name="clock" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Développeur</Text></Feather>
+				<Text></Text>
+				<Text style={{fontFamily:"Product"}}>Essayer de chercher</Text>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Avocat</Text></Feather>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Ressource Humaine</Text></Feather>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Landry Manankoraisina</Text></Feather>
+				<Text></Text>
+				<Feather name="search" size={15} color={'#777'}><Text style={{fontFamily:"Product"}}> Programmation</Text></Feather>
+			</Container>
+			<Text style={{fontFamily:"Product", position:"absolute", top:90, right:20}}>Effacer</Text>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:128, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:168, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:240, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:280, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:322, right:30}}></Feather>
+			<Feather name="arrow-up-left" size={20} color={'#777'} style={{position:"absolute", top:361, right:30}}></Feather>
 		</View>
 	)
 }
@@ -189,53 +202,34 @@ function forgot({ navigation }){
 //Page MainPage
 function main({navigation}){
 	return(
-		<View>
-			<View style={styles.container}>
-				<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon} onPress={() => this.props.navigation.navigate('DrawerOpen') }/>
-				<Text style={styles.textAvatar}>Black7618</Text>
-				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
-				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-					<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
-				</Text>
-			</View>
-			<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f25046"/> Your contents</Text>
-			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
-				<Card style={{borderRadius:10}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/mars.png')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="queue-music" color="#000"></MaterialIcons> Musics list</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/album.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="album" color="#000"></MaterialIcons>Albums</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="favorite" color='#000'></MaterialIcons>Favorites</Text>
-					</CardItem>
-				</Card>
-			</ScrollView>
-			<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#f25046"/> Notifications </Text>
-			<Text style={styles.clear}>CLEAR ALL</Text>
+		<View style={styles.loginPage}>
+			<Image  style={styles.coverImage} source={require('./assets/images/leaf.jpeg')} ></Image>
+			<Image  style={styles.avatarImage2} source={require('./assets/images/ld.jpeg')} ></Image>
+			<Octicons name="primitive-dot" size={32} color={"#2ebc4f"} style={{position:"absolute", top:180, left:122}}></Octicons>
+			<MaterialIcons name="edit" size={22} color={"#777"} style={{position:"absolute", top:180, left:320}}/>
+			<Container style={{position:'absolute', top:230, left:15}}>
+				<Text style={{fontFamily:"ProductBold", color:"#777", fontSize:15}}>BAKARY Gaetan Jonathan </Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Etudiant à l'ESTI, Alternant à COMDATA</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Comdata Madagascar. ESTI</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Antananarivo, Madagascar</Text>
+			</Container>
+			<Container style={{position:'absolute', top:310, left:15, backgroundColor:'#eef5f0', borderRadius:6, width:330, height:90, borderWidth:1, borderColor:"#e0e7e2"}}>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>A l'écoute de nouvelles opportunités</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>Poste administrateur système et Développeur</Text>
+				<Text></Text>
+				<Text style={{fontFamily:"ProductBold", color:"#2ebc4f", fontSize:14, top:5, left:10}}>Voir tous les détails</Text>
+				<MaterialIcons name="edit" size={22} color={"#777"} style={{position:"absolute", top:4, left:301}}/>
+			</Container>
+			<Text style={{height:14, width:1000, backgroundColor:'#dde2df', position:'absolute', top:420}}></Text>
+			<Container style={{position:'absolute', top:440, left:15,  width:330, height:90,}}>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:16,}}>A propos</Text>
+				<Text></Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-15,backgroundColor:"#e6eeee", width:120, padding:4, paddingLeft:10,paddingRight:10, borderRadius:20}}>Promotion 2018</Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-42,backgroundColor:"#e6eeee", left:130, width:90, padding:4, paddingLeft:10, borderRadius:20}}>Fraternité 3</Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-30, backgroundColor:"#e6eeee", width:63, padding:4, paddingLeft:10, borderRadius:20}}>APS2A</Text>
+				<Text style={{fontFamily:"Product",color:"#777", fontSize:14, top:-57, left:72,backgroundColor:"#e6eeee", width:96, padding:4, paddingLeft:10, borderRadius:20}}>Informatique</Text>
+				<MaterialIcons name="edit" size={22} color={"#777"} style={{position:"absolute", top:4, left:301}}/>
+			</Container>
 		</View>
 	)
 }
