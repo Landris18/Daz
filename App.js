@@ -214,7 +214,7 @@ function main({navigation}){
 				<Text style={{fontFamily:"Product", color:"#777", fontSize:13}}>Antananarivo, Madagascar</Text>
 			</Container>
 			<Container style={{position:'absolute', top:310, left:15, backgroundColor:'#eef5f0', borderRadius:6, width:330, height:90, borderWidth:1, borderColor:"#e0e7e2"}}>
-				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>A l'écoute de nouvelles opporunités</Text>
+				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>A l'écoute de nouvelles opportunités</Text>
 				<Text style={{fontFamily:"Product", color:"#777", fontSize:14, top:5, left:10}}>Poste administrateur système et Développeur</Text>
 				<Text></Text>
 				<Text style={{fontFamily:"ProductBold", color:"#2ebc4f", fontSize:14, top:5, left:10}}>Voir tous les détails</Text>
