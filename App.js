@@ -114,20 +114,6 @@ function log_sign(){
 }
 
 
-//Navigation Drawer (sidebar)
-const Drawer = createDrawerNavigator()
-
-function nav_drawer(){
-	return(
-		<Drawer.Navigator initialRouteName="main" >
-			<Drawer.Screen name="main" component={main} />
-			<Drawer.Screen name="login" component={login} />
-			<Drawer.Screen name="create" component={create} />
-		</Drawer.Navigator>
-	)
-}
-
-
 //Page Login
 class login extends Component {
 	state = {
@@ -192,7 +178,7 @@ function main({navigation}){
 		<View>
 			<View style={styles.container}>
 				<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon} onPress={() => this.props.navigation.navigate('DrawerOpen') }/>
+				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
 				<Text style={styles.textAvatar}>Black7618</Text>
 				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
