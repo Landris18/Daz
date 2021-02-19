@@ -13,9 +13,9 @@ import { TextInput } from 'react-native-gesture-handler';
 
 
 function data_test() {
-	fetch('http://192.168.10.112:3000/ecole')
+	fetch('http://192.168.10.113:3000/users')
 		.then(response => response.json())
-		.then(uers => console.warn(users))   
+		.then(users => console.warn(users))   
 }
 data_test()
 
@@ -70,10 +70,10 @@ export default class App extends Component{
 
 //Page de Chargement
 function splash({ navigation }){
-	//On navigue vers la page login après 2000ms soit 2s
+	//On navigue vers la page login après 2000ms soit s
 	setTimeout(function () {
 		navigation.navigate('log_sign');
-	},2000);
+	},1000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
