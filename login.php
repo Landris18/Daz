@@ -23,7 +23,7 @@ else{
 	$InvalidMSGJSon = json_encode($InvalidMSG);
 	echo $InvalidMSGJSon ;
 }
- 
+
 mysqli_close($con);
 
 ?>

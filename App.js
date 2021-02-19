@@ -196,7 +196,7 @@ class main extends Component{
 				<View style={styles.container}>
 					<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
 					<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-					<Text style={styles.textAvatar}> Black7628</Text>
+					<Text style={styles.textAvatar}> { this.props.navigation.state.params.User_name }</Text>
 					<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 					<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
 						<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
