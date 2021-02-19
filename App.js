@@ -12,14 +12,6 @@ import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommun
 import { TextInput } from 'react-native-gesture-handler';
 
 
-function data_test() {
-	fetch('http://192.168.10.113:3000/users')
-		.then(response => response.json())
-		.then(users => console.warn(users))   
-}
-data_test()
-
-
 //Importer le font Product Sans
 function LoadProduct() {
 	Font.loadAsync({
@@ -41,6 +33,7 @@ export default class App extends Component{
 				<Stack.Navigator>
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 					<Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/>
+					<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 					<Stack.Screen 
 						name="forgot" 
@@ -115,27 +108,51 @@ function log_sign(){
 
 //Page Login
 class login extends Component {
-	state = {
-		username: '',
-		password: ''
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserEmail: '',
+			UserPassword: ''
 		}
-		handleUser = (text) => {
-			this.setState({ username: text })
-		}
-		handlePassword = (text) => {
-			this.setState({ password: text })
-		}
-		Login = (username, password) => {
-			alert('username: ' + username + ' password: ' + password)
 	}
+
+	UserLoginFunction = () =>{
+		const { UserUsername }  = this.state ;
+		const { UserPassword }  = this.state ;
+		
+		fetch('http://192.168.10.113/Daz/login.php', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username: UserUsername,
+				password: UserPassword
+			})
+		}).then((response) => response.json())
+			.then((responseJson) => {
+				if(responseJson === 'Login_Success')
+				{
+					this.props.navigation.navigate('main', { User_name: UserUsername });
+				}
+				else{
+					Alert.alert(responseJson);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});	
+	}
+
 	render(){
 		return (
 			<View style={styles.loginPage}>
 				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
 				<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
-				<TextInput onChangeText = {this.handleUser} style={styles.inputUser} placeholder="Username" />
-				<TextInput onChangeText = {this.handlePassword} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-				<Text onPress = { () => this.Login(this.state.username, this.state.password)}style={styles.btnLogin}>LOGIN</Text>
+				<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
+				<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
+				<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
 				<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
 			</View>
 		)  
@@ -172,55 +189,57 @@ function forgot({ navigation }){
 
 
 //Page MainPage
-function main({navigation}){
-	return(
-		<View>
-			<View style={styles.container}>
-				<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
-				<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-				<Text style={styles.textAvatar}>Black7618</Text>
-				<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
-				<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
-					<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
-				</Text>
+class main extends Component{
+	render(){
+		return(
+			<View>
+				<View style={styles.container}>
+					<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
+					<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
+					<Text style={styles.textAvatar}> Black7628</Text>
+					<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
+					<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
+						<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
+					</Text>
+				</View>
+				<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f25046"/> Your contents</Text>
+				<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
+					<Card style={{borderRadius:10}}>
+						<CardItem cardBody style={{borderRadius:10}}>
+							<Image source={require('./assets/images/mars.png')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
+						</CardItem>
+						<CardItem style={{borderRadius:10}}>
+							<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="queue-music" color="#000"></MaterialIcons> Musics list</Text>
+						</CardItem>
+					</Card>
+					<Card style={{borderRadius:10, marginLeft:5}}>
+						<CardItem cardBody style={{borderRadius:10}}>
+							<Image source={require('./assets/images/album.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
+						</CardItem>
+						<CardItem style={{borderRadius:10}}>
+							<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="album" color="#000"></MaterialIcons>Albums</Text>
+						</CardItem>
+					</Card>
+					<Card style={{borderRadius:10, marginLeft:5}}>
+						<CardItem cardBody style={{borderRadius:10}}>
+							<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
+						</CardItem>
+						<CardItem style={{borderRadius:10}}>
+							<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
+						</CardItem>
+					</Card>
+					<Card style={{borderRadius:10, marginLeft:5}}>
+						<CardItem cardBody style={{borderRadius:10}}>
+							<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
+						</CardItem>
+						<CardItem style={{borderRadius:10}}>
+							<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="favorite" color='#000'></MaterialIcons>Favorites</Text>
+						</CardItem>
+					</Card>
+				</ScrollView>
+				<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#f25046"/> Notifications </Text>
+				<Text style={styles.clear}>CLEAR ALL</Text>
 			</View>
-			<Text style={styles.textContents}><MaterialCommunityIcons style={styles.musicLogo} name="music-box-multiple-outline" size={25} color="#f25046"/> Your contents</Text>
-			<ScrollView style={styles.scroll} horizontal={true} showsHorizontalScrollIndicator={false}>
-				<Card style={{borderRadius:10}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/mars.png')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="queue-music" color="#000"></MaterialIcons> Musics list</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/album.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="album" color="#000"></MaterialIcons>Albums</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
-					</CardItem>
-				</Card>
-				<Card style={{borderRadius:10, marginLeft:5}}>
-					<CardItem cardBody style={{borderRadius:10}}>
-						<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width:105, flex: 1}}/>
-					</CardItem>
-					<CardItem style={{borderRadius:10}}>
-						<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><MaterialIcons name="favorite" color='#000'></MaterialIcons>Favorites</Text>
-					</CardItem>
-				</Card>
-			</ScrollView>
-			<Text style={styles.textNotifs}><Ionicons name="md-notifications-outline" size={25} color="#f25046"/> Notifications </Text>
-			<Text style={styles.clear}>CLEAR ALL</Text>
-		</View>
-	)
+		)
+	}
 }
