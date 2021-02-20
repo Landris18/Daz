@@ -111,7 +111,7 @@ class login extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			UserEmail: '',
+			UserUsername: '',
 			UserPassword: ''
 		}
 	}
@@ -120,7 +120,7 @@ class login extends Component {
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
 		
-		fetch('http://192.168.10.113/Daz/login.php', {
+		fetch('http://192.168.62.52/Daz/login.php', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -134,6 +134,7 @@ class login extends Component {
 			.then((responseJson) => {
 				if(responseJson === 'Login_Success')
 				{
+					console.log(UserUsername)
 					this.props.navigation.navigate('main', { User_name: UserUsername });
 				}
 				else{
@@ -191,12 +192,13 @@ function forgot({ navigation }){
 //Page MainPage
 class main extends Component{
 	render(){
+		console.log(this.props);
 		return(
 			<View>
 				<View style={styles.container}>
 					<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
 					<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-					<Text style={styles.textAvatar}> { this.props.navigation.state.params.User_name }</Text>
+					<Text style={styles.textAvatar}> {this.props.route.params.User_name}</Text>
 					<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 					<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
 						<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
