@@ -34,6 +34,7 @@ export default class App extends Component{
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 					<Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/>
 					<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
+					<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 					<Stack.Screen 
 						name="forgot" 
@@ -63,7 +64,7 @@ export default class App extends Component{
 
 //Page de Chargement
 function splash({ navigation }){
-	//On navigue vers la page login après 2000ms soit s
+	//On navigue vers la page login après 1000ms soit 1s
 	setTimeout(function () {
 		navigation.navigate('log_sign');
 	},1000);
@@ -83,7 +84,6 @@ function splash({ navigation }){
 //Déclaration de la variable Tab
 const Tab = createMaterialBottomTabNavigator();
 
-// Naviguer entre login et signup
 function log_sign(){
 	return(
 		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
@@ -104,6 +104,7 @@ function log_sign(){
 		</Tab.Navigator>
 	)
 }
+
 
 
 //Page Login
@@ -138,7 +139,7 @@ class login extends Component {
 					this.props.navigation.navigate('main', { User_name: UserUsername });
 				}
 				else{
-					Alert.alert(responseJson);
+					Alert.alert(responseJson);// Naviguer entre login et signup
 				}
 			})
 			.catch((error) => {
@@ -162,18 +163,63 @@ class login extends Component {
 
 
 //Page création de compte
-function create({ navigation }){
-	return(
-		<View style={styles.loginPage}>
-			<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-			<Text style={styles.textLogin}>Inscrivez-vous !</Text>
-			<TextInput style={styles.inputUserCreate} placeholder="Username"/>
-			<TextInput style={styles.inputPass} placeholder="Email"/>
-			<TextInput style={styles.inputPass} placeholder="Password" secureTextEntry/>
-			<TextInput style={styles.inputPass} placeholder="Confirm password" secureTextEntry/>
-			<Text style={styles.btnCreate} onPress={() => navigation.navigate('splash')}>CREATE ACCOUNT</Text>
-		</View>
-	)
+class create extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserUsername: '',
+			UserMail: '',
+			UserPassword: '',
+			UserCPassword: '',
+		}
+	}
+
+	UserRegisterFunction = () =>{
+		const { UserUsername }  = this.state ;
+		const { UserMail }  = this.state ;
+		const { UserPassword }  = this.state ;
+		const { UserCPassword }  = this.state ;
+		
+		fetch('http://192.168.10.101/Daz/register.php', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username: UserUsername,
+				mail: UserMail,
+				password: UserPassword,
+				cpassword: UserCPassword
+			})
+		}).then((response) => response.json())
+			.then((responseJson) => {
+				if(responseJson === 'User Registered')
+				{
+					this.props.navigation.navigate('login');
+					Alert.alert(responseJson);
+				}
+				else{
+					Alert.alert(responseJson);
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});	
+	}
+	render(){
+		return(
+			<View style={styles.loginPage}>
+				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
+				<Text style={styles.textLogin}>Inscrivez-vous !</Text>
+				<TextInput style={styles.inputUserCreate} onChangeText={UserUsername => this.setState({UserUsername})} placeholder="Username"/>
+				<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
+				<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
+				<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
+				<Text style={styles.btnCreate} onPress={this.UserRegisterFunction} >CREATE ACCOUNT</Text>
+			</View>
+		)
+	}
 }
 
 
