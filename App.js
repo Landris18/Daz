@@ -11,8 +11,6 @@ import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
-
-//Importer le font Product Sans
 function LoadProduct() {
 	Font.loadAsync({
 		'Product': require('./assets/fonts/SF-Pro-Display-Medium.otf'),
@@ -22,10 +20,8 @@ function LoadProduct() {
 LoadProduct();
 
 
-//Déclaration de la variable Stack
-const Stack = createStackNavigator();
-
 //Gestion des screens
+const Stack = createStackNavigator();
 export default class App extends Component{
 	render(){
 		return(
@@ -62,9 +58,8 @@ export default class App extends Component{
 }
 
 
-//Page de Chargement
+//Splash screen
 function splash({ navigation }){
-	//On navigue vers la page login après 1000ms soit 1s
 	setTimeout(function () {
 		navigation.navigate('log_sign');
 	},1000);
@@ -75,15 +70,14 @@ function splash({ navigation }){
 			</View>
 			<View style={styles.madeView}>
 				<Text style={styles.dazing}>DAZING</Text>
-				<Text style={styles.made}>Made by Black-Mavericks</Text>
+				<Text style={styles.made}>Built by Black-Mavericks</Text>
 			</View>
 		</View>
 	)
 }
 
-//Déclaration de la variable Tab
+//Bottom navigation
 const Tab = createMaterialBottomTabNavigator();
-
 function log_sign(){
 	return(
 		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
@@ -104,7 +98,6 @@ function log_sign(){
 		</Tab.Navigator>
 	)
 }
-
 
 
 //Page Login
@@ -139,7 +132,7 @@ class login extends Component {
 					this.props.navigation.navigate('main', { User_name: UserUsername });
 				}
 				else{
-					Alert.alert(responseJson);// Naviguer entre login et signup
+					Alert.alert(responseJson);
 				}
 			})
 			.catch((error) => {
@@ -197,7 +190,7 @@ class create extends Component {
 				if(responseJson === 'User Registered')
 				{
 					this.props.navigation.navigate('login');
-					Alert.alert(responseJson);
+					showAlert();
 				}
 				else{
 					Alert.alert(responseJson);
