@@ -1,2 +1,2 @@
 # Daz
-Application React native built by Black-Mavericks
+Application de musique React native built by Black-Mavericks
