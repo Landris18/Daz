@@ -13,15 +13,15 @@ import { TextInput } from 'react-native-gesture-handler';
 
 function LoadProduct() {
 	Font.loadAsync({
-		'Product': require('./assets/fonts/SF-Pro-Display-Medium.otf'),
-		'ProductBold': require('./assets/fonts/SF-Pro-Display-Bold.otf'),
+		'Product': require('./assets/fonts/PS.ttf'),
+		'ProductBold': require('./assets/fonts/PSBold.ttf'),
 	});
 }
 LoadProduct();
 
-
 //Gestion des screens
 const Stack = createStackNavigator();
+
 export default class App extends Component{
 	render(){
 		return(
@@ -62,7 +62,7 @@ export default class App extends Component{
 function splash({ navigation }){
 	setTimeout(function () {
 		navigation.navigate('log_sign');
-	},1000);
+	},2000);
 	return(
 		<View style={styles.container}>
 			<View style={styles.logoView}>
@@ -114,7 +114,7 @@ class login extends Component {
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
 		
-		fetch('http://192.168.62.52/Daz/login.php', {
+		fetch('http://192.168.10.106/Daz/login.php', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -128,7 +128,6 @@ class login extends Component {
 			.then((responseJson) => {
 				if(responseJson === 'Login_Success')
 				{
-					console.log(UserUsername)
 					this.props.navigation.navigate('main', { User_name: UserUsername });
 				}
 				else{
@@ -148,7 +147,7 @@ class login extends Component {
 				<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
 				<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
 				<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
-				<Text style={styles.forgot} onPress={() => navigation.navigate('forgot')}>Forgot Password ?</Text>
+				<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 			</View>
 		)  
 	}	
@@ -203,13 +202,13 @@ class create extends Component {
 	render(){
 		return(
 			<View style={styles.loginPage}>
-				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
+				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')}></Image>
 				<Text style={styles.textLogin}>Inscrivez-vous !</Text>
 				<TextInput style={styles.inputUserCreate} onChangeText={UserUsername => this.setState({UserUsername})} placeholder="Username"/>
 				<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
 				<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
 				<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-				<Text style={styles.btnCreate} onPress={this.UserRegisterFunction} >CREATE ACCOUNT</Text>
+				<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
 			</View>
 		)
 	}
