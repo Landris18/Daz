@@ -1,13 +1,13 @@
 import { StyleSheet} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 export default StyleSheet.create({
 //Page de chargement//
 	container:{
-		backgroundColor: '#ffffff',
 		alignItems: 'center',
 		flex: 2,
-		justifyContent:'center'
+		justifyContent:'center',
 	},
 	logoView:{
 		backgroundColor: '#ffffff',
@@ -16,8 +16,8 @@ export default StyleSheet.create({
 		justifyContent:'center',
      },
      logo:{
-		width:160,
-		height:160,
+		width: wp('35%'),
+		height: hp('25%'),
 		borderRadius:80,
 		justifyContent:'center',
           alignItems: 'center',
@@ -36,6 +36,13 @@ export default StyleSheet.create({
 		fontFamily: 'Product',
 		color: '#999',
 		fontSize: 14,
+	},
+	backgroundImage:{
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		bottom: 0,
+		right: 0,
 	},
 
 

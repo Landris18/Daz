@@ -5,11 +5,22 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { View, Text, Image, ScrollView, Alert } from 'react-native';
+import { View, Text, Image, ScrollView, Alert, ImageBackground } from 'react-native';
 import { Card, CardItem} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
+import {
+	widthPercentageToDP as wp, 
+	heightPercentageToDP as hp, 
+	listenOrientationChange as loc,
+	removeOrientationListener as rol
+} from 'react-native-responsive-screen';
+
+
+//Gestion des screens
+const Stack = createStackNavigator();
+
 
 function LoadProduct() {
 	Font.loadAsync({
@@ -19,10 +30,14 @@ function LoadProduct() {
 }
 LoadProduct();
 
-//Gestion des screens
-const Stack = createStackNavigator();
 
 export default class App extends Component{
+	componentDidMount() {
+		loc(this);
+	}
+	componentWillUnMount() {
+		rol();
+	}
 	render(){
 		return(
 			<NavigationContainer>
@@ -62,12 +77,13 @@ export default class App extends Component{
 function splash({ navigation }){
 	setTimeout(function () {
 		navigation.navigate('log_sign');
-	},2000);
+	},80000);
 	return(
 		<View style={styles.container}>
-			<View style={styles.logoView}>
-				<Image style={styles.logo} source={require('./assets/images/playlogo.png')} ></Image>
-			</View>
+			<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+
+				<Image style={styles.logo} source={require('./assets/images/dlog.png')} ></Image>
+
 			<View style={styles.madeView}>
 				<Text style={styles.dazing}>DAZING</Text>
 				<Text style={styles.made}>Built by Black-Mavericks</Text>
@@ -75,6 +91,7 @@ function splash({ navigation }){
 		</View>
 	)
 }
+
 
 //Bottom navigation
 const Tab = createMaterialBottomTabNavigator();
