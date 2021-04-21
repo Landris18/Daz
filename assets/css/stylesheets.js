@@ -72,7 +72,7 @@ export default StyleSheet.create({
 		fontSize: 20,
 		width:wp('50%'),
 		position:'absolute',
-		top:hp('16%'),
+		top:hp('15%'),
 		left:wp('40%')
 
 	},
@@ -96,13 +96,13 @@ export default StyleSheet.create({
 	},
 	inputUserCreate:{
 		fontFamily: 'Product',
-		backgroundColor: '#fafafa',
-		width:280,
-		height:45,
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
 		borderRadius:25,
 		paddingLeft:20,
-		color:'#555',
-		marginTop:10,
+		color:'#444',
+		marginTop:hp('3%'),
 	},
 	inputPass:{
 		fontFamily: 'Product',
@@ -112,7 +112,7 @@ export default StyleSheet.create({
 		borderRadius:25,
 		paddingLeft:20,
 		color:'#444',
-		marginTop:15
+		marginTop:hp('2%'),
 	},
 	btnLogin:{
 		fontFamily:'ProductBold',
@@ -137,16 +137,21 @@ export default StyleSheet.create({
 		backgroundColor:'#f25046',
 		fontSize:13,
 		color:'#fff',
-		padding:12,
-		borderRadius:20,
-		paddingLeft:40,
-		paddingRight:40,
-		marginTop:13,
+		padding:hp('1.8%'),
+		borderRadius:22,
+		paddingLeft:60,
+		paddingRight:60,
+		marginTop:hp('3%')
+	},
+	signUp:{
+		fontFamily:'ProductBold',
+		color: '#555',
+		marginTop:hp('6.8%')
 	},
 	signIn:{
 		fontFamily:'ProductBold',
 		color: '#555',
-		marginTop:hp('6.8%')
+		marginTop:hp('3%')
 	},
 
 

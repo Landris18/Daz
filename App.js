@@ -159,14 +159,14 @@ class login extends Component {
 			<View style={styles.container}>
 				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
 				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
-				<Text style={styles.textHome}>Sign in now to discover the other side of party!</Text>
+				<Text style={styles.textHome}>Sign in now to discover the other side of party</Text>
 				<Container style={styles.loginForm}>
 					<Text style={styles.textLogin}>S'identifier</Text>
 					<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
 					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
 					<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
-					<Text style={styles.signIn}>Don't have an account ? Sign up.</Text>
+					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have an account ? Sign up.</Text>
 				</Container>
 			</View>
 		)  
@@ -221,14 +221,19 @@ class create extends Component {
 	}
 	render(){
 		return(
-			<View style={styles.loginPage}>
-				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')}></Image>
-				<Text style={styles.textLogin}>Inscrivez-vous !</Text>
-				<TextInput style={styles.inputUserCreate} onChangeText={UserUsername => this.setState({UserUsername})} placeholder="Username"/>
-				<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
-				<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
-				<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-				<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
+			<View style={styles.container}>
+				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
+				<Text style={styles.textHome}>Join us now to discover the other side of party</Text>
+				<Container style={styles.loginForm}>
+					<Text style={styles.textLogin}>Sign up</Text>
+					<TextInput style={styles.inputUserCreate} onChangeText={UserUsername => this.setState({UserUsername})} placeholder="Username"/>
+					<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
+					<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
+					<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
+					<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
+					<Text style={styles.signIn}>Do you have an account ? Sign in.</Text>
+				</Container>
 			</View>
 		)
 	}
