@@ -8,6 +8,8 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		flex: 2,
 		justifyContent:'center',
+		width: wp('100%'),
+		height: hp('100%'),
 	},
 	logoView:{
 		backgroundColor: '#ffffff',
@@ -18,7 +20,6 @@ export default StyleSheet.create({
      logo:{
 		width: wp('35%'),
 		height: hp('25%'),
-		borderRadius:80,
 		justifyContent:'center',
           alignItems: 'center',
      },
@@ -29,12 +30,12 @@ export default StyleSheet.create({
      },
      dazing:{
           fontFamily: 'ProductBold',
-		color: '#999',
+		color: '#ffffff',
           fontSize: 14,
      },
 	made:{
 		fontFamily: 'Product',
-		color: '#999',
+		color: '#ffffff',
 		fontSize: 14,
 	},
 	backgroundImage:{
@@ -47,36 +48,51 @@ export default StyleSheet.create({
 
 
 //Page de Login//
-     loginPage:{
-          backgroundColor: '#ffffff',
-          alignItems: 'center',
-          flex: 2,
-		justifyContent:'center',
+	loginForm:{
+		alignItems: 'center',
+		width: wp('100%'),
+		height: hp('65%'),
+		position:'absolute',
+		bottom:hp('0%'),
+		borderTopRightRadius:50,
+		borderTopLeftRadius:50
 	},
 	logoLogin:{
-		width:140,
-		height:140,
-		borderRadius:80,
+		width: wp('35%'),
+		height: hp('25%'),
 		justifyContent:'center',
-          alignItems: 'center',
+		position:'absolute',
+		top:hp('7%'),
+		left:wp('4%')
+	},
+	textHome:{
+		fontFamily: 'Product',
+		color: '#fff',
+		width:wp('100%'),
+		fontSize: 20,
+		width:wp('50%'),
+		position:'absolute',
+		top:hp('16%'),
+		left:wp('40%')
+
 	},
 	textLogin:{
-		fontFamily: 'Product',
-		color: '#999',
-		fontSize: 20,
+		fontFamily: 'ProductBold',
+		color: '#555',
+		fontSize: 40,
 		width:275,
 		textAlign:'center',
-		marginTop:-10,
+		marginTop:hp('5%'),
 	},
 	inputUser:{
 		fontFamily: 'Product',
-		backgroundColor: '#fafafa',
-		width:280,
-		height:45,
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
 		borderRadius:25,
 		paddingLeft:20,
-		color:'#555',
-		marginTop:27,
+		color:'#444',
+		marginTop:hp('6%'),
 	},
 	inputUserCreate:{
 		fontFamily: 'Product',
@@ -90,12 +106,12 @@ export default StyleSheet.create({
 	},
 	inputPass:{
 		fontFamily: 'Product',
-		backgroundColor: '#fafafa',
-		width:280,
-		height:45,
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
 		borderRadius:25,
 		paddingLeft:20,
-		color:'#555',
+		color:'#444',
 		marginTop:15
 	},
 	btnLogin:{
@@ -103,11 +119,11 @@ export default StyleSheet.create({
 		backgroundColor:'#f25046',
 		fontSize:13,
 		color:'#fff',
-		padding:12,
-		borderRadius:20,
+		padding:hp('1.8%'),
+		borderRadius:22,
 		paddingLeft:60,
 		paddingRight:60,
-		marginTop:45,
+		marginTop:hp('6%')
 	},
 	bottomBar:{
 		height:50,
@@ -127,13 +143,18 @@ export default StyleSheet.create({
 		paddingRight:40,
 		marginTop:13,
 	},
+	signIn:{
+		fontFamily:'ProductBold',
+		color: '#555',
+		marginTop:hp('6.8%')
+	},
 
 
 
 //Page Forgot Password
 	forgot:{
 		fontFamily:'Product',
-		color: '#777',
+		color: '#444',
 		marginTop:18,
 	},
 	textForgot:{

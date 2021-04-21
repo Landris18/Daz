@@ -6,7 +6,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
 import { View, Text, Image, ScrollView, Alert, ImageBackground } from 'react-native';
-import { Card, CardItem} from 'native-base';
+import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
@@ -43,7 +43,7 @@ export default class App extends Component{
 			<NavigationContainer>
 				<Stack.Navigator>
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
-					<Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/>
+					{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
 					<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
 					<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
@@ -76,14 +76,12 @@ export default class App extends Component{
 //Splash screen
 function splash({ navigation }){
 	setTimeout(function () {
-		navigation.navigate('log_sign');
-	},80000);
+		navigation.navigate('login');
+	},3000);
 	return(
 		<View style={styles.container}>
 			<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
-
-				<Image style={styles.logo} source={require('./assets/images/dlog.png')} ></Image>
-
+			<Image style={styles.logo} source={require('./assets/images/dlog.png')} ></Image>
 			<View style={styles.madeView}>
 				<Text style={styles.dazing}>DAZING</Text>
 				<Text style={styles.made}>Built by Black-Mavericks</Text>
@@ -95,26 +93,26 @@ function splash({ navigation }){
 
 //Bottom navigation
 const Tab = createMaterialBottomTabNavigator();
-function log_sign(){
-	return(
-		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
-			<Tab.Screen name="login" component={login} 
-				options={{ 
-					headerShown: false, 
-					title: '',
-					tabBarIcon:({ color })=>(<AntDesign name="login" size={24} color={color}/>)
-				}}
-			/>
-			<Tab.Screen name="create" component={create} 
-				options={{ 
-					headerShown: false, 
-					title: '', 
-					tabBarIcon:({ color })=>(<Ionicons name="ios-create-outline" size={24} color={color}/>)
-				}}
-			/>
-		</Tab.Navigator>
-	)
-}
+// function log_sign(){
+// 	return(
+// 		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
+// 			<Tab.Screen name="login" component={login} 
+// 				options={{ 
+// 					headerShown: false, 
+// 					title: '',
+// 					tabBarIcon:({ color })=>(<AntDesign name="login" size={24} color={color}/>)
+// 				}}
+// 			/>
+// 			<Tab.Screen name="create" component={create} 
+// 				options={{ 
+// 					headerShown: false, 
+// 					title: '', 
+// 					tabBarIcon:({ color })=>(<Ionicons name="ios-create-outline" size={24} color={color}/>)
+// 				}}
+// 			/>
+// 		</Tab.Navigator>
+// 	)
+// }
 
 
 //Page Login
@@ -158,13 +156,18 @@ class login extends Component {
 
 	render(){
 		return (
-			<View style={styles.loginPage}>
-				<Image style={styles.logoLogin} source={require('./assets/images/playlogo.png')} ></Image>
-				<Text style={styles.textLogin}>Connectez-vous et profitez de nos services !</Text>
-				<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
-				<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-				<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
-				<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
+			<View style={styles.container}>
+				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
+				<Text style={styles.textHome}>Sign in now to discover the other side of party!</Text>
+				<Container style={styles.loginForm}>
+					<Text style={styles.textLogin}>S'identifier</Text>
+					<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
+					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
+					<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
+					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
+					<Text style={styles.signIn}>Don't have an account ? Sign up.</Text>
+				</Container>
 			</View>
 		)  
 	}	
