@@ -10,6 +10,7 @@ export default StyleSheet.create({
 		justifyContent:'center',
 		width: wp('100%'),
 		height: hp('100%'),
+		backgroundColor:'#ffffff'
 	},
 	logoView:{
 		backgroundColor: '#ffffff',
@@ -116,7 +117,8 @@ export default StyleSheet.create({
 	},
 	btnLogin:{
 		fontFamily:'ProductBold',
-		backgroundColor:'#f25046',
+		backgroundColor:'#ff005d',
+		// ,f25046
 		fontSize:13,
 		color:'#fff',
 		padding:hp('1.8%'),
@@ -134,7 +136,7 @@ export default StyleSheet.create({
 	},
 	btnCreate:{
 		fontFamily:'ProductBold',
-		backgroundColor:'#f25046',
+		backgroundColor:'#ff005d',
 		fontSize:13,
 		color:'#fff',
 		padding:hp('1.8%'),
@@ -150,25 +152,49 @@ export default StyleSheet.create({
 	},
 	signIn:{
 		fontFamily:'ProductBold',
-		color: '#555',
+		color: '#555',		marginTop:hp('4%'),
 		marginTop:hp('3%')
 	},
-
-
-
-//Page Forgot Password
 	forgot:{
 		fontFamily:'Product',
 		color: '#444',
 		marginTop:18,
 	},
+
+
+
+//Page Forgot Password
+	goBack:{
+		fontWeight:'bold',
+		position:'absolute',
+		top:hp('8%'),
+		left:wp('8%')
+	},
+	titleForgot:{
+		fontFamily: 'ProductBold',
+		color: '#555',
+		fontSize: 40,
+		width:wp('50%'),
+		left:wp('-11%'),
+		textAlign:'left'
+	},
 	textForgot:{
 		fontFamily: 'Product',
-		color: '#999',
-		fontSize: 20,
-		width:200,
-		textAlign:'center',
-		marginTop:5,
+		color: '#666',
+		fontSize: 18,
+		width:275,
+		marginTop:hp('4%'),
+	},
+	btnForgot:{
+		fontFamily:'ProductBold',
+		backgroundColor:'#ff005d',
+		fontSize:13,
+		color:'#fff',
+		padding:hp('1.8%'),
+		borderRadius:22,
+		paddingLeft:60,
+		paddingRight:60,
+		marginTop:hp('6%')
 	},
 
 

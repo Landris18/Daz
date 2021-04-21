@@ -52,17 +52,17 @@ export default class App extends Component{
 						component={forgot} 
 						options={
 							{ 	
-								headerShown:true,
-								title:'Forgot password',
-								headerStyle: {  
-									backgroundColor: '#f25046',
-									elevation:3,  
-								},  
-								headerTintColor: '#ffffff',  
-								headerTitleStyle: {  
-									fontFamily:'Product',
-									fontSize:16,
-								},   
+								headerShown:false,
+								// title:'Forgot password',
+								// headerStyle: {  
+								// 	backgroundColor: '#f25046',
+								// 	elevation:3,  
+								// },  
+								// headerTintColor: '#ffffff',  
+								// headerTitleStyle: {  
+								// 	fontFamily:'Product',
+								// 	fontSize:16,
+								// },   
 							}
 						}
 					/>
@@ -157,7 +157,7 @@ class login extends Component {
 	render(){
 		return (
 			<View style={styles.container}>
-				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs2.jpg')} ></ImageBackground>
 				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
 				<Text style={styles.textHome}>Sign in now to discover the other side of party</Text>
 				<Container style={styles.loginForm}>
@@ -222,7 +222,7 @@ class create extends Component {
 	render(){
 		return(
 			<View style={styles.container}>
-				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs2.jpg')} ></ImageBackground>
 				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
 				<Text style={styles.textHome}>Join us now to discover the other side of party</Text>
 				<Container style={styles.loginForm}>
@@ -241,14 +241,18 @@ class create extends Component {
 
 
 //Page Forgot password
-function forgot({ navigation }){
-	return(
-		<View style={styles.loginPage}>
-			<Text style={styles.textForgot}>Entrez votre adresse mail pour récuperer votre compte !</Text>
-			<TextInput style={styles.inputUser} placeholder="Adresse mail"/>
-			<Text style={styles.btnLogin} onPress={() => navigation.navigate('splash')}>CONFIRMER</Text>
-		</View>
-	)
+class forgot extends Component{
+	render(){
+		return(
+			<View style={styles.container}>
+				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.navigate('login')} name="left" size={28} color="#ff005d"/>
+				<Text style={styles.titleForgot}>Forgot Password</Text>
+				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
+				<TextInput style={styles.inputUser} placeholder="Email address"/>
+				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+			</View>
+		)
+	}	
 }
 
 
