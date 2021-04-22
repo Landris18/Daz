@@ -38,6 +38,8 @@
 		"react-native-safe-area-context": "3.1.9",
 		"react-native-screens": "~2.15.2",
 		"react-native-shimmer": "^0.5.0",
+		"react-native-simple-slideshow": "^1.1.0",
+		"react-native-slideshow": "^1.0.1",
 		"react-native-tab-view": "^2.15.2",
 		"react-native-vector-icons": "^8.0.0",
 		"react-native-web": "^0.15.0",

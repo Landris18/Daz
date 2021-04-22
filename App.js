@@ -5,11 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { View, Text, Image, ScrollView, Alert, ImageBackground } from 'react-native';
+import { View, Text, Image, ScrollView, Alert, ImageBackground, Dimensions } from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
+import { BackHandler } from 'react-native';
 import {
 	widthPercentageToDP as wp, 
 	heightPercentageToDP as hp, 
@@ -44,7 +45,26 @@ export default class App extends Component{
 				<Stack.Navigator>
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 					{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
-					<Stack.Screen name="login" component={login} options={{ headerShown: false }}/>
+					<Stack.Screen 
+						name="login" 
+						component={login} 
+						options={
+							{ 
+								headerShown: false,
+								// animations:{
+								// 	push: {
+								// 		content: {
+								// 			translationX: {
+								// 				from: require('react-native').Dimensions.get('window').width,
+								// 				to: 10,
+								// 				duration: 300
+								// 			}
+								// 		}
+								// 	}
+								// }
+							}
+						}
+					/>
 					<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 					<Stack.Screen 
@@ -123,6 +143,21 @@ class login extends Component {
 			UserUsername: '',
 			UserPassword: ''
 		}
+		//Handling android back button
+		this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+	}
+
+	componentDidMount() {
+		BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+	}
+	 
+	componentWillUnmount() {
+		BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+	}
+	 
+	handleBackButtonClick() {
+		this.props.navigation.navigate('login');
+		return true;
 	}
 
 	UserLoginFunction = () =>{
@@ -166,7 +201,7 @@ class login extends Component {
 					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
 					<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
-					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have an account ? Sign up.</Text>
+					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
 				</Container>
 			</View>
 		)  
@@ -232,7 +267,7 @@ class create extends Component {
 					<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
 					<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
 					<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
-					<Text style={styles.signIn}>Do you have an account ? Sign in.</Text>
+					<Text style={styles.signIn}>Already have Daz account? <Text style={styles.signColor}>Sign In.</Text></Text>
 				</Container>
 			</View>
 		)
@@ -245,7 +280,7 @@ class forgot extends Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.navigate('login')} name="left" size={28} color="#ff005d"/>
+				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.goBack()} name="left" size={28} color="#ff005d"/>
 				<Text style={styles.titleForgot}>Forgot Password</Text>
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>

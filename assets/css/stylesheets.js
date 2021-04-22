@@ -160,6 +160,9 @@ export default StyleSheet.create({
 		color: '#444',
 		marginTop:18,
 	},
+	signColor:{
+		color:"#ff005d"
+	},
 
 
 
@@ -192,8 +195,8 @@ export default StyleSheet.create({
 		color:'#fff',
 		padding:hp('1.8%'),
 		borderRadius:22,
-		paddingLeft:60,
-		paddingRight:60,
+		paddingLeft:hp('15%'),
+		paddingRight:hp('15%'),
 		marginTop:hp('6%')
 	},
 
