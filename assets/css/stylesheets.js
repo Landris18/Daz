@@ -55,8 +55,8 @@ export default StyleSheet.create({
 		height: hp('65%'),
 		position:'absolute',
 		bottom:hp('0%'),
-		borderTopRightRadius:50,
-		borderTopLeftRadius:50
+		borderTopRightRadius:30,
+		borderTopLeftRadius:30
 	},
 	logoLogin:{
 		width: wp('35%'),
