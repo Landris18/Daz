@@ -162,7 +162,7 @@ class login extends Component {
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
 		
-		fetch('http://iteam-s.mg:3000/api/User', {
+		fetch('http://iteam-s.mg:3000/api/login', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -225,7 +225,7 @@ class create extends Component {
 		const { UserPassword }  = this.state ;
 		const { UserCPassword }  = this.state ;
 		
-		fetch('http://192.168.10.101/Daz/register.php', {
+		fetch('http://iteam-s.mg:3000/api/signup', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
