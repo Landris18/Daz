@@ -150,11 +150,9 @@ class login extends Component {
 	componentDidMount() {
 		BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 	}
-	 
 	componentWillUnmount() {
 		BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
 	}
-	 
 	handleBackButtonClick() {
 		this.props.navigation.navigate('login');
 		return true;
@@ -164,7 +162,7 @@ class login extends Component {
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
 		
-		fetch('http://192.168.10.106/Daz/login.php', {
+		fetch('http://iteam-s.mg:3000/api/User', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
