@@ -19,7 +19,7 @@
 | Nom       | Niveau | Poste              | Profil Github                                             |
 | --------- | ------ | ------------------ | ----------------------------------------------------------|
 | Landry    | L3     | Développeur GPAO   | [Landry Manankoraisina](https://github.com/Landris18)      |
-| Arlème    | L2     | Null               | [Arlème Johnson](https://github.com/rootkit7628)           |
+| Arlème    | L2     | :sob:              | [Arlème Johnson](https://github.com/rootkit7628)           |
 
 
 <h1 align="center">QUI SOMMES NOUS ?</h1>
