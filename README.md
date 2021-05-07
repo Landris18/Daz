@@ -16,10 +16,10 @@
 
 <h3>CONTRIBUTEURS du projet Daz</h3>
     
-| Nom       | Niveau | Poste        | Profil Github                                             |
-| --------- | ------ | ------------ | ----------------------------------------------------------|
-| Landry    | L3     | **-+-+-+-** | [Landry Manankoraisina](https://github.com/Landris18)      |
-| Arlème    | L2     | **-+-+-+-** | [Arlème Johnson](https://github.com/rootkit7628)           |
+| Nom       | Niveau | Poste              | Profil Github                                             |
+| --------- | ------ | ------------------ | ----------------------------------------------------------|
+| Landry    | L3     | Développeur GPAO   | [Landry Manankoraisina](https://github.com/Landris18)      |
+| Arlème    | L2     | Null               | [Arlème Johnson](https://github.com/rootkit7628)           |
 
 
 <h1 align="center">QUI SOMMES NOUS ?</h1>
