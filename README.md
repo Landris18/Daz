@@ -19,7 +19,7 @@
 | Nom       | Niveau | Poste        | Profil Github                                             |
 | --------- | ------ | ------------ | ----------------------------------------------------------|
 | Landry    | L3     | **-+-+-+-** | [Landry Manankoraisina](https://github.com/Landris18)      |
-| Arlème    | L2     | **-+-+-+-** | [Arlème Jonhson](https://github.com/rootkit7628)           |
+| Arlème    | L2     | **-+-+-+-** | [Arlème Johnson](https://github.com/rootkit7628)           |
 
 
 <h1 align="center">QUI SOMMES NOUS ?</h1>
