@@ -14,7 +14,7 @@
 
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
 
-<h3>CONTRIBUTEURS du projet Bot Crush</h3>
+<h3>CONTRIBUTEURS du projet Daz</h3>
     
 | Nom       | Niveau | Poste        | Profil Github                                             |
 | --------- | ------ | ------------ | ----------------------------------------------------------|
