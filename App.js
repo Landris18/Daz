@@ -17,10 +17,14 @@ import {
 	listenOrientationChange as loc,
 	removeOrientationListener as rol
 } from 'react-native-responsive-screen';
+const axios = require("axios")
 
 
 //Gestion des screens
 const Stack = createStackNavigator();
+
+//Importations de l'axios
+
 
 
 function LoadProduct() {
@@ -157,34 +161,30 @@ class login extends Component {
 		this.props.navigation.navigate('login');
 		return true;
 	}
+	gotomia
+
 
 	UserLoginFunction = () =>{
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
 		
-		fetch('http://iteam-s.mg:3000/api/login', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
+		axios({
+			method: 'post',
+			url: 'http://iteam-s.mg:3001/api/v1/login',
+			data: {
 				username: UserUsername,
 				password: UserPassword
-			})
-		}).then((response) => response.json())
-			.then((responseJson) => {
-				if(responseJson === 'Login_Success')
-				{
-					this.props.navigation.navigate('main', { User_name: UserUsername });
-				}
-				else{
-					Alert.alert(responseJson);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});	
+			}
+		})
+		.then((response) => {
+			if (response.data == true){
+				this.props.navigation.navigate('main', { User_name: UserUsername });
+			}
+			else if (response.data == false) {
+				Alert.alert("Wrong password or username")
+			}
+		})
+
 	}
 
 	render(){
@@ -298,7 +298,7 @@ class main extends Component{
 				<View style={styles.container}>
 					<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
 					<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-					<Text style={styles.textAvatar}> {this.props.route.params.User_name}</Text>
+					<Text style={styles.textAvatar}>{this.props.route.params.User_name}</Text>
 					<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 					<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
 						<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>
