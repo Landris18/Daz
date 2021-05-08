@@ -14,7 +14,7 @@ MongoClient.connect(url, function(err, client) {
   db = client.db(dbName);
 });
 
-app.get('/api/users', (req,res) => {
+app.get('/api/v1/users', (req,res) => {
     db.collection('User').find({}).toArray(function(err, docs) {
         if (err) {
             console.log(err)
@@ -24,29 +24,31 @@ app.get('/api/users', (req,res) => {
       }) 
 })
 
-app.post('/api/login', urlencodedParser, async function (req, res){
+app.post('/api/v1/login', urlencodedParser, async function (req, res){
+    console.log(req.body)
 	response = {
 		username : req.body.username,
 		password : req.body.password,
-	}
+    }
 	username = response.username
 	password  = response.password
 
 	isvalid = await login({ username, password })
 	console.log(isvalid)
-	res.status(200).json(isvalid)
 })
 
-
-app.listen(3000, () => {
- console.log('Go to http://localhost:3000/users');
-});
 
 
 async function login({ username, password }) {
     const user = await db.collection('User').findOne({ username });
+    message = ""
     if (user && password == user.mdp) {
-        return true
+        message = "Success";
+        console.log(message)
     } 
-   	return false
+    message = "Failed"
+
 }
+
+app.listen(3001, () => {});
+   
