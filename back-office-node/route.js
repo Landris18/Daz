@@ -2,18 +2,21 @@ const url = require('./conf').url
 const dbName = require('./conf').dbName
 
 const express = require('express');
-const bodyParser = require('body-parser');
-
-let urlencodedParser = bodyParser.urlencoded({ extended: false })  
+const bodyParser = require('body-parser');  
 const app = express()
 const MongoClient = require('mongodb').MongoClient;
 let db
- 
+
+app.use(bodyParser.json());
+
+
 MongoClient.connect(url, function(err, client) {
   console.log("Connected successfully to server");
   db = client.db(dbName);
 });
 
+
+// Just to test the routes
 app.get('/api/v1/users', (req,res) => {
     db.collection('User').find({}).toArray(function(err, docs) {
         if (err) {
@@ -24,30 +27,24 @@ app.get('/api/v1/users', (req,res) => {
       }) 
 })
 
-app.post('/api/v1/login', urlencodedParser, async function (req, res){
-    console.log(req.body)
-	response = {
-		username : req.body.username,
-		password : req.body.password,
-    }
-	username = response.username
-	password  = response.password
 
+// Login routes
+app.post('/api/v1/login', async function (req, res){
+    console.log(req.body)
+	username = req.body.username
+	password  = req.body.password
 	isvalid = await login({ username, password })
-	console.log(isvalid)
+	res.status(200).json(isvalid)
 })
 
 
 
 async function login({ username, password }) {
     const user = await db.collection('User').findOne({ username });
-    message = ""
     if (user && password == user.mdp) {
-        message = "Success";
-        console.log(message)
+        return true
     } 
-    message = "Failed"
-
+    return false
 }
 
 app.listen(3001, () => {});
