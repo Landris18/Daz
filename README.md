@@ -20,6 +20,7 @@
 | --------- | ------ | ------------------ | ----------------------------------------------------------|
 | Landry    | L3     | Développeur GPAO (AngularJS/Django) | [Landry Manankoraisina](https://github.com/Landris18)      |
 | Arlème    | L2     | Développeur Java                    | [Arlème Johnson](https://github.com/rootkit7628)           |
+| Gaetan    | L3     | Exploit                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
 
 
 <h1 align="center">QUI SOMMES NOUS ?</h1>
