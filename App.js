@@ -87,6 +87,7 @@ export default class App extends Component{
 							}
 						}
 					/>
+					<Stack.Screen name="mail_confirmation" component={mail_confirmation} options={{ headerShown: false }}/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		)
@@ -97,7 +98,7 @@ export default class App extends Component{
 //Splash screen
 function splash({ navigation }){
 	setTimeout(function () {
-		navigation.navigate('login');
+		navigation.navigate('mail_confirmation');
 	},2000);
 	return(
 		<View style={styles.container}>
@@ -224,33 +225,29 @@ class create extends Component {
 		const { UserPassword }  = this.state ;
 		const { UserCPassword }  = this.state ;
 		
-		fetch('http://iteam-s.mg:3000/api/signup', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
+		axios({
+			method: 'post',
+			url: 'http://iteam-s.mg:3001/api/v1/signup',
+			data: {
 				username: UserUsername,
 				mail: UserMail,
 				password: UserPassword,
 				cpassword: UserCPassword
-			})
-		}).then((response) => response.json())
-			.then((responseJson) => {
-				if(responseJson === 'User Registered')
-				{
-					this.props.navigation.navigate('login');
-					showAlert();
-				}
-				else{
-					Alert.alert(responseJson);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});	
+			}
+		})
+		.then((response) => {
+			if (response.data == true) {
+				this.props.navigation.navigate('login');
+			}
+			else if (response.data == false) {
+				Alert.alert("Erreur sur les données")
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+		});	
 	}
+
 	render(){
 		return(
 			<View style={styles.container}>
@@ -263,7 +260,7 @@ class create extends Component {
 					<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
 					<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
 					<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-					<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
+					<Text style={styles.btnCreate} onPress={() => this.props.navigation.navigate('mail_confirmation')}>CREATE ACCOUNT</Text>
 					<Text style={styles.signIn}>Already have Daz account? <Text style={styles.signColor}>Sign In.</Text></Text>
 				</Container>
 			</View>
@@ -282,6 +279,27 @@ class forgot extends Component{
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>
 				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+			</View>
+		)
+	}	
+}
+
+
+//Page Forgot password
+class mail_confirmation extends Component{
+	render(){
+		return(
+			<View style={styles.container}>
+				<Text style={styles.titleForgot}>Confirm email</Text>
+				<Text style={styles.textForgot}>
+					Veuillez confirmer votre adresse email pour finaliser votre inscription.
+					Un code à 6 chiffres a été envoyé à votre adresse email.
+				</Text>
+				<TextInput style={styles.inputUser} placeholder="Code de confirmation"/>
+				<View>
+					<Text style={styles.btnMail} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('login')}>ANNULER</Text>
+				</View>
 			</View>
 		)
 	}	
