@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { View, Text, Image, ScrollView, Alert, ImageBackground, Dimensions } from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, Alert, ImageBackground, Dimensions } from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -17,23 +17,20 @@ import {
 	listenOrientationChange as loc,
 	removeOrientationListener as rol
 } from 'react-native-responsive-screen';
-const axios = require("axios")
+import axios from 'axios'
 
 
 //Gestion des screens
 const Stack = createStackNavigator();
 
-//Importations de l'axios
 
-
-
-function LoadProduct() {
-	Font.loadAsync({
+async function LoadProduct() {
+	await Font.loadAsync({
 		'Product': require('./assets/fonts/PS.ttf'),
 		'ProductBold': require('./assets/fonts/PSBold.ttf'),
 	});
 }
-LoadProduct();
+LoadProduct()
 
 
 export default class App extends Component{
@@ -101,7 +98,7 @@ export default class App extends Component{
 function splash({ navigation }){
 	setTimeout(function () {
 		navigation.navigate('login');
-	},3000);
+	},2000);
 	return(
 		<View style={styles.container}>
 			<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
@@ -178,9 +175,11 @@ class login extends Component {
 		})
 		.then((response) => {
 			if (response.data == true){
+				Keyboard.dismiss()
 				this.props.navigation.navigate('main', { User_name: UserUsername });
 			}
 			else if (response.data == false) {
+				Keyboard.dismiss()
 				Alert.alert("Wrong password or username")
 			}
 		})
