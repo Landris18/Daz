@@ -39,11 +39,7 @@ loadProduct()
 
 
 export default class App extends Component{
-	constructor(props) {
-		loadProduct()
-		super(props);
-		
-	   }
+
 	componentDidMount() {
 		
 		loc(this);
@@ -115,7 +111,7 @@ function splash({ navigation }){
 			if (user_id && user_token){
 				setTimeout(function () {
 					navigation.navigate('main', { User_name: user_id });
-				},2000);
+				},1000);
 			}
 			else{
 				setTimeout(function () {
@@ -269,28 +265,39 @@ class create extends Component {
 		const { UserMail }  = this.state ;
 		const { UserPassword }  = this.state ;
 		const { UserCPassword }  = this.state ;
-		
-		axios({
-			method: 'post',
-			url: 'http://iteam-s.mg:3001/api/v1/signup',
-			data: {
-				username: UserUsername,
-				mail: UserMail,
-				password: UserPassword,
-				cpassword: UserCPassword
+
+		var mailRegex = new RegExp ("^[a-z]{2,}[a-z0-9_.]+@[a-z]{1,}[a-z0-9]+.[a-z]{2,3}$")
+		var passRegex = new RegExp("(.){6,}")
+
+		if (mailRegex.test(UserMail == true)){
+			if (passRegex.test(UserPassword == true)){
+				if (UserPassword == UserCPassword){
+					axios({
+						method: 'post',
+						url: 'http://iteam-s.mg:3001/api/v1/signup',
+						data: {
+							username: UserUsername,
+							mail: UserMail,
+							password: UserPassword,
+						}
+					})
+					.then((response) => {
+					})
+					.catch((error) => {
+						console.log(error);
+					});	
+				}
+				else{
+					alert.Alert("Votre mot de passe ne correspond pas")
+				}
 			}
-		})
-		.then((response) => {
-			if (response.data == true) {
-				this.props.navigation.navigate('login');
+			else{
+				alert.Alert("Le mot de passe doit comporter 6 chiffres au minimum")
 			}
-			else if (response.data == false) {
-				Alert.alert("Erreur sur les données")
-			}
-		})
-		.catch((error) => {
-			console.error(error);
-		});	
+		}
+		else{
+			alert.Alert("Invalid email addres")
+		}
 	}
 
 	render(){
