@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/stylesheets';
-import { View, Text, Image, ScrollView, Alert, ImageBackground, Dimensions } from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, Alert, ImageBackground, Dimensions } from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -17,27 +17,35 @@ import {
 	listenOrientationChange as loc,
 	removeOrientationListener as rol
 } from 'react-native-responsive-screen';
-const axios = require("axios")
+import axios from 'axios'
+import { AsyncStorage } from 'react-native'
 
 
 //Gestion des screens
 const Stack = createStackNavigator();
 
-//Importations de l'axios
+//Token de l'utilisateur
+const KEY_TOKEN = 'USER_TOKEN';
+const KEY_ID = 'USER_ID';
 
 
-
-function LoadProduct() {
+function loadProduct() {
 	Font.loadAsync({
 		'Product': require('./assets/fonts/PS.ttf'),
 		'ProductBold': require('./assets/fonts/PSBold.ttf'),
-	});
+	})
 }
-LoadProduct();
+loadProduct()
 
 
 export default class App extends Component{
+	constructor(props) {
+		loadProduct()
+		super(props);
+		
+	   }
 	componentDidMount() {
+		
 		loc(this);
 	}
 	componentWillUnMount() {
@@ -90,6 +98,7 @@ export default class App extends Component{
 							}
 						}
 					/>
+					<Stack.Screen name="mail_confirmation" component={mail_confirmation} options={{ headerShown: false }}/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		)
@@ -99,9 +108,33 @@ export default class App extends Component{
 
 //Splash screen
 function splash({ navigation }){
-	setTimeout(function () {
-		navigation.navigate('login');
-	},3000);
+	AsyncStorage.getItem(KEY_ID).then(asyncStorageRes => {
+		var user_id = asyncStorageRes;
+		AsyncStorage.getItem(KEY_TOKEN).then(asyncStorageRes => {
+			var user_token = asyncStorageRes
+			if (user_id && user_token){
+				setTimeout(function () {
+					navigation.navigate('main', { User_name: user_id });
+				},2000);
+			}
+			else{
+				setTimeout(function () {
+					navigation.navigate('login');
+				},2000);
+				return(
+					<View style={styles.container}>
+						<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+						<Image style={styles.logo} source={require('./assets/images/dlog.png')} ></Image>
+						<View style={styles.madeView}>
+							<Text style={styles.dazing}>DAZING</Text>
+							<Text style={styles.made}>Built by Black-Mavericks</Text>
+						</View>
+					</View>
+				)
+			}
+		});
+	});
+	
 	return(
 		<View style={styles.container}>
 			<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
@@ -177,15 +210,27 @@ class login extends Component {
 			}
 		})
 		.then((response) => {
-			if (response.data == true){
+			Keyboard.dismiss()
+			if (response.status == 200){
+				Keyboard.dismiss()
+				AsyncStorage.setItem(KEY_ID, response.data.userID);
+				AsyncStorage.setItem(KEY_TOKEN, response.data.token);
 				this.props.navigation.navigate('main', { User_name: UserUsername });
 			}
-			else if (response.data == false) {
-				Alert.alert("Wrong password or username")
+		})
+		.catch((err) => {
+			Keyboard.dismiss()
+			console.log(err.response)
+			if (err.response.status == 401) {
+				Keyboard.dismiss()
+				Alert.alert(err.response.data.error)
+			}
+			else{
+				Alert.alert("Something went wrong !")
 			}
 		})
-
 	}
+
 
 	render(){
 		return (
@@ -225,33 +270,29 @@ class create extends Component {
 		const { UserPassword }  = this.state ;
 		const { UserCPassword }  = this.state ;
 		
-		fetch('http://iteam-s.mg:3000/api/signup', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
+		axios({
+			method: 'post',
+			url: 'http://iteam-s.mg:3001/api/v1/signup',
+			data: {
 				username: UserUsername,
 				mail: UserMail,
 				password: UserPassword,
 				cpassword: UserCPassword
-			})
-		}).then((response) => response.json())
-			.then((responseJson) => {
-				if(responseJson === 'User Registered')
-				{
-					this.props.navigation.navigate('login');
-					showAlert();
-				}
-				else{
-					Alert.alert(responseJson);
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			});	
+			}
+		})
+		.then((response) => {
+			if (response.data == true) {
+				this.props.navigation.navigate('login');
+			}
+			else if (response.data == false) {
+				Alert.alert("Erreur sur les données")
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+		});	
 	}
+
 	render(){
 		return(
 			<View style={styles.container}>
@@ -264,7 +305,7 @@ class create extends Component {
 					<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
 					<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
 					<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-					<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
+					<Text style={styles.btnCreate} onPress={() => this.props.navigation.navigate('mail_confirmation')}>CREATE ACCOUNT</Text>
 					<Text style={styles.signIn}>Already have Daz account? <Text style={styles.signColor}>Sign In.</Text></Text>
 				</Container>
 			</View>
@@ -289,10 +330,30 @@ class forgot extends Component{
 }
 
 
+//Page Forgot password
+class mail_confirmation extends Component{
+	render(){
+		return(
+			<View style={styles.container}>
+				<Text style={styles.titleForgot}>Confirm email</Text>
+				<Text style={styles.textForgot}>
+					Veuillez confirmer votre adresse email pour finaliser votre inscription.
+					Un code à 6 chiffres a été envoyé à votre adresse email.
+				</Text>
+				<TextInput style={styles.inputUser} placeholder="Code de confirmation"/>
+				<View>
+					<Text style={styles.btnMail} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('login')}>ANNULER</Text>
+				</View>
+			</View>
+		)
+	}	
+}
+
+
 //Page MainPage
 class main extends Component{
 	render(){
-		console.log(this.props);
 		return(
 			<View>
 				<View style={styles.container}>

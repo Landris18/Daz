@@ -199,6 +199,32 @@ export default StyleSheet.create({
 		paddingRight:hp('15%'),
 		marginTop:hp('6%')
 	},
+	btnMail:{
+		fontFamily:'ProductBold',
+		backgroundColor:'#ff005d',
+		fontSize:13,
+		color:'#fff',
+		padding:hp('1.8%'),
+		borderRadius:22,
+		paddingLeft:hp('5%'),
+		paddingRight:hp('5%'),
+		marginTop:hp('6%'),
+		marginLeft:wp('-28%'),
+		marginRight:wp('9%')
+	},
+	btnMailCancel:{
+		fontFamily:'ProductBold',
+		backgroundColor:'#cccccc',
+		fontSize:13,
+		color:'#fff',
+		padding:hp('1.8%'),
+		borderRadius:22,
+		paddingLeft:hp('5%'),
+		paddingRight:hp('5%'),
+		marginTop:hp('-5.8%'),
+		marginLeft:wp('14%'),
+		marginRight:wp('-28%')
+	},
 
 
 //Page Main
