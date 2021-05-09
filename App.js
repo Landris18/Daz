@@ -18,23 +18,34 @@ import {
 	removeOrientationListener as rol
 } from 'react-native-responsive-screen';
 import axios from 'axios'
+import { AsyncStorage } from 'react-native'
 
 
 //Gestion des screens
 const Stack = createStackNavigator();
 
+//Token de l'utilisateur
+const KEY_TOKEN = 'USER_TOKEN';
+const KEY_ID = 'USER_ID';
 
-async function LoadProduct() {
-	await Font.loadAsync({
+
+function loadProduct() {
+	Font.loadAsync({
 		'Product': require('./assets/fonts/PS.ttf'),
 		'ProductBold': require('./assets/fonts/PSBold.ttf'),
-	});
+	})
 }
-LoadProduct()
+loadProduct()
 
 
 export default class App extends Component{
+	constructor(props) {
+		loadProduct()
+		super(props);
+		
+	   }
 	componentDidMount() {
+		
 		loc(this);
 	}
 	componentWillUnMount() {
@@ -97,9 +108,33 @@ export default class App extends Component{
 
 //Splash screen
 function splash({ navigation }){
-	setTimeout(function () {
-		navigation.navigate('mail_confirmation');
-	},2000);
+	AsyncStorage.getItem(KEY_ID).then(asyncStorageRes => {
+		var user_id = asyncStorageRes;
+		AsyncStorage.getItem(KEY_TOKEN).then(asyncStorageRes => {
+			var user_token = asyncStorageRes
+			if (user_id && user_token){
+				setTimeout(function () {
+					navigation.navigate('main', { User_name: user_id });
+				},2000);
+			}
+			else{
+				setTimeout(function () {
+					navigation.navigate('login');
+				},2000);
+				return(
+					<View style={styles.container}>
+						<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
+						<Image style={styles.logo} source={require('./assets/images/dlog.png')} ></Image>
+						<View style={styles.madeView}>
+							<Text style={styles.dazing}>DAZING</Text>
+							<Text style={styles.made}>Built by Black-Mavericks</Text>
+						</View>
+					</View>
+				)
+			}
+		});
+	});
+	
 	return(
 		<View style={styles.container}>
 			<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
@@ -175,17 +210,27 @@ class login extends Component {
 			}
 		})
 		.then((response) => {
-			if (response.data == true){
+			Keyboard.dismiss()
+			if (response.status == 200){
 				Keyboard.dismiss()
+				AsyncStorage.setItem(KEY_ID, response.data.userID);
+				AsyncStorage.setItem(KEY_TOKEN, response.data.token);
 				this.props.navigation.navigate('main', { User_name: UserUsername });
 			}
-			else if (response.data == false) {
+		})
+		.catch((err) => {
+			Keyboard.dismiss()
+			console.log(err.response)
+			if (err.response.status == 401) {
 				Keyboard.dismiss()
-				Alert.alert("Wrong password or username")
+				Alert.alert(err.response.data.error)
+			}
+			else{
+				Alert.alert("Something went wrong !")
 			}
 		})
-
 	}
+
 
 	render(){
 		return (
@@ -309,7 +354,6 @@ class mail_confirmation extends Component{
 //Page MainPage
 class main extends Component{
 	render(){
-		console.log(this.props);
 		return(
 			<View>
 				<View style={styles.container}>
