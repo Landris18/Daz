@@ -28,6 +28,7 @@
 		"mysql": "^2.18.1",
 		"native-base": "^2.15.2",
 		"nodemon": "^2.0.7",
+		"pg-pool": "^3.3.0",
 		"react": "16.13.1",
 		"react-dom": "16.13.1",
 		"react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",

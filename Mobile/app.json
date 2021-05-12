@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Daz",
+    "slug": "Daz",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/playlogo.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android":{
+      "package": "com.blackmavericks.daz",
+      "versionCode": 0
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
