@@ -11,9 +11,10 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-
+API/node_modules/
+Mobile/node_modules/
 # macOS
 .DS_Store
 
-# Config file for API
-back-office-node/conf.js
+# Config file for
+API/conf.js
