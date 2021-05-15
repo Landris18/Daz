@@ -2,6 +2,7 @@
 vscodecolor.css
 node_modules/
 .expo/*
+Mobile/.expo/*
 npm-debug.*
 *.jks
 *.p8
