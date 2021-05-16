@@ -1,7 +1,6 @@
 import { StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-
 export default StyleSheet.create({
 //Page de chargement//
 	container:{
@@ -56,7 +55,7 @@ export default StyleSheet.create({
 		position:'absolute',
 		bottom:hp('0%'),
 		borderTopRightRadius:30,
-		borderTopLeftRadius:30
+		borderTopLeftRadius:30,
 	},
 	logoLogin:{
 		width: wp('35%'),
@@ -309,5 +308,38 @@ export default StyleSheet.create({
 		position:'absolute',
 		right:40,
 		top:397,
-	}
+	},
+//Style modal
+modalView:{
+	height:hp('25%'),
+	width:wp('80%'),
+	flexDirection: 'column',
+     justifyContent: 'center',
+	alignItems: 'center', 
+	backgroundColor:'#fff',
+	borderRadius:10,
+},
+modalText:{
+	color:'#666', 
+	fontSize:16,
+	fontFamily: 'Product',
+	alignItems: 'center',
+	textAlign:'center',
+	marginTop:hp('1.5%'),
+	marginLeft:wp('10%'),
+	marginRight:wp('10%'),
+},
+btnModal:{
+	fontFamily:'ProductBold',
+	backgroundColor:'#ff005d',
+	// ,f25046
+	fontSize:13,
+	color:'#fff',
+	padding:hp('1.8%'),
+	borderRadius:22,
+	paddingLeft:60,
+	paddingRight:60,
+	marginTop:hp('3.5%')
+},
+
 });

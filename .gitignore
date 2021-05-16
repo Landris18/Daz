@@ -2,6 +2,7 @@
 vscodecolor.css
 node_modules/
 .expo/*
+Mobile/.expo/*
 npm-debug.*
 *.jks
 *.p8
@@ -13,6 +14,7 @@ web-build/
 web-report/
 API/node_modules/
 Mobile/node_modules/
+Mobile/.expo/
 # macOS
 .DS_Store
 

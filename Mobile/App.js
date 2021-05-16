@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
-import styles from './assets/css/stylesheets';
-import { Keyboard,View, Text, Image, ScrollView, Alert, ImageBackground, Dimensions } from 'react-native';
+import styles from './assets/css/css';
+import { Keyboard,View, Text, Image, ScrollView, Alert, ImageBackground, Modal } from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -18,7 +18,8 @@ import {
 	removeOrientationListener as rol
 } from 'react-native-responsive-screen';
 import axios from 'axios'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native';
+import { AlertModal } from './components/modals/alertModal';
 
 
 //Gestion des screens
@@ -172,13 +173,18 @@ const Tab = createMaterialBottomTabNavigator();
 class login extends Component {
 	constructor(props) {
 		super(props)
+		this.handler = this.handler.bind(this);
 		this.state = {
 			UserUsername: '',
-			UserPassword: ''
+			UserPassword: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
 		}
 		//Handling android back button
 		this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 	}
+
 
 	componentDidMount() {
 		BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -190,8 +196,13 @@ class login extends Component {
 		this.props.navigation.navigate('login');
 		return true;
 	}
-	gotomia
 
+	handler() {
+		this.setState({
+			modalShow: false
+		});
+	}
+  
 
 	UserLoginFunction = () =>{
 		const { UserUsername }  = this.state ;
@@ -216,21 +227,27 @@ class login extends Component {
 		})
 		.catch((err) => {
 			Keyboard.dismiss()
-			console.log(err.response)
 			if (err.response.status == 401) {
 				Keyboard.dismiss()
-				Alert.alert(err.response.data.error)
+				if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
+					this.setState({modalShow: true, errorText: err.response.data.error, errorIcon: "account-search"})
+				}
+				else{
+					this.setState({modalShow: true, errorText: err.response.data.error, errorIcon: "lock-alert"})
+				}
 			}
 			else{
-				Alert.alert("Something went wrong !")
+				this.setState({modalShow: true, errorText: "Something went wrong !", errorIcon:"alert-circle-check"})
 			}
 		})
 	}
 
 
 	render(){
+		
 		return (
 			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
 				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs2.jpg')} ></ImageBackground>
 				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
 				<Text style={styles.textHome}>Sign in now to discover the other side of party</Text>
@@ -242,6 +259,7 @@ class login extends Component {
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
 				</Container>
+
 			</View>
 		)  
 	}	
