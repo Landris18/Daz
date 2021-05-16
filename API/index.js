@@ -1,4 +1,5 @@
 // ****************************
+const mail = require('./conf').mail
 const url = require('./conf').url
 const dbName = require('./conf').dbName
 const verifid = require('./middleware/verifid');
@@ -66,6 +67,20 @@ async function register({ username, email, password ,res}){
 				code: code
 			})
 		console.log('user inserted')
+		let mailOptions = {
+      from: 'arleme.dev7@gmail.com',
+ 		  to: email,
+      subject: 'Code de Confirmation',
+      text: "Votre code est: " + code
+    };
+
+    mail.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
 	}
 }
 
