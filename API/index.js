@@ -38,7 +38,7 @@ app.get('/api/v1/users', (req,res) => {
 
 
 // Verify if the {userID, token} match and return True or false
-app.get('/api/v1/verify_token', (req,res) => {
+/*app.get('/api/v1/verify_token', (req,res) => {
 	console.log(req.body)
 	try {
 		const token = req.headers.authorization.token;
@@ -58,18 +58,39 @@ app.get('/api/v1/verify_token', (req,res) => {
 		});
 	}
 })
-
+*/
 
 // Register route {email, username, password} => 
-/*app.post('/api/v1/register', async function(req, res)) {
+app.post('/api/v1/register', async function(req, res){
     console.log(req.body)
-    const user = {
-        email  : req.body.email
-        username : req.body.username
-        password  :  bcrypt.hash(req.body.password, 5)
-    }
-    await res.status(200).json(user)
-}*/
+
+    username = req.body.username.toLowerCase(),
+    email  = req.body.email.toLowerCase(),
+    password  = await bcrypt.hash(req.body.password, 5)
+
+    await register({ username, email, password ,res })
+})
+
+async function register({ username, email, password ,res}){
+	const username_exist = await db.collection('User').findOne({ username });
+	const email_exist = await db.collection('User').findOne({ email })
+	if(username_exist){
+		return res.status(401).json({ error :'Username "'+username+'" already taken'})
+	}
+	else if(email_exist){
+		return res.status(401).json({ error :'Email "'+email+'" already associate to an account'})
+	}
+	else{
+		const code = ('0000'+(Math.floor(Math.random()*99999)).toString()).substr(-5)
+		await db.collection('User').insertOne({
+				username: username,
+				email: email,
+				password: password,
+				code: code
+			})
+		console.log('user inserted')
+	}
+}
 
 
 // Login with {username, password} and return {userID&Token or Error}
@@ -84,10 +105,10 @@ app.post('/api/v1/login', async function (req, res){
 async function login({ username, password, res }) {
     const user = await db.collection('User').findOne({ username });
     if(!user){
-        return res.status(401).json({ error :'User don\'t exist'})
+        return res.status(401).json({ error :'Username doesn\'t exist, try another or sign up !'})
     } 
-    //else if(bcrypt.compare(req.body.password, user.mdp)) {
-    else if(password == user.mdp) {
+    //else if(bcrypt.compare(req.body.password, user.password)) {
+    else if(password == user.password) {
         return res.status(200).json({
             userID : user._id,
             token : jwt.sign(
@@ -98,11 +119,10 @@ async function login({ username, password, res }) {
         })
     }
     else{
-        return res.status(401).json({ error :'Incorrect password'})
+        return res.status(401).json({ error :'You inserted an incorrect password !'})
     }
 }
 
 
 // Listen on port 3001
 app.listen(3001, () => {});
-   
