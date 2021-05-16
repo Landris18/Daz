@@ -18,7 +18,10 @@ export class AlertModal extends Component{
      render(){
           return(
                <Modal 
-               isVisible={this.props.isVisible} 
+               isVisible={this.props.isVisible}
+               onBackdropPress={() => {this.props.action()}}
+               onSwipeComplete={() => {this.props.action()}}
+               swipeDirection="right"
                animationInTiming={1000}
                animationOutTiming={1} 
                animationIn={'shake'}
@@ -26,9 +29,9 @@ export class AlertModal extends Component{
                backdropOpacity={0.80}
                style={{alignItems:'center'}}>
                     <View style={styles.modalView}>
-                         <MaterialCommunityIcons name="lock-alert" size={60} color="#999" style={{marginTop:hp('-2%')}} />
-                         <Text style={styles.modalText}>You inserted a wrong password !</Text>
-                         <Text onPress={() => {this.props.action()}} style={styles.btnModal}> Valider</Text>
+                         <MaterialCommunityIcons name={this.props.icon} size={60} color="#999" style={{marginTop:hp('-2%')}} />
+                         <Text style={styles.modalText}>{this.props.text}</Text>
+                         <Text onPress={() => {this.props.action()}} style={styles.btnModal}> Fermer</Text>
                     </View>
                </Modal>
           )

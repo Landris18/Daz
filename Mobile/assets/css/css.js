@@ -324,6 +324,7 @@ modalText:{
 	fontSize:16,
 	fontFamily: 'Product',
 	alignItems: 'center',
+	textAlign:'center',
 	marginTop:hp('1.5%'),
 	marginLeft:wp('10%'),
 	marginRight:wp('10%'),

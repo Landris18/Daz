@@ -177,12 +177,12 @@ class login extends Component {
 		this.state = {
 			UserUsername: '',
 			UserPassword: '',
-			modalShow: false
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
 		}
 		//Handling android back button
 		this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-		
-
 	}
 
 
@@ -201,9 +201,8 @@ class login extends Component {
 		this.setState({
 			modalShow: false
 		});
-	 }
+	}
   
-
 
 	UserLoginFunction = () =>{
 		const { UserUsername }  = this.state ;
@@ -230,10 +229,15 @@ class login extends Component {
 			Keyboard.dismiss()
 			if (err.response.status == 401) {
 				Keyboard.dismiss()
-				Alert.alert(err.response.data.error)
+				if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
+					this.setState({modalShow: true, errorText: err.response.data.error, errorIcon: "account-search"})
+				}
+				else{
+					this.setState({modalShow: true, errorText: err.response.data.error, errorIcon: "lock-alert"})
+				}
 			}
 			else{
-				Alert.alert("Something went wrong !")
+				this.setState({modalShow: true, errorText: "Something went wrong !", errorIcon:"alert-circle-check"})
 			}
 		})
 	}
@@ -243,7 +247,7 @@ class login extends Component {
 		
 		return (
 			<View style={styles.container}>
-				<AlertModal text="" action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
 				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs2.jpg')} ></ImageBackground>
 				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
 				<Text style={styles.textHome}>Sign in now to discover the other side of party</Text>
@@ -251,9 +255,7 @@ class login extends Component {
 					<Text style={styles.textLogin}>S'identifier</Text>
 					<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
 					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-					<Text onPress={() => {
-                this.setState({modalShow: true})
-              }} style={styles.btnLogin}>LOGIN</Text>
+					<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
 				</Container>
