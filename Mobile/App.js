@@ -317,36 +317,49 @@ class create extends Component {
 						url: 'http://iteam-s.mg:3001/api/v1/register',
 						data: {
 							username: UserUsername,
-							mail: UserMail,
+							email: UserMail,
 							password: UserPassword,
 						}
 					})
 					.then((response) => {
 						Keyboard.dismiss()
+						console.log(response.status)
 						if (response.status == 200){
 							Keyboard.dismiss()
 							this.setState({modalShow: true, errorText: "User registered with success", errorIcon:"alert-circle-check"})
 						}
 						else{
 							Keyboard.dismiss()
-							this.setState({modalShow: true, errorText: error, errorIcon:"alert-circle-check"})
+							this.setState({modalShow: true, errorText: "hahah", errorIcon:"alert-circle-check"})
 						}
 					})
 					.catch((error) => {
 						Keyboard.dismiss()
-						this.setState({modalShow: true, errorText: error, errorIcon:"alert-circle-check"})
+						this.setState({modalShow: true, errorText: "haha", errorIcon:"alert-circle-check"})
 					});	
 				}
 				else{
-					this.setState({modalShow: true, errorText: "Votre mot de passe ne correspond pas !", errorIcon:"alert-circle-check"})
+					this.setState({
+						modalShow: true, 
+						errorText: "Votre mot de passe ne correspond pas !", 
+						errorIcon:"alert-circle-check"
+					})
 				}
 			}
 			else{
-				this.setState({modalShow: true, errorText: "Le mot de passe doit comporter 6 caractères au minimum !", errorIcon:"alert-circle-check"})
+				this.setState({
+					modalShow: true, 
+					errorText: "Le mot de passe doit comporter 6 caractères au minimum !", 
+					errorIcon:"alert-circle-check"
+				})
 			}
 		}
 		else{
-			this.setState({modalShow: true, errorText: "Invalid email format !", errorIcon:"alert-circle-check"})
+			this.setState({
+				modalShow: true, 
+				errorText: "Invalid email format !", 
+				errorIcon:"alert-circle-check"
+			})
 		}
 	}
 
