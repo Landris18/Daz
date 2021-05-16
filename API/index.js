@@ -37,35 +37,12 @@ app.get('/api/v1/users', (req,res) => {
 })
 
 
-// Verify if the {userID, token} match and return True or false
-/*app.get('/api/v1/verify_token', (req,res) => {
-	console.log(req.body)
-	try {
-		const token = req.headers.authorization.token;
-		const decodedToken = jwt.verify(token, 'BLACK_MAVERICK_TOKEN');
-		console.log(decodedToken)
-		const userId = decodedToken.userID;
-		if (req.body.userId && req.body.user_id !== userID) {
-			res.status(401).json({
-				error : new Error('Invalid user ID')
-			})
-		} else {
-			res.status(200).json(true)
-		}
-	} catch {
-		res.status(401).json({
-			error: new Error('Invalid request!')
-		});
-	}
-})
-*/
-
 // Register route {email, username, password} => 
 app.post('/api/v1/register', async function(req, res){
     console.log(req.body)
 
-    username = req.body.username.toLowerCase(),
-    email  = req.body.email.toLowerCase(),
+    username = req.body.username,
+    email  = req.body.email,
     password  = await bcrypt.hash(req.body.password, 5)
 
     await register({ username, email, password ,res })
@@ -123,6 +100,30 @@ async function login({ username, password, res }) {
     }
 }
 
+
+
+// Verify if the {userID, token} match and return True or false
+/*app.get('/api/v1/verify_token', (req,res) => {
+	console.log(req.body)
+	try {
+		const token = req.headers.authorization.token;
+		const decodedToken = jwt.verify(token, 'BLACK_MAVERICK_TOKEN');
+		console.log(decodedToken)
+		const userId = decodedToken.userID;
+		if (req.body.userId && req.body.user_id !== userID) {
+			res.status(401).json({
+				error : new Error('Invalid user ID')
+			})
+		} else {
+			res.status(200).json(true)
+		}
+	} catch {
+		res.status(401).json({
+			error: new Error('Invalid request!')
+		});
+	}
+})
+*/
 
 // Listen on port 3001
 app.listen(3001, () => {});

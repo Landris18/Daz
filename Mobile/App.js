@@ -230,14 +230,26 @@ class login extends Component {
 			if (err.response.status == 401) {
 				Keyboard.dismiss()
 				if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
-					this.setState({modalShow: true, errorText: err.response.data.error, errorIcon: "account-search"})
+					this.setState({
+						modalShow: true, 
+						errorText: err.response.data.error, 
+						errorIcon: "account-search"
+					})
 				}
 				else{
-					this.setState({modalShow: true, errorText: err.response.data.error, errorIcon: "lock-alert"})
+					this.setState({
+						modalShow: true, 
+						errorText: err.response.data.error, 
+						errorIcon: "lock-alert"
+					})
 				}
 			}
 			else{
-				this.setState({modalShow: true, errorText: "Something went wrong !", errorIcon:"alert-circle-check"})
+				this.setState({
+					modalShow: true, 
+					errorText: "Something went wrong !", 
+					errorIcon:"alert-circle-check"
+				})
 			}
 		})
 	}
@@ -270,12 +282,22 @@ class login extends Component {
 class create extends Component {
 	constructor(props) {
 		super(props)
+		this.handler = this.handler.bind(this);
 		this.state = {
 			UserUsername: '',
 			UserMail: '',
 			UserPassword: '',
 			UserCPassword: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
 		}
+	}
+
+	handler() {
+		this.setState({
+			modalShow: false
+		});
 	}
 
 	UserRegisterFunction = () =>{
@@ -287,12 +309,12 @@ class create extends Component {
 		var mailRegex = new RegExp ("^[a-z]{2,}[a-z0-9_.]+@[a-z]{1,}[a-z0-9]+.[a-z]{2,3}$")
 		var passRegex = new RegExp("(.){6,}")
 
-		if (mailRegex.test(UserMail == true)){
-			if (passRegex.test(UserPassword == true)){
+		if (mailRegex.test(UserMail) == true){
+			if (passRegex.test(UserPassword) == true){
 				if (UserPassword == UserCPassword){
 					axios({
 						method: 'post',
-						url: 'http://iteam-s.mg:3001/api/v1/signup',
+						url: 'http://iteam-s.mg:3001/api/v1/register',
 						data: {
 							username: UserUsername,
 							mail: UserMail,
@@ -300,27 +322,38 @@ class create extends Component {
 						}
 					})
 					.then((response) => {
+						Keyboard.dismiss()
+						if (response.status == 200){
+							Keyboard.dismiss()
+							this.setState({modalShow: true, errorText: "User registered with success", errorIcon:"alert-circle-check"})
+						}
+						else{
+							Keyboard.dismiss()
+							this.setState({modalShow: true, errorText: error, errorIcon:"alert-circle-check"})
+						}
 					})
 					.catch((error) => {
-						console.log(error);
+						Keyboard.dismiss()
+						this.setState({modalShow: true, errorText: error, errorIcon:"alert-circle-check"})
 					});	
 				}
 				else{
-					alert.Alert("Votre mot de passe ne correspond pas")
+					this.setState({modalShow: true, errorText: "Votre mot de passe ne correspond pas !", errorIcon:"alert-circle-check"})
 				}
 			}
 			else{
-				alert.Alert("Le mot de passe doit comporter 6 chiffres au minimum")
+				this.setState({modalShow: true, errorText: "Le mot de passe doit comporter 6 caractères au minimum !", errorIcon:"alert-circle-check"})
 			}
 		}
 		else{
-			alert.Alert("Invalid email addres")
+			this.setState({modalShow: true, errorText: "Invalid email format !", errorIcon:"alert-circle-check"})
 		}
 	}
 
 	render(){
 		return(
 			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
 				<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs2.jpg')} ></ImageBackground>
 				<Image style={styles.logoLogin} source={require('./assets/images/dlog.png')} ></Image>
 				<Text style={styles.textHome}>Join us now to discover the other side of party</Text>
@@ -330,7 +363,7 @@ class create extends Component {
 					<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
 					<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
 					<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-					<Text style={styles.btnCreate} onPress={() => this.props.navigation.navigate('mail_confirmation')}>CREATE ACCOUNT</Text>
+					<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
 					<Text style={styles.signIn}>Already have Daz account? <Text style={styles.signColor}>Sign In.</Text></Text>
 				</Container>
 			</View>
