@@ -21,16 +21,3 @@
 | Landry    | L3     | Développeur GPAO  | [Landry Manankoraisina](https://github.com/Landris18)      |
 | Arlème    | L2     | Développeur Wordpress                    | [Arlème Johnson](https://github.com/rootkit7628)           |
 | Gaetan    | L3     | Développeur Bcust                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
-
-
-<h1 align="center">QUI SOMMES NOUS ?</h1>
-<table>
-<tr><td>Nous sommes une communauté des IT fondé récemment par des jeunes du Programme SESAME. Comme son nom l'indique "<a href="https://github.com/iTeam-S">iTeam-$</a>".
-Nous sommes dans le domaine de l'informatique ,digitale, management et de la communication qui se sont regroupés pour mettre en œuvre une communauté dynamique..
-<ul>
-    <li><a href="https://web.facebook.com/iTeam.Community">Notre page facebook</a></li>
-    <li><a href="https://iteam-s.mg">Notre site web</a></li>
-</ul>
-    </td><td><img src="https://avatars.githubusercontent.com/u/74913824?s=200&v=4"></img></td></tr>
-</table>
-
