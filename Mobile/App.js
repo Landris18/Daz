@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import styles from './assets/css/css';
-import { Keyboard,View, Text, Image, ScrollView, Alert, ImageBackground, Modal } from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, ImageBackground} from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -185,7 +185,6 @@ class login extends Component {
 		this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
 	}
 
-
 	componentDidMount() {
 		BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 	}
@@ -203,7 +202,6 @@ class login extends Component {
 		});
 	}
   
-
 	UserLoginFunction = () =>{
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
@@ -271,7 +269,6 @@ class login extends Component {
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
 				</Container>
-
 			</View>
 		)  
 	}	
@@ -309,7 +306,7 @@ class create extends Component {
 		var mailRegex = new RegExp ("^[a-z]{2,}[a-z0-9_.]+@[a-z]{1,}[a-z0-9]+.[a-z]{2,3}$")
 		var passRegex = new RegExp("(.){6,}")
 
-		if (mailRegex.test(UserMail) == true){
+		if (mailRegex.test(UserMail.toLowerCase()) == true){
 			if (passRegex.test(UserPassword) == true){
 				if (UserPassword == UserCPassword){
 					axios({
@@ -323,19 +320,29 @@ class create extends Component {
 					})
 					.then((response) => {
 						Keyboard.dismiss()
-						console.log(response.status)
 						if (response.status == 200){
 							Keyboard.dismiss()
-							this.setState({modalShow: true, errorText: "User registered with success", errorIcon:"alert-circle-check"})
-						}
-						else{
-							Keyboard.dismiss()
-							this.setState({modalShow: true, errorText: "hahah", errorIcon:"alert-circle-check"})
+							this.props.navigation.navigate('mail_confirmation', { User_code: response.data.code, User_mail: UserMail });
+							console.log(response.data.code)
 						}
 					})
-					.catch((error) => {
+					.catch((err) => {
 						Keyboard.dismiss()
-						this.setState({modalShow: true, errorText: "haha", errorIcon:"alert-circle-check"})
+						if (err.response.status == 401) {
+							Keyboard.dismiss()
+							this.setState({
+								modalShow: true, 
+								errorText: err.response.data.error, 
+								errorIcon: "account-search"
+							})
+						}
+						else{
+							this.setState({
+								modalShow: true, 
+								errorText: "Something went wrong !", 
+								errorIcon:"alert-circle-check"
+							})
+						}
 					});	
 				}
 				else{
@@ -403,17 +410,42 @@ class forgot extends Component{
 
 //Page Forgot password
 class mail_confirmation extends Component{
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserCode: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
+		}
+	}
+
+	MailConfirmation = () =>{
+		const { UserCode }  = this.state ;
+		if (UserCode == this.props.route.params.User_code){
+			this.props.navigation.navigate('main');
+		}
+		else{
+			this.setState({
+				modalShow: true, 
+				errorText: "Votre code de confirmation n'est pas valide !", 
+				errorIcon:"alert-circle-check"
+			})
+		}
+	}
+
 	render(){
 		return(
 			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
 				<Text style={styles.titleForgot}>Confirm email</Text>
 				<Text style={styles.textForgot}>
 					Veuillez confirmer votre adresse email pour finaliser votre inscription.
-					Un code à 6 chiffres a été envoyé à votre adresse email.
+					Un code à été envoyé à votre adresse <Text style={styles.mail_c}>{this.props.route.params.User_mail}</Text>.
 				</Text>
-				<TextInput style={styles.inputUser} placeholder="Code de confirmation"/>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUser} placeholder="Code de confirmation"/>
 				<View>
-					<Text style={styles.btnMail} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+					<Text style={styles.btnMail} onPress={this.MailConfirmation}>CONFIRMER</Text>
 					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('login')}>ANNULER</Text>
 				</View>
 			</View>
@@ -430,7 +462,7 @@ class main extends Component{
 				<View style={styles.container}>
 					<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
 					<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-					<Text style={styles.textAvatar}>{this.props.route.params.User_name}</Text>
+					{/* <Text style={styles.textAvatar}>{this.props.route.params.User_name}</Text> */}
 					<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 					<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
 						<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>

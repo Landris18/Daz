@@ -224,6 +224,11 @@ export default StyleSheet.create({
 		marginLeft:wp('14%'),
 		marginRight:wp('-28%')
 	},
+	mail_c:{
+		fontFamily: 'ProductBold',
+		color: '#444',
+		fontSize:18
+	},
 
 
 //Page Main
