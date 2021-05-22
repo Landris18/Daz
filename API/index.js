@@ -42,8 +42,8 @@ app.get('/api/v1/users', (req,res) => {
 app.post('/api/v1/register', async function(req, res){
     console.log(req.body)
 
-    username = req.body.username,
-    email  = req.body.email,
+    username = req.body.username.toLowerCase(),
+    email  = req.body.email.toLowerCase(),
     password  = await bcrypt.hash(req.body.password, 5)
 
     await register({ username, email, password ,res })
@@ -71,7 +71,7 @@ async function register({ username, email, password ,res}){
       from: 'arleme.dev7@gmail.com',
  		  to: email,
       subject: 'Code de Confirmation',
-      text: "Votre code est: " + code
+      text: "Votre code de confirmation est: " + code
     };
 
     mail.sendMail(mailOptions, function(error, info){
@@ -81,6 +81,11 @@ async function register({ username, email, password ,res}){
         console.log('Email sent: ' + info.response);
       }
     });
+
+    return res.status(200).json({
+      username: username,
+      code: code
+    })
 	}
 }
 
