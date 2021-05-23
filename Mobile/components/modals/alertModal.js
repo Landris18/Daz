@@ -13,6 +13,7 @@ import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommun
 // import { TextInput } from 'react-native-gesture-handler';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+
 export class AlertModal extends Component{
      render(){
           return(

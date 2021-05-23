@@ -20,6 +20,7 @@ import {
 import axios from 'axios'
 import { AsyncStorage } from 'react-native';
 import { AlertModal } from './components/modals/alertModal';
+import AnimateLoadingButton from 'react-native-animate-loading-button';
 
 
 //Gestion des screens
@@ -201,6 +202,15 @@ class login extends Component {
 			modalShow: false
 		});
 	}
+
+	_onPressHandler() {
+		this.loadingButton.showLoading(true);
+	 
+		// mock
+		setTimeout(() => {
+		  this.loadingButton.showLoading(false);
+		}, 2000);
+	}
   
 	UserLoginFunction = () =>{
 		const { UserUsername }  = this.state ;
@@ -265,7 +275,20 @@ class login extends Component {
 					<Text style={styles.textLogin}>S'identifier</Text>
 					<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
 					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-					<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
+					{/* <Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text> */}
+					<AnimateLoadingButton
+						ref={c => (this.loadingButton = c)}
+						width={250}
+						height={50}
+						title="LOGIN"
+						titleFontSize={15}
+						titleWeight={'100'}
+						titleColor="#fff"
+						backgroundColor="#ff005d"
+						titleFontFamily="Product"
+						borderRadius={25}
+						onPress={this._onPressHandler.bind(this)}
+        				/>
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
 				</Container>

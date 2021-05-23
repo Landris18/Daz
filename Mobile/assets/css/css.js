@@ -113,6 +113,7 @@ export default StyleSheet.create({
 		paddingLeft:20,
 		color:'#444',
 		marginTop:hp('2%'),
+		marginBottom:hp('6%')
 	},
 	btnLogin:{
 		fontFamily:'ProductBold',
