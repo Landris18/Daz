@@ -203,18 +203,13 @@ class login extends Component {
 		});
 	}
 
-	_onPressHandler() {
-		this.loadingButton.showLoading(true);
-	 
-		// mock
-		setTimeout(() => {
-		  this.loadingButton.showLoading(false);
-		}, 2000);
-	}
   
 	UserLoginFunction = () =>{
+
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
+
+		this.loadingButton.showLoading(true);
 		
 		axios({
 			method: 'post',
@@ -225,6 +220,7 @@ class login extends Component {
 			}
 		})
 		.then((response) => {
+			this.loadingButton.showLoading(false);
 			Keyboard.dismiss()
 			if (response.status == 200){
 				Keyboard.dismiss()
@@ -235,6 +231,7 @@ class login extends Component {
 		})
 		.catch((err) => {
 			Keyboard.dismiss()
+			this.loadingButton.showLoading(false);
 			if (err.response.status == 401) {
 				Keyboard.dismiss()
 				if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
@@ -287,7 +284,7 @@ class login extends Component {
 						backgroundColor="#ff005d"
 						titleFontFamily="Product"
 						borderRadius={25}
-						onPress={this._onPressHandler.bind(this)}
+						onPress={this.UserLoginFunction.bind(this)}
         				/>
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
