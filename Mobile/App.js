@@ -3,9 +3,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import styles from './assets/css/css';
-import { Keyboard,View, Text, Image, ScrollView, ImageBackground} from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView, StatusBar} from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -55,6 +55,7 @@ export default class App extends Component{
 				<Stack.Navigator>
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 					{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
+					<Stack.Screen name="intro" component={intro} options={{ headerShown: false }}/>
 					<Stack.Screen 
 						name="login" 
 						component={login} 
@@ -118,7 +119,7 @@ function splash({ navigation }){
 			else{
 				setTimeout(function () {
 					navigation.navigate('login');
-				},2000);
+				},1000);
 				return(
 					<View style={styles.container}>
 						<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
@@ -144,6 +145,59 @@ function splash({ navigation }){
 		</View>
 	)
 }
+
+
+
+function intro({ navigation }){
+	const [sliderState, setSliderState] = useState({ currentPage: 0 });
+	const { width, height } = Dimensions.get('window');
+	const setSliderPage = (event) => {
+		const { currentPage } = sliderState;
+		const { x } = event.nativeEvent.contentOffset;
+		console.log(x)
+		const indexOfNextScreen = Math.round(x / width);
+		if (indexOfNextScreen !== currentPage) {
+			setSliderState({
+				...sliderState,
+				currentPage: indexOfNextScreen,
+			});
+		}
+	}
+	const { currentPage: pageIndex } = sliderState;
+	return(
+		<>
+		<SafeAreaView style={{ flex: 1 }}>
+			<ScrollView style={{ flex: 1 }} horizontal={true} scrollEventThrottle={16} pagingEnabled={true} 
+				showsHorizontalScrollIndicator={false}
+				onScroll={(event) => {
+					setSliderPage(event);
+				}}>
+				<View style={{ width, height }}>
+					<Text style={styles.textLogin}>Screen 1</Text>
+				</View>
+				<View style={{ width, height }}>
+					<Text style={styles.textLogin}>Screen 2</Text>
+				</View>
+				<View style={{ width, height }}>
+					<Text style={styles.textLogin}>Screen 3</Text>
+				</View>
+				<View style={{ width, height }}>
+					<Text style={styles.textLogin}>Screen 4</Text>
+				</View>
+				<View style={{ width, height }}>
+					<Text style={styles.textLogin}>Screen 5</Text>
+				</View>
+			</ScrollView>
+			<View style={styles.paginationWrapper}>
+				{Array.from(Array(5).keys()).map((key, index) => (
+				<View style={[styles.paginationDots, { opacity: pageIndex === key ? 1 : 0.05 }]} key={key} />
+				))}
+        		</View>
+		</SafeAreaView>
+     </>
+	)
+}
+
 
 
 //Bottom navigation
@@ -232,21 +286,23 @@ class login extends Component {
 		.catch((err) => {
 			Keyboard.dismiss()
 			this.loadingButton.showLoading(false);
-			if (err.response.status == 401) {
-				Keyboard.dismiss()
-				if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
-					this.setState({
-						modalShow: true, 
-						errorText: err.response.data.error, 
-						errorIcon: "account-search"
-					})
-				}
-				else{
-					this.setState({
-						modalShow: true, 
-						errorText: err.response.data.error, 
-						errorIcon: "lock-alert"
-					})
+			if (err.response.status) {
+				if (err.response.status == 401) {
+					Keyboard.dismiss()
+					if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
+						this.setState({
+							modalShow: true, 
+							errorText: err.response.data.error, 
+							errorIcon: "account-search"
+						})
+					}
+					else{
+						this.setState({
+							modalShow: true, 
+							errorText: err.response.data.error, 
+							errorIcon: "lock-alert"
+						})
+					}
 				}
 			}
 			else{
@@ -259,9 +315,7 @@ class login extends Component {
 		})
 	}
 
-
 	render(){
-		
 		return (
 			<View style={styles.container}>
 				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>

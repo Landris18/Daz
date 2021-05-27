@@ -54,8 +54,8 @@ export default StyleSheet.create({
 		height: hp('65%'),
 		position:'absolute',
 		bottom:hp('0%'),
-		borderTopRightRadius:30,
-		borderTopLeftRadius:30,
+		borderTopRightRadius:20,
+		borderTopLeftRadius:20,
 	},
 	logoLogin:{
 		width: wp('35%'),
@@ -347,5 +347,23 @@ btnModal:{
 	paddingRight:60,
 	marginTop:hp('3.5%')
 },
+
+//CustomIntro
+paginationWrapper: {
+	position: 'absolute',
+	bottom: 10,
+	left: 0,
+	right: 0,
+	justifyContent: 'center',
+	alignItems: 'center',
+	flexDirection: 'row',
+   },
+   paginationDots: {
+	height: 10,
+	width: 10,
+	borderRadius: 10 / 2,
+	backgroundColor: '#ff005d',
+	marginLeft: 10,
+   },
 
 });
