@@ -286,7 +286,7 @@ class login extends Component {
 		.catch((err) => {
 			Keyboard.dismiss()
 			this.loadingButton.showLoading(false);
-			if (err.response.status) {
+			if (err.response) {
 				if (err.response.status == 401) {
 					Keyboard.dismiss()
 					if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
@@ -308,7 +308,7 @@ class login extends Component {
 			else{
 				this.setState({
 					modalShow: true, 
-					errorText: "Something went wrong !", 
+					errorText: "Server did not respond !", 
 					errorIcon:"alert-circle-check"
 				})
 			}
