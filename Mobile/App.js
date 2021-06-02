@@ -472,7 +472,7 @@ class forgot extends Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.goBack()} name="left" size={28} color="#ff005d"/>
+				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.goBack()} name="left" size={28} color="#555"/>
 				<Text style={styles.titleForgot}>Forgot Password</Text>
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>

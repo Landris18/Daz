@@ -171,7 +171,7 @@ export default StyleSheet.create({
 		fontWeight:'bold',
 		position:'absolute',
 		top:hp('8%'),
-		left:wp('8%')
+		right:wp('8%')
 	},
 	titleForgot:{
 		fontFamily: 'ProductBold',
