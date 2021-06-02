@@ -351,19 +351,59 @@ btnModal:{
 //CustomIntro
 paginationWrapper: {
 	position: 'absolute',
-	bottom: 10,
+	bottom: hp("5%"),
 	left: 0,
 	right: 0,
 	justifyContent: 'center',
 	alignItems: 'center',
 	flexDirection: 'row',
-   },
-   paginationDots: {
+},
+paginationDots: {
 	height: 10,
 	width: 10,
 	borderRadius: 10 / 2,
-	backgroundColor: '#ff005d',
+	backgroundColor: '#888888',
 	marginLeft: 10,
-   },
+},
+imgIntro:{
+	width: wp('80%'),
+	height: hp('40%'),
+	position:'absolute',
+	top:hp('17%'),
+	left:wp('10%')
+},
+titleIntro:{
+	fontFamily: 'ProductBold',
+	color: '#333',
+	fontSize: 30,
+	textAlign:'center',
+	alignItems: 'center',
+	justifyContent:'center',
+	top:hp('62%'),
+},
+textIntro:{
+	fontFamily: 'Product',
+	color: '#888',
+	width:wp("83%"),
+	fontSize: 16,
+	textAlign:'center',
+	alignItems: 'center',
+	justifyContent:'center',
+	top:hp('64%'),
+	left:wp("8.5%")
+},
+btnIntro:{
+	fontFamily:'ProductBold',
+	backgroundColor:'#ff005d',
+	fontSize:13,
+	color:'#fff',
+	borderRadius:22,
+	padding:hp("1.8%"),
+	paddingLeft:wp("20%"),
+	top:hp('67%'),
+	left:wp("20%"),
+	width:wp("60%")
+},
+
 
 });

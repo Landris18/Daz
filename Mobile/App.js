@@ -118,7 +118,7 @@ function splash({ navigation }){
 			}
 			else{
 				setTimeout(function () {
-					navigation.navigate('login');
+					navigation.navigate('intro');
 				},1000);
 				return(
 					<View style={styles.container}>
@@ -154,7 +154,6 @@ function intro({ navigation }){
 	const setSliderPage = (event) => {
 		const { currentPage } = sliderState;
 		const { x } = event.nativeEvent.contentOffset;
-		console.log(x)
 		const indexOfNextScreen = Math.round(x / width);
 		if (indexOfNextScreen !== currentPage) {
 			setSliderState({
@@ -166,35 +165,38 @@ function intro({ navigation }){
 	const { currentPage: pageIndex } = sliderState;
 	return(
 		<>
-		<SafeAreaView style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1 }} horizontal={true} scrollEventThrottle={16} pagingEnabled={true} 
-				showsHorizontalScrollIndicator={false}
-				onScroll={(event) => {
-					setSliderPage(event);
-				}}>
-				<View style={{ width, height }}>
-					<Text style={styles.textLogin}>Screen 1</Text>
+			<SafeAreaView style={{ flex: 1 }}>
+				<ScrollView style={{ flex: 1 }} horizontal={true} scrollEventThrottle={16} pagingEnabled={true} 
+					showsHorizontalScrollIndicator={false}
+					onScroll={(event) => {
+						setSliderPage(event);
+					}}>
+					<View style={{ width, height, backgroundColor:"#fff"  }}>
+						<Image style={styles.imgIntro} source={require('./assets/images/col.png')} ></Image>
+						<Text style={styles.titleIntro}>Ready everywhere</Text>
+						<Text style={styles.textIntro}>The first place that offer you all you need. Daz is everywhere and has no limit.</Text>
+						<Text style={styles.btnIntro} onPress={() => navigation.navigate('login')}>GET STARTED</Text>
+					</View>
+					<View style={{ width, height, backgroundColor:"#fff" }}>
+						<Image style={styles.imgIntro} source={require('./assets/images/col1.png')} ></Image>
+						<Text style={styles.titleIntro}>Utimate Sound</Text>
+						<Text style={styles.textIntro}>The first place that offer you all you need. Daz is everywhere and has no limit.</Text>
+						<Text style={styles.btnIntro} onPress={() => navigation.navigate('login')}>GET STARTED</Text>
+					</View>
+					<View style={{ width, height, backgroundColor:"#fff" }}>
+						<Image style={styles.imgIntro} source={require('./assets/images/col.png')} ></Image>
+						<Text style={styles.titleIntro}>Music non-stop</Text>
+						<Text style={styles.textIntro}>The first place that offer you all you need. Daz is everywhere and has no limit.</Text>
+						<Text style={styles.btnIntro} onPress={() => navigation.navigate('login')}>GET STARTED</Text>
+					</View>
+				</ScrollView>
+				<View style={styles.paginationWrapper}>
+					{Array.from(Array(3).keys()).map((key, index) => (
+					<View style={[styles.paginationDots, { opacity: pageIndex === key ? 1 : 0.15 }]} key={key} />
+					))}
 				</View>
-				<View style={{ width, height }}>
-					<Text style={styles.textLogin}>Screen 2</Text>
-				</View>
-				<View style={{ width, height }}>
-					<Text style={styles.textLogin}>Screen 3</Text>
-				</View>
-				<View style={{ width, height }}>
-					<Text style={styles.textLogin}>Screen 4</Text>
-				</View>
-				<View style={{ width, height }}>
-					<Text style={styles.textLogin}>Screen 5</Text>
-				</View>
-			</ScrollView>
-			<View style={styles.paginationWrapper}>
-				{Array.from(Array(5).keys()).map((key, index) => (
-				<View style={[styles.paginationDots, { opacity: pageIndex === key ? 1 : 0.05 }]} key={key} />
-				))}
-        		</View>
-		</SafeAreaView>
-     </>
+			</SafeAreaView>
+     	</>
 	)
 }
 
@@ -326,7 +328,6 @@ class login extends Component {
 					<Text style={styles.textLogin}>S'identifier</Text>
 					<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
 					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-					{/* <Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text> */}
 					<AnimateLoadingButton
 						ref={c => (this.loadingButton = c)}
 						width={250}
@@ -562,7 +563,7 @@ class main extends Component{
 					</Card>
 					<Card style={{borderRadius:10, marginLeft:5}}>
 						<CardItem cardBody style={{borderRadius:10}}>
-							<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
+							<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
 						</CardItem>
 						<CardItem style={{borderRadius:10}}>
 							<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>
