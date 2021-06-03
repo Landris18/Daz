@@ -115,6 +115,27 @@ export default StyleSheet.create({
 		marginTop:hp('2%'),
 		marginBottom:hp('6%')
 	},
+	inputPassCreate:{
+		fontFamily: 'Product',
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#444',
+		marginTop:hp('2%'),
+	},
+	inputPassCreateLast:{
+		fontFamily: 'Product',
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#444',
+		marginTop:hp('2%'),
+		marginBottom:hp('2%')
+	},
 	btnLogin:{
 		fontFamily:'ProductBold',
 		backgroundColor:'#ff005d',
