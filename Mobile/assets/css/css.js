@@ -94,6 +94,16 @@ export default StyleSheet.create({
 		color:'#444',
 		marginTop:hp('6%'),
 	},
+	inputUserChange:{
+		fontFamily: 'Product',
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#444',
+		marginTop:hp('2%'),
+	},
 	inputUserCreate:{
 		fontFamily: 'Product',
 		backgroundColor: '#f5f5f5',

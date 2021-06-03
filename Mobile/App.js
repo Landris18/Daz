@@ -56,26 +56,7 @@ export default class App extends Component{
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 					{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
 					<Stack.Screen name="intro" component={intro} options={{ headerShown: false }}/>
-					<Stack.Screen 
-						name="login" 
-						component={login} 
-						options={
-							{ 
-								headerShown: false,
-								// animations:{
-								// 	push: {
-								// 		content: {
-								// 			translationX: {
-								// 				from: require('react-native').Dimensions.get('window').width,
-								// 				to: 10,
-								// 				duration: 300
-								// 			}
-								// 		}
-								// 	}
-								// }
-							}
-						}
-					/>
+					<Stack.Screen name="login" component={login} options={{ headerShown: false}}/>
 					<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 					<Stack.Screen 
@@ -98,6 +79,8 @@ export default class App extends Component{
 						}
 					/>
 					<Stack.Screen name="mail_confirmation" component={mail_confirmation} options={{ headerShown: false }}/>
+					<Stack.Screen name="mail_confirmation_forgot" component={mail_confirmation_forgot} options={{ headerShown: false }}/>
+					<Stack.Screen name="change_pass" component={change_pass} options={{ headerShown: false }}/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		)
@@ -464,7 +447,6 @@ class create extends Component {
 					<TextInput style={styles.inputPassCreate} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
 					<TextInput style={styles.inputPassCreate} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
 					<TextInput style={styles.inputPassCreateLast} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-					{/* <Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text> */}
 					<AnimateLoadingButton
 						ref={d => (this.loadingButton = d)}
 						width={250}
@@ -495,14 +477,14 @@ class forgot extends Component{
 				<Text style={styles.titleForgot}>Forgot Password</Text>
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>
-				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('mail_confirmation_forgot')}>CONFIRMER</Text>
 			</View>
 		)
 	}	
 }
 
 
-//Page Forgot password
+//Page Mail Register
 class mail_confirmation extends Component{
 	constructor(props) {
 		super(props)
@@ -547,6 +529,97 @@ class mail_confirmation extends Component{
 	}	
 }
 
+
+//Page Mail Forgot
+class mail_confirmation_forgot extends Component{
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserCode: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
+		}
+	}
+
+	MailConfirmation = () =>{
+		const { UserCode }  = this.state ;
+		if (UserCode == this.props.route.params.User_code){
+			this.props.navigation.navigate('main');
+		}
+		else{
+			this.setState({
+				modalShow: true, 
+				errorText: "Votre code de confirmation n'est pas valide !", 
+				errorIcon:"alert-circle-check"
+			})
+		}
+	}
+
+	render(){
+		return(
+			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
+				<Text style={styles.titleForgot}>Confirm email</Text>
+				<Text style={styles.textForgot}>
+					Veuillez confirmer votre identité pour changer votre mot de passe.
+					Un code à été envoyé à votre adresse <Text style={styles.mail_c}>landry.apsa@gmail.com</Text>.
+				</Text>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUser} placeholder="Code de confirmation"/>
+				<View>
+					<Text style={styles.btnMail} onPress={this.MailConfirmation}>CONFIRMER</Text>
+					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('change_pass')}>ANNULER</Text>
+				</View>
+			</View>
+		)
+	}	
+}
+
+
+//Page Mail Forgot
+class change_pass extends Component{
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserCode: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
+		}
+	}
+
+	MailConfirmation = () =>{
+		const { UserCode }  = this.state ;
+		if (UserCode == this.props.route.params.User_code){
+			this.props.navigation.navigate('main');
+		}
+		else{
+			this.setState({
+				modalShow: true, 
+				errorText: "Votre code de confirmation n'est pas valide !", 
+				errorIcon:"alert-circle-check"
+			})
+		}
+	}
+
+	render(){
+		return(
+			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
+				<Text style={styles.titleForgot}>Change Password</Text>
+				<Text style={styles.textForgot}>
+					Veuillez réinitialiser votre mot de passe pour pouvoir utiliser votre compte.
+				</Text>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUser} placeholder="Nouveau password"/>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUserChange} placeholder="Confirm nouveau password"/>
+				<View>
+					<Text style={styles.btnMail} onPress={this.MailConfirmation}>CONFIRMER</Text>
+					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('login')}>ANNULER</Text>
+				</View>
+			</View>
+		)
+	}	
+}
 
 //Page MainPage
 class main extends Component{
