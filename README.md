@@ -1,6 +1,6 @@
 # `DAZ`
 <table>
-<tr><td>Application de streaming de musique pour un monde plus moderne !
+<tr><td>Daz est une application de streaming de musique pour conçue pour le monde moderne!
 </table>
 
 <h2>Téléchargement et Lancement</h2>
