@@ -1,4 +1,4 @@
-# `DAZ`
+# `DAZ (En cours de Dev)`
 <table>
 <tr><td>Daz est une application de streaming de musique pour conçue pour le monde moderne!
 </table>
