@@ -1,9 +1,9 @@
-# `DAZ`
+# `DAZ (En cours de Dev)`
 <table>
 <tr><td>Daz est une application de streaming de musique pour conçue pour le monde moderne!
 </table>
 
-<h2>Téléchargement et Lancement</h2>
+<h2>Téléchargement et Lancement : </h2>
   
 Nous supposons que vous avez déjà expo-cli installer dans votre sinon exécuter `npm install -g expo-cli` avant de continuer.
 
