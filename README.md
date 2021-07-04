@@ -32,6 +32,8 @@ Puis cloner le projet avec la commande `git clone https://github.com/iTeam-S/Daz
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
 
 <h3>CONTRIBUTEURS du projet Daz</h3>
+
+![Image des contributeurs GitHub](https://contrib.rocks/image?repo=iTeam-S/Daz)
     
 | Nom       | Niveau | Poste              | Profil Github                                             |
 | --------- | ------ | ------------------ | ----------------------------------------------------------|
