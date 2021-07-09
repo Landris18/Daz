@@ -3,9 +3,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import styles from './assets/css/css';
-import { Keyboard,View, Text, Image, ScrollView, ImageBackground} from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView, StatusBar} from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -20,6 +20,7 @@ import {
 import axios from 'axios'
 import { AsyncStorage } from 'react-native';
 import { AlertModal } from './components/modals/alertModal';
+import AnimateLoadingButton from 'react-native-animate-loading-button';
 
 
 //Gestion des screens
@@ -28,7 +29,7 @@ const Stack = createStackNavigator();
 //Token de l'utilisateur
 const KEY_TOKEN = 'USER_TOKEN';
 const KEY_ID = 'USER_ID';
-
+const KEY_ENTER = 'USER_ENTER';
 
 function loadProduct() {
 	Font.loadAsync({
@@ -54,26 +55,8 @@ export default class App extends Component{
 				<Stack.Navigator>
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
 					{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
-					<Stack.Screen 
-						name="login" 
-						component={login} 
-						options={
-							{ 
-								headerShown: false,
-								// animations:{
-								// 	push: {
-								// 		content: {
-								// 			translationX: {
-								// 				from: require('react-native').Dimensions.get('window').width,
-								// 				to: 10,
-								// 				duration: 300
-								// 			}
-								// 		}
-								// 	}
-								// }
-							}
-						}
-					/>
+					<Stack.Screen name="intro" component={intro} options={{ headerShown: false }}/>
+					<Stack.Screen name="login" component={login} options={{ headerShown: false}}/>
 					<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
 					<Stack.Screen 
@@ -96,6 +79,8 @@ export default class App extends Component{
 						}
 					/>
 					<Stack.Screen name="mail_confirmation" component={mail_confirmation} options={{ headerShown: false }}/>
+					<Stack.Screen name="mail_confirmation_forgot" component={mail_confirmation_forgot} options={{ headerShown: false }}/>
+					<Stack.Screen name="change_pass" component={change_pass} options={{ headerShown: false }}/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		)
@@ -105,33 +90,32 @@ export default class App extends Component{
 
 //Splash screen
 function splash({ navigation }){
-	AsyncStorage.getItem(KEY_ID).then(asyncStorageRes => {
-		var user_id = asyncStorageRes;
-		AsyncStorage.getItem(KEY_TOKEN).then(asyncStorageRes => {
-			var user_token = asyncStorageRes
-			if (user_id && user_token){
-				setTimeout(function () {
-					navigation.navigate('main', { User_name: user_id });
-				},1000);
-			}
-			else{
-				setTimeout(function () {
-					navigation.navigate('login');
-				},2000);
-				return(
-					<View style={styles.container}>
-						<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
-						<Image style={styles.logo} source={require('./assets/images/dlog.png')} ></Image>
-						<View style={styles.madeView}>
-							<Text style={styles.dazing}>DAZING</Text>
-							<Text style={styles.made}>Built by Black-Mavericks</Text>
-						</View>
-					</View>
-				)
-			}
+	AsyncStorage.getItem(KEY_ENTER).then(asyncStorageRes => {
+		var user_enter = asyncStorageRes;
+		AsyncStorage.getItem(KEY_ID).then(asyncStorageRes => {
+			var user_id = asyncStorageRes;
+			AsyncStorage.getItem(KEY_TOKEN).then(asyncStorageRes => {
+				var user_token = asyncStorageRes
+				if (user_enter){
+					if (user_id && user_token){
+						setTimeout(function () {
+							navigation.navigate('main', { User_name: user_id });
+						},1000);
+					}
+					else{
+						setTimeout(function () {
+							navigation.navigate('login');
+						},1000);
+					}
+				}
+				else{
+					setTimeout(function () {
+						navigation.navigate('intro');
+					},1000);
+				}
+			});
 		});
 	});
-	
 	return(
 		<View style={styles.container}>
 			<ImageBackground style={styles.backgroundImage} source={require('./assets/images/djs.jpg')} ></ImageBackground>
@@ -143,6 +127,62 @@ function splash({ navigation }){
 		</View>
 	)
 }
+
+
+
+function intro({ navigation }){
+	const [sliderState, setSliderState] = useState({ currentPage: 0 });
+	const { width, height } = Dimensions.get('window');
+	const setSliderPage = (event) => {
+		const { currentPage } = sliderState;
+		const { x } = event.nativeEvent.contentOffset;
+		const indexOfNextScreen = Math.round(x / width);
+		if (indexOfNextScreen !== currentPage) {
+			setSliderState({
+				...sliderState,
+				currentPage: indexOfNextScreen,
+			});
+		}
+	}
+	const { currentPage: pageIndex } = sliderState;
+	AsyncStorage.setItem(KEY_ENTER, "used_app");
+	return(
+		<>
+			<SafeAreaView style={{ flex: 1 }}>
+				<ScrollView style={{ flex: 1 }} horizontal={true} scrollEventThrottle={16} pagingEnabled={true} 
+					showsHorizontalScrollIndicator={false}
+					onScroll={(event) => {
+						setSliderPage(event);
+					}}>
+					<View style={{ width, height, backgroundColor:"#fff"  }}>
+						<Image style={styles.imgIntro} source={require('./assets/images/col.png')} ></Image>
+						<Text style={styles.titleIntro}>Ready everywhere</Text>
+						<Text style={styles.textIntro}>The first place that offer you all you need. Daz is everywhere and has no limit.</Text>
+						<Text style={styles.btnIntro} onPress={() => navigation.navigate('login')}>GET STARTED</Text>
+					</View>
+					<View style={{ width, height, backgroundColor:"#fff" }}>
+						<Image style={styles.imgIntro} source={require('./assets/images/col1.png')} ></Image>
+						<Text style={styles.titleIntro}>Utimate Sound</Text>
+						<Text style={styles.textIntro}>The first place that offer you all you need. Daz is everywhere and has no limit.</Text>
+						<Text style={styles.btnIntro} onPress={() => navigation.navigate('login')}>GET STARTED</Text>
+					</View>
+					<View style={{ width, height, backgroundColor:"#fff" }}>
+						<Image style={styles.imgIntro} source={require('./assets/images/col.png')} ></Image>
+						<Text style={styles.titleIntro}>Music non-stop</Text>
+						<Text style={styles.textIntro}>The first place that offer you all you need. Daz is everywhere and has no limit.</Text>
+						<Text style={styles.btnIntro} onPress={() => navigation.navigate('login')}>GET STARTED</Text>
+					</View>
+				</ScrollView>
+				<View style={styles.paginationWrapper}>
+					{Array.from(Array(3).keys()).map((key, index) => (
+					<View style={[styles.paginationDots, { opacity: pageIndex === key ? 1 : 0.15 }]} key={key} />
+					))}
+				</View>
+			</SafeAreaView>
+     	</>
+	)
+}
+
 
 
 //Bottom navigation
@@ -201,10 +241,14 @@ class login extends Component {
 			modalShow: false
 		});
 	}
+
   
 	UserLoginFunction = () =>{
+
 		const { UserUsername }  = this.state ;
 		const { UserPassword }  = this.state ;
+
+		this.loadingButton.showLoading(true);
 		
 		axios({
 			method: 'post',
@@ -215,6 +259,7 @@ class login extends Component {
 			}
 		})
 		.then((response) => {
+			this.loadingButton.showLoading(false);
 			Keyboard.dismiss()
 			if (response.status == 200){
 				Keyboard.dismiss()
@@ -224,37 +269,38 @@ class login extends Component {
 			}
 		})
 		.catch((err) => {
+			this.loadingButton.showLoading(false);
 			Keyboard.dismiss()
-			if (err.response.status == 401) {
-				Keyboard.dismiss()
-				if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
-					this.setState({
-						modalShow: true, 
-						errorText: err.response.data.error, 
-						errorIcon: "account-search"
-					})
-				}
-				else{
-					this.setState({
-						modalShow: true, 
-						errorText: err.response.data.error, 
-						errorIcon: "lock-alert"
-					})
+			if (err.response) {
+				if (err.response.status == 401) {
+					Keyboard.dismiss()
+					if (err.response.data.error == "Username doesn't exist, try another or sign up !"){
+						this.setState({
+							modalShow: true, 
+							errorText: err.response.data.error, 
+							errorIcon: "account-search"
+						})
+					}
+					else{
+						this.setState({
+							modalShow: true, 
+							errorText: err.response.data.error, 
+							errorIcon: "lock-alert"
+						})
+					}
 				}
 			}
 			else{
 				this.setState({
 					modalShow: true, 
-					errorText: "Something went wrong !", 
+					errorText: "Server did not respond !", 
 					errorIcon:"alert-circle-check"
 				})
 			}
 		})
 	}
 
-
 	render(){
-		
 		return (
 			<View style={styles.container}>
 				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
@@ -265,7 +311,19 @@ class login extends Component {
 					<Text style={styles.textLogin}>S'identifier</Text>
 					<TextInput  onChangeText={UserUsername => this.setState({UserUsername})} style={styles.inputUser} placeholder="Username" />
 					<TextInput onChangeText={UserPassword => this.setState({UserPassword})} style={styles.inputPass} placeholder="Password" secureTextEntry/>
-					<Text onPress={this.UserLoginFunction} style={styles.btnLogin}>LOGIN</Text>
+					<AnimateLoadingButton
+						ref={c => (this.loadingButton = c)}
+						width={250}
+						height={50}
+						title="LOGIN"
+						titleFontSize={15}
+						titleWeight={'100'}
+						titleColor="#fff"
+						backgroundColor="#ff005d"
+						titleFontFamily="Product"
+						borderRadius={25}
+						onPress={this.UserLoginFunction.bind(this)}
+        				/>
 					<Text style={styles.forgot} onPress={() => this.props.navigation.navigate('forgot')}>Forgot Password ?</Text>
 					<Text style={styles.signUp} onPress={() => this.props.navigation.navigate('create')}>Don't have Daz account? <Text style={styles.signColor}>Sign Up.</Text></Text>
 				</Container>
@@ -298,6 +356,7 @@ class create extends Component {
 	}
 
 	UserRegisterFunction = () =>{
+		this.loadingButton.showLoading(true);
 		const { UserUsername }  = this.state ;
 		const { UserMail }  = this.state ;
 		const { UserPassword }  = this.state ;
@@ -319,6 +378,7 @@ class create extends Component {
 						}
 					})
 					.then((response) => {
+						this.loadingButton.showLoading(false);
 						Keyboard.dismiss()
 						if (response.status == 200){
 							Keyboard.dismiss()
@@ -327,6 +387,7 @@ class create extends Component {
 						}
 					})
 					.catch((err) => {
+						this.loadingButton.showLoading(false);
 						Keyboard.dismiss()
 						if (err.response.status == 401) {
 							Keyboard.dismiss()
@@ -351,6 +412,7 @@ class create extends Component {
 						errorText: "Votre mot de passe ne correspond pas !", 
 						errorIcon:"alert-circle-check"
 					})
+					this.loadingButton.showLoading(false);
 				}
 			}
 			else{
@@ -359,6 +421,7 @@ class create extends Component {
 					errorText: "Le mot de passe doit comporter 6 caractères au minimum !", 
 					errorIcon:"alert-circle-check"
 				})
+				this.loadingButton.showLoading(false);
 			}
 		}
 		else{
@@ -367,6 +430,7 @@ class create extends Component {
 				errorText: "Invalid email format !", 
 				errorIcon:"alert-circle-check"
 			})
+			this.loadingButton.showLoading(false);
 		}
 	}
 
@@ -380,11 +444,23 @@ class create extends Component {
 				<Container style={styles.loginForm}>
 					<Text style={styles.textLogin}>Sign up</Text>
 					<TextInput style={styles.inputUserCreate} onChangeText={UserUsername => this.setState({UserUsername})} placeholder="Username"/>
-					<TextInput style={styles.inputPass} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
-					<TextInput style={styles.inputPass} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
-					<TextInput style={styles.inputPass} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
-					<Text style={styles.btnCreate} onPress={this.UserRegisterFunction}>CREATE ACCOUNT</Text>
-					<Text style={styles.signIn}>Already have Daz account? <Text style={styles.signColor}>Sign In.</Text></Text>
+					<TextInput style={styles.inputPassCreate} onChangeText={UserMail => this.setState({UserMail})} placeholder="Email"/>
+					<TextInput style={styles.inputPassCreate} onChangeText={UserPassword => this.setState({UserPassword})} placeholder="Password" secureTextEntry/>
+					<TextInput style={styles.inputPassCreateLast} onChangeText={UserCPassword => this.setState({UserCPassword})} placeholder="Confirm password" secureTextEntry/>
+					<AnimateLoadingButton
+						ref={d => (this.loadingButton = d)}
+						width={250}
+						height={50}
+						title="CREATE ACCOUNT"
+						titleFontSize={15}
+						titleWeight={'100'}
+						titleColor="#fff"
+						backgroundColor="#ff005d"
+						titleFontFamily="Product"
+						borderRadius={25}
+						onPress={this.UserRegisterFunction.bind(this)}
+        				/>
+					<Text style={styles.signIn}>Already have Daz account? <Text style={styles.signColor} onPress={() => this.props.navigation.navigate('login')}>Sign In.</Text></Text>
 				</Container>
 			</View>
 		)
@@ -397,18 +473,18 @@ class forgot extends Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.goBack()} name="left" size={28} color="#ff005d"/>
+				<AntDesign style={styles.goBack}  onPress={() => this.props.navigation.goBack()} name="left" size={22} color="#555"/>
 				<Text style={styles.titleForgot}>Forgot Password</Text>
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>
-				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('login')}>CONFIRMER</Text>
+				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('mail_confirmation_forgot')}>CONFIRMER</Text>
 			</View>
 		)
 	}	
 }
 
 
-//Page Forgot password
+//Page Mail Register
 class mail_confirmation extends Component{
 	constructor(props) {
 		super(props)
@@ -454,6 +530,97 @@ class mail_confirmation extends Component{
 }
 
 
+//Page Mail Forgot
+class mail_confirmation_forgot extends Component{
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserCode: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
+		}
+	}
+
+	MailConfirmation = () =>{
+		const { UserCode }  = this.state ;
+		if (UserCode == this.props.route.params.User_code){
+			this.props.navigation.navigate('main');
+		}
+		else{
+			this.setState({
+				modalShow: true, 
+				errorText: "Votre code de confirmation n'est pas valide !", 
+				errorIcon:"alert-circle-check"
+			})
+		}
+	}
+
+	render(){
+		return(
+			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
+				<Text style={styles.titleForgot}>Confirm email</Text>
+				<Text style={styles.textForgot}>
+					Veuillez confirmer votre identité pour changer votre mot de passe.
+					Un code à été envoyé à votre adresse <Text style={styles.mail_c}>landry.apsa@gmail.com</Text>.
+				</Text>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUser} placeholder="Code de confirmation"/>
+				<View>
+					<Text style={styles.btnMail} onPress={this.MailConfirmation}>CONFIRMER</Text>
+					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('change_pass')}>ANNULER</Text>
+				</View>
+			</View>
+		)
+	}	
+}
+
+
+//Page Mail Forgot
+class change_pass extends Component{
+	constructor(props) {
+		super(props)
+		this.state = {
+			UserCode: '',
+			modalShow: false,
+			errorText: '',
+			errorIcon: ''
+		}
+	}
+
+	MailConfirmation = () =>{
+		const { UserCode }  = this.state ;
+		if (UserCode == this.props.route.params.User_code){
+			this.props.navigation.navigate('main');
+		}
+		else{
+			this.setState({
+				modalShow: true, 
+				errorText: "Votre code de confirmation n'est pas valide !", 
+				errorIcon:"alert-circle-check"
+			})
+		}
+	}
+
+	render(){
+		return(
+			<View style={styles.container}>
+				<AlertModal text={this.state.errorText} icon={this.state.errorIcon} action={this.handler} isVisible={this.state.modalShow}> </AlertModal>
+				<Text style={styles.titleForgot}>Change Password</Text>
+				<Text style={styles.textForgot}>
+					Veuillez réinitialiser votre mot de passe pour pouvoir utiliser votre compte.
+				</Text>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUser} placeholder="Nouveau password"/>
+				<TextInput onChangeText={UserCode => this.setState({UserCode})} style={styles.inputUserChange} placeholder="Confirm nouveau password"/>
+				<View>
+					<Text style={styles.btnMail} onPress={this.MailConfirmation}>CONFIRMER</Text>
+					<Text style={styles.btnMailCancel} onPress={() => this.props.navigation.navigate('login')}>ANNULER</Text>
+				</View>
+			</View>
+		)
+	}	
+}
+
 //Page MainPage
 class main extends Component{
 	render(){
@@ -488,7 +655,7 @@ class main extends Component{
 					</Card>
 					<Card style={{borderRadius:10, marginLeft:5}}>
 						<CardItem cardBody style={{borderRadius:10}}>
-							<Image source={require('./assets/images/dj.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
+							<Image source={require('./assets/images/favo.jpg')}  style={{height: 100,borderTopLeftRadius:10, borderTopRightRadius:10, width: 105, flex: 1}}/>
 						</CardItem>
 						<CardItem style={{borderRadius:10}}>
 							<Text style={{fontFamily:'Product', color:'#555', fontSize:13}}><FontAwesome5 name="headphones" color="#000"></FontAwesome5>Artists</Text>

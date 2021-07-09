@@ -1,8 +1,25 @@
-# `DAZ`
+# `DAZ (En cours de Dev)`
 <table>
-<tr><td>Application de streaming de musique pour un monde plus moderne !
-  
+<tr><td>Daz est une application de streaming de musique pour conçue pour le monde moderne!
 </table>
+
+<h2>Téléchargement et Lancement : </h2>
+  
+Nous supposons que vous avez déjà expo-cli installer dans votre sinon exécuter `npm install -g expo-cli` avant de continuer.
+
+Puis cloner le projet avec la commande `git clone https://github.com/iTeam-S/Daz.git` </br>
+</br>
+ Puis accéder dans le dossier Mobile/ et taper `npm install` pour installer les dépendances et puis `expo start` pour lancer le projet.
+ 
+
+<h3>NOTE:</h3>
+<ul>
+  <li>Le projet est en cours de développemnt et est loin d'être terminé.</li>
+  <li>Il n'existe pas encore de release de ce projet.</li>
+  <li>Si vous avez des problèmes sur le lancement du projet, vous pouvez créer des issues.</li>
+</ul>
+</br>
+
 
 [![forthebadge made-with-javascript](http://ForTheBadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com/)
 

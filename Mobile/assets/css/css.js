@@ -54,8 +54,8 @@ export default StyleSheet.create({
 		height: hp('65%'),
 		position:'absolute',
 		bottom:hp('0%'),
-		borderTopRightRadius:30,
-		borderTopLeftRadius:30,
+		borderTopRightRadius:20,
+		borderTopLeftRadius:20,
 	},
 	logoLogin:{
 		width: wp('35%'),
@@ -94,6 +94,16 @@ export default StyleSheet.create({
 		color:'#444',
 		marginTop:hp('6%'),
 	},
+	inputUserChange:{
+		fontFamily: 'Product',
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#444',
+		marginTop:hp('2%'),
+	},
 	inputUserCreate:{
 		fontFamily: 'Product',
 		backgroundColor: '#f5f5f5',
@@ -113,6 +123,28 @@ export default StyleSheet.create({
 		paddingLeft:20,
 		color:'#444',
 		marginTop:hp('2%'),
+		marginBottom:hp('6%')
+	},
+	inputPassCreate:{
+		fontFamily: 'Product',
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#444',
+		marginTop:hp('2%'),
+	},
+	inputPassCreateLast:{
+		fontFamily: 'Product',
+		backgroundColor: '#f5f5f5',
+		width: wp('80%'),
+		height: hp('7%'),
+		borderRadius:25,
+		paddingLeft:20,
+		color:'#444',
+		marginTop:hp('2%'),
+		marginBottom:hp('2%')
 	},
 	btnLogin:{
 		fontFamily:'ProductBold',
@@ -170,7 +202,7 @@ export default StyleSheet.create({
 		fontWeight:'bold',
 		position:'absolute',
 		top:hp('8%'),
-		left:wp('8%')
+		right:wp('8%')
 	},
 	titleForgot:{
 		fontFamily: 'ProductBold',
@@ -346,5 +378,63 @@ btnModal:{
 	paddingRight:60,
 	marginTop:hp('3.5%')
 },
+
+//CustomIntro
+paginationWrapper: {
+	position: 'absolute',
+	bottom: hp("5%"),
+	left: 0,
+	right: 0,
+	justifyContent: 'center',
+	alignItems: 'center',
+	flexDirection: 'row',
+},
+paginationDots: {
+	height: 10,
+	width: 10,
+	borderRadius: 10 / 2,
+	backgroundColor: '#888888',
+	marginLeft: 10,
+},
+imgIntro:{
+	width: wp('80%'),
+	height: hp('40%'),
+	position:'absolute',
+	top:hp('17%'),
+	left:wp('10%')
+},
+titleIntro:{
+	fontFamily: 'ProductBold',
+	color: '#333',
+	fontSize: 30,
+	textAlign:'center',
+	alignItems: 'center',
+	justifyContent:'center',
+	top:hp('62%'),
+},
+textIntro:{
+	fontFamily: 'Product',
+	color: '#888',
+	width:wp("83%"),
+	fontSize: 16,
+	textAlign:'center',
+	alignItems: 'center',
+	justifyContent:'center',
+	top:hp('64%'),
+	left:wp("8.5%")
+},
+btnIntro:{
+	fontFamily:'ProductBold',
+	backgroundColor:'#ff005d',
+	fontSize:13,
+	color:'#fff',
+	borderRadius:22,
+	padding:hp("1.8%"),
+	paddingLeft:wp("20%"),
+	top:hp('67%'),
+	left:wp("20%"),
+	width:wp("60%")
+},
+
 
 });
