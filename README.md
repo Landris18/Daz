@@ -5,7 +5,7 @@
 
 <h2>Téléchargement et Lancement : </h2>
   
-Nous supposons que vous avez déjà expo-cli installer dans votre sinon exécuter `npm install -g expo-cli` avant de continuer.
+Nous supposons que vous avez déjà expo-cli installer sur votre machine sinon exécuter `npm install -g expo-cli` avant de continuer.
 
 Puis cloner le projet avec la commande `git clone https://github.com/iTeam-S/Daz.git` </br>
 </br>

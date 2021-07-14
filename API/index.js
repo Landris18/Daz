@@ -89,6 +89,10 @@ async function register({ username, email, password ,res}){
 	}
 }
 
+async function send_code({email, reason}){
+	const
+}
+
 
 // Login with {username, password} and return {userID&Token or Error}
 app.post('/api/v1/login', async function (req, res){
