@@ -36,5 +36,5 @@ Puis cloner le projet avec la commande `git clone https://github.com/iTeam-S/Daz
 | Nom       | Niveau | Poste              | Profil Github                                             |
 | --------- | ------ | ------------------ | ----------------------------------------------------------|
 | Landry    | L3     | Développeur GPAO  | [Landry Manankoraisina](https://github.com/Landris18)      |
-| Arlème    | L2     | Développeur Wordpress                    | [Arlème Johnson](https://github.com/rootkit7628)           |
+| Arlème    | L2     | Développeur Odoo                    | [Arlème Johnson](https://github.com/rootkit7628)           |
 | Gaetan    | L3     | Développeur Bcust                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
