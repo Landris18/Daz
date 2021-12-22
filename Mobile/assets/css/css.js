@@ -72,7 +72,7 @@ export default StyleSheet.create({
 		fontSize: 20,
 		width:wp('50%'),
 		position:'absolute',
-		top:hp('15%'),
+		top:hp('16.5%'),
 		left:wp('40%')
 
 	},
