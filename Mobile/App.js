@@ -43,12 +43,13 @@ loadProduct()
 export default class App extends Component{
 
 	componentDidMount() {
-		
 		loc(this);
 	}
+
 	componentWillUnMount() {
 		rol();
 	}
+
 	render(){
 		return(
 			<NavigationContainer>
@@ -100,18 +101,18 @@ function splash({ navigation }){
 					if (user_id && user_token){
 						setTimeout(function () {
 							navigation.navigate('main', { User_name: user_id });
-						},1000);
+						},1500);
 					}
 					else{
 						setTimeout(function () {
 							navigation.navigate('login');
-						},1000);
+						},1500);
 					}
 				}
 				else{
 					setTimeout(function () {
 						navigation.navigate('intro');
-					},1000);
+					},1500);
 				}
 			});
 		});
@@ -129,7 +130,7 @@ function splash({ navigation }){
 }
 
 
-
+// Daz intro
 function intro({ navigation }){
 	const [sliderState, setSliderState] = useState({ currentPage: 0 });
 	const { width, height } = Dimensions.get('window');
@@ -148,7 +149,7 @@ function intro({ navigation }){
 	AsyncStorage.setItem(KEY_ENTER, "used_app");
 	return(
 		<>
-			<SafeAreaView style={{ flex: 1 }}>
+			<SafeAreaView style={{ flex: 1, backgroundColor:"#fff" }}>
 				<ScrollView style={{ flex: 1 }} horizontal={true} scrollEventThrottle={16} pagingEnabled={true} 
 					showsHorizontalScrollIndicator={false}
 					onScroll={(event) => {
