@@ -6,22 +6,14 @@
 <h2>Téléchargement et Lancement : </h2>
   
 Nous supposons que vous avez déjà expo-cli installer sur votre machine sinon exécuter `npm install -g expo-cli` avant de continuer.
-
+</br>
 Puis cloner le projet avec la commande `git clone https://github.com/iTeam-S/Daz.git` </br>
 </br>
 Puis accéder dans le dossier Mobile/ et taper `npm install` pour installer les dépendances et puis `expo start` pour lancer le projet.
 </br>
 Si vous avez un problème avec `RNCSafeArea`, accèder dans le dossier `Mobile/node_modules/expo/node_modules/` et supprimer dossier dedans.
-Puis supprimer la ligne `safe-area-context` dans `Mobile/node_modules/expo/package.json`. Une fois fini, relancer le projet avec la commande `expo start`.
-
-
-<h3>NOTE:</h3>
-<ul>
-  <li>Le projet est en cours de développemnt</li>
-  <li>Il n'existe pas encore de release de ce projet.</li>
-  <li>Si vous avez des problèmes sur le lancement du projet, vous pouvez créer des issues.</li>
-</ul>
 </br>
+Puis supprimer la ligne `safe-area-context` dans `Mobile/node_modules/expo/package.json`. Une fois fini, relancer le projet avec la commande `expo start`.
 
 
 [![forthebadge made-with-javascript](http://ForTheBadge.com/images/badges/made-with-javascript.svg)](https://www.javascript.com/)
@@ -40,6 +32,6 @@ Puis supprimer la ligne `safe-area-context` dans `Mobile/node_modules/expo/packa
     
 | Nom       | Niveau | Poste              | Profil Github                                             |
 | --------- | ------ | ------------------ | ----------------------------------------------------------|
-| Landry    | L3     | Développeur GPAO  | [Landry Manankoraisina](https://github.com/Landris18)      |
+| Landry    | L3     | Développeur Django/Angular  | [Landry Manankoraisina](https://github.com/Landris18)      |
 | Arlème    | L2     | Développeur Odoo                    | [Arlème Johnson](https://github.com/rootkit7628)           |
-| Gaetan    | L3     | Développeur Bcust                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
+| Gaetan    | L3     | Développeur Exploit                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
