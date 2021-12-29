@@ -1,9 +1,9 @@
-const mail = require('./conf').mail
+const mail = require('./mailer').mail
 
 async function send_mail({ dest_mail, subject, body }){
 	let mailOptions = {
-      	from: 'arleme.dev7@gmail.com',
- 		to: dest_mail,
+      	from: process.env.EMAIL,
+ 		    to: dest_mail,
       	subject: subject,
       	text: body
     };
