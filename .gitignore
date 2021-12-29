@@ -1,4 +1,4 @@
-# Build and default files
+2# Build and default files
 vscodecolor.css
 node_modules/
 .expo/*
@@ -15,8 +15,6 @@ web-report/
 API/node_modules/
 Mobile/node_modules/
 Mobile/.expo/
+*.env
 # macOS
 .DS_Store
-
-# Config file for
-API/conf.js
