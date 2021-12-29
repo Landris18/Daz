@@ -1,0 +1,18 @@
+# # Exemple register request
+POST http://localhost:3001/api/v1/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "hungerfist",
+    "email": "arleme.botoravony@esti.mg",
+    "password": "hungerfist"
+}
+
+# Exemple login request
+POST http://localhost:3001/api/v1/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "hungerfist",
+    "password": "hungerfist"
+}
