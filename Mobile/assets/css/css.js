@@ -16,23 +16,23 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		flex: 2,
 		justifyContent:'center',
-     },
-     logo:{
+    },
+    logo:{
 		width: wp('35%'),
 		height: hp('25%'),
 		justifyContent:'center',
           alignItems: 'center',
-     },
+    },
 	madeView:{
 		position:'absolute',
 		bottom:45,
 		alignItems:'center',
-     },
-     dazing:{
+    },
+    dazing:{
           fontFamily: 'ProductBold',
 		color: '#ffffff',
           fontSize: 14,
-     },
+    },
 	made:{
 		fontFamily: 'Product',
 		color: '#ffffff',
