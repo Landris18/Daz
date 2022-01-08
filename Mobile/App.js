@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component, useState } from 'react';
 import styles from './assets/css/css';
-import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView, StatusBar} from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView} from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -21,6 +21,7 @@ import axios from 'axios'
 import { AsyncStorage } from 'react-native';
 import { AlertModal } from './components/modals/alertModal';
 import AnimateLoadingButton from 'react-native-animate-loading-button';
+// import { Video } from 'expo-av';
 
 
 //Gestion des screens
@@ -31,18 +32,23 @@ const KEY_TOKEN = 'USER_TOKEN';
 const KEY_ID = 'USER_ID';
 const KEY_ENTER = 'USER_ENTER';
 
-function loadProduct() {
-	Font.loadAsync({
+async function loadFont(){
+	await Font.loadAsync({
 		'Product': require('./assets/fonts/PS.ttf'),
 		'ProductBold': require('./assets/fonts/PSBold.ttf'),
 	})
 }
-loadProduct()
+
+loadFont();
 
 
 export default class App extends Component{
 
-	componentDidMount() {
+	async componentDidMount() {
+		await Font.loadAsync({
+			'Product': require('./assets/fonts/PS.ttf'),
+			'ProductBold': require('./assets/fonts/PSBold.ttf'),
+		});
 		loc(this);
 	}
 
@@ -91,6 +97,7 @@ export default class App extends Component{
 
 //Splash screen
 function splash({ navigation }){
+	
 	AsyncStorage.getItem(KEY_ENTER).then(asyncStorageRes => {
 		var user_enter = asyncStorageRes;
 		AsyncStorage.getItem(KEY_ID).then(asyncStorageRes => {
@@ -130,10 +137,12 @@ function splash({ navigation }){
 }
 
 
-// Daz intro
+// Introduction sur les fonctionnalités de l'application
 function intro({ navigation }){
+
 	const [sliderState, setSliderState] = useState({ currentPage: 0 });
 	const { width, height } = Dimensions.get('window');
+
 	const setSliderPage = (event) => {
 		const { currentPage } = sliderState;
 		const { x } = event.nativeEvent.contentOffset;
@@ -145,8 +154,11 @@ function intro({ navigation }){
 			});
 		}
 	}
+
 	const { currentPage: pageIndex } = sliderState;
+
 	AsyncStorage.setItem(KEY_ENTER, "used_app");
+
 	return(
 		<>
 			<SafeAreaView style={{ flex: 1, backgroundColor:"#fff" }}>
@@ -212,6 +224,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 //Page Login
 class login extends Component {
+
 	constructor(props) {
 		super(props)
 		this.handler = this.handler.bind(this);
@@ -229,9 +242,11 @@ class login extends Component {
 	componentDidMount() {
 		BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 	}
+
 	componentWillUnmount() {
 		BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
 	}
+
 	handleBackButtonClick() {
 		this.props.navigation.navigate('login');
 		return true;
@@ -336,8 +351,9 @@ class login extends Component {
 
 //Page création de compte
 class create extends Component {
+
 	constructor(props) {
-		super(props)
+		super(props);
 		this.handler = this.handler.bind(this);
 		this.state = {
 			UserUsername: '',
@@ -471,6 +487,7 @@ class create extends Component {
 
 //Page Forgot password
 class forgot extends Component{
+
 	render(){
 		return(
 			<View style={styles.container}>
@@ -479,6 +496,17 @@ class forgot extends Component{
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>
 				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('mail_confirmation_forgot')}>CONFIRMER</Text>
+
+				{/* <Video
+					source={{ uri: 'http://www.hesgoal.com/157e5dcc-69c5-415a-9166-0575f84c071c' }}
+					rate={1.0}
+					volume={1.0}
+					isMuted={false}
+					resizeMode="cover"
+					shouldPlay
+					isLooping
+					style={{ width: 300, height: 300 }}
+				/> */}
 			</View>
 		)
 	}	
@@ -487,6 +515,7 @@ class forgot extends Component{
 
 //Page Mail Register
 class mail_confirmation extends Component{
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -533,8 +562,9 @@ class mail_confirmation extends Component{
 
 //Page Mail Forgot
 class mail_confirmation_forgot extends Component{
+
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			UserCode: '',
 			modalShow: false,
@@ -579,6 +609,7 @@ class mail_confirmation_forgot extends Component{
 
 //Page Mail Forgot
 class change_pass extends Component{
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -624,6 +655,7 @@ class change_pass extends Component{
 
 //Page MainPage
 class main extends Component{
+
 	render(){
 		return(
 			<View>
