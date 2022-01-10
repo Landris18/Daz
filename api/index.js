@@ -126,25 +126,28 @@ async function login({ username, password, response }) {
         response.status(500).json({ error : "Some Error Occured" })
       }
       let user = res[0]
-
       if(!user){
           return response.status(401).json({ error :'Username doesn\'t exist, try another or sign up !'})
-      } 
-      else if(bcrypt.compare(password, user.password)) {
-      //else if(password == user.password) {
-          return response.status(200).json({
+      }
+      bcrypt.compare(password, user.password, function(err, match) {
+          if (err) {
+             console.log(err)
+             response.status(500).json({ error : "Some Error Occured" })
+          }
+      	  if(match){
+		return response.status(200).json({
               userID : user.id,
               token : jwt.sign(
-                { userID: user.id },
-                'BLACK_MAVERICK_TOKEN',
-                { expiresIn: '7 days' }
-              )
-          })
-      }
-      else{
-          return response.status(401).json({ error :'You inserted an incorrect password !'})
-      }
-  })
+                   { userID: user.id },
+                   'BLACK_MAVERICK_TOKEN',
+                   { expiresIn: '7 days' }
+                 )
+              })
+          }else{
+              return response.status(401).json({ error :'You inserted an incorrect password !'})
+          }
+      });
+ })
 }
 
 

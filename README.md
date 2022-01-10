@@ -1,9 +1,9 @@
 # `DAZ`
-<table>
-<tr><td>Daz est une application de streaming de musique pour conçue pour le monde moderne!
-</table>
 
-<h2>Téléchargement et Lancement : </h2>
+Daz est une application de streaming de musique pour conçue pour le monde moderne!
+
+
+<h2>Téléchargement et Lancement</h2>
   
 Nous supposons que vous avez déjà expo-cli installer sur votre machine sinon exécuter `npm install -g expo-cli` avant de continuer.
 </br>
@@ -29,9 +29,4 @@ Puis supprimer la ligne `safe-area-context` dans `Mobile/node_modules/expo/packa
 <h3>CONTRIBUTEURS du projet Daz</h3>
 
 ![Image des contributeurs GitHub](https://contrib.rocks/image?repo=iTeam-S/Daz)
-    
-| Nom       | Niveau | Poste              | Profil Github                                             |
-| --------- | ------ | ------------------ | ----------------------------------------------------------|
-| Landry    | L3     | Développeur Django/Angular  | [Landry Manankoraisina](https://github.com/Landris18)      |
-| Arlème    | L2     | Développeur Odoo                    | [Arlème Johnson](https://github.com/rootkit7628)           |
-| Gaetan    | L3     | Développeur Exploit                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
+
