@@ -34,4 +34,3 @@ Puis supprimer la ligne `safe-area-context` dans `Mobile/node_modules/expo/packa
 | --------- | ------ | ------------------ | ----------------------------------------------------------|
 | Landry    | L3     | Développeur Django/Angular  | [Landry Manankoraisina](https://github.com/Landris18)      |
 | Arlème    | L2     | Développeur Odoo                    | [Arlème Johnson](https://github.com/rootkit7628)           |
-| Gaetan    | L3     | Développeur Exploit                    | [Gaetan Jonathan](https://github.com/gaetan103)           |
