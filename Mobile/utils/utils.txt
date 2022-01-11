@@ -43,3 +43,7 @@ const Tab = createMaterialBottomTabNavigator();
 // 		</Tab.Navigator>
 // 	)
 // }
+
+
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+

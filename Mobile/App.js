@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component, useState } from 'react';
 import styles from './assets/css/css';
 import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView, BackHandler, AsyncStorage } from 'react-native';
@@ -37,7 +36,7 @@ loadFont();
 
 export default class App extends Component{
 
-	componentDidMount() {
+	async componentDidMount() {
 		loc(this);
 	}
 
@@ -589,13 +588,14 @@ class change_pass extends Component{
 
 //Page MainPage
 class main extends Component{
+
 	render(){
 		return(
 			<View>
 				<View style={styles.container}>
 					<Image style={styles.coverImage} source={require('./assets/images/acover.jpg')} />
 					<Ionicons name="menu" size={24} color="#fff" style={styles.menuIcon}/>
-					<Text style={styles.textAvatar}>{this.props.route.params.User_name}</Text>
+					{/* <Text style={styles.textAvatar}>{this.props.route.params.User_name}</Text> */}
 					<Image style={styles.avatarImage} source={require('./assets/images/playlogo.png')}/>
 					<Text style={styles.editCover} onPress={() => navigation.navigate('login')}>
 						<Entypo name="camera" size={13} color="#fff"> EDIT</Entypo>

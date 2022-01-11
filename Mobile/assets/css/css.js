@@ -1,5 +1,10 @@
 import { StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+// import * as Font from 'expo-font';
+
+
+
+
 
 export default StyleSheet.create({
 //Page de chargement//
