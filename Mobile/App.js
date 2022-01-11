@@ -1,28 +1,20 @@
-//Importations des modules et des components
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component, useState } from 'react';
 import styles from './assets/css/css';
-import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView} from 'react-native';
+import { Keyboard,View, Text, Image, ScrollView, ImageBackground, Dimensions, SafeAreaView, BackHandler, AsyncStorage } from 'react-native';
 import { Card, CardItem, Container} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
-import { BackHandler } from 'react-native';
 import {
-	widthPercentageToDP as wp, 
-	heightPercentageToDP as hp, 
 	listenOrientationChange as loc,
 	removeOrientationListener as rol
 } from 'react-native-responsive-screen';
 import axios from 'axios'
-import { AsyncStorage } from 'react-native';
 import { AlertModal } from './components/modals/alertModal';
 import AnimateLoadingButton from 'react-native-animate-loading-button';
-// import { Video } from 'expo-av';
-
 
 //Gestion des screens
 const Stack = createStackNavigator();
@@ -45,10 +37,6 @@ loadFont();
 export default class App extends Component{
 
 	async componentDidMount() {
-		await Font.loadAsync({
-			'Product': require('./assets/fonts/PS.ttf'),
-			'ProductBold': require('./assets/fonts/PSBold.ttf'),
-		});
 		loc(this);
 	}
 
@@ -61,30 +49,11 @@ export default class App extends Component{
 			<NavigationContainer>
 				<Stack.Navigator>
 					<Stack.Screen name="splash" component={splash} options={{ headerShown: false }}/>
-					{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
 					<Stack.Screen name="intro" component={intro} options={{ headerShown: false }}/>
 					<Stack.Screen name="login" component={login} options={{ headerShown: false}}/>
 					<Stack.Screen name="create" component={create} options={{ headerShown: false }}/>
 					<Stack.Screen name="main" component={main} options={{ headerShown: false }}/>
-					<Stack.Screen 
-						name="forgot" 
-						component={forgot} 
-						options={
-							{ 	
-								headerShown:false,
-								// title:'Forgot password',
-								// headerStyle: {  
-								// 	backgroundColor: '#f25046',
-								// 	elevation:3,  
-								// },  
-								// headerTintColor: '#ffffff',  
-								// headerTitleStyle: {  
-								// 	fontFamily:'Product',
-								// 	fontSize:16,
-								// },   
-							}
-						}
-					/>
+					<Stack.Screen name="forgot" component={forgot} options={{ headerShown: false }}/>
 					<Stack.Screen name="mail_confirmation" component={mail_confirmation} options={{ headerShown: false }}/>
 					<Stack.Screen name="mail_confirmation_forgot" component={mail_confirmation_forgot} options={{ headerShown: false }}/>
 					<Stack.Screen name="change_pass" component={change_pass} options={{ headerShown: false }}/>
@@ -195,31 +164,6 @@ function intro({ navigation }){
      	</>
 	)
 }
-
-
-
-//Bottom navigation
-const Tab = createMaterialBottomTabNavigator();
-// function log_sign(){
-// 	return(
-// 		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
-// 			<Tab.Screen name="login" component={login} 
-// 				options={{ 
-// 					headerShown: false, 
-// 					title: '',
-// 					tabBarIcon:({ color })=>(<AntDesign name="login" size={24} color={color}/>)
-// 				}}
-// 			/>
-// 			<Tab.Screen name="create" component={create} 
-// 				options={{ 
-// 					headerShown: false, 
-// 					title: '', 
-// 					tabBarIcon:({ color })=>(<Ionicons name="ios-create-outline" size={24} color={color}/>)
-// 				}}
-// 			/>
-// 		</Tab.Navigator>
-// 	)
-// }
 
 
 //Page Login
@@ -496,17 +440,6 @@ class forgot extends Component{
 				<Text style={styles.textForgot}>Veuillez saisir votre adresse email pour récupérer votre compte</Text>
 				<TextInput style={styles.inputUser} placeholder="Email address"/>
 				<Text style={styles.btnForgot} onPress={() => this.props.navigation.navigate('mail_confirmation_forgot')}>CONFIRMER</Text>
-
-				{/* <Video
-					source={{ uri: 'http://www.hesgoal.com/157e5dcc-69c5-415a-9166-0575f84c071c' }}
-					rate={1.0}
-					volume={1.0}
-					isMuted={false}
-					resizeMode="cover"
-					shouldPlay
-					isLooping
-					style={{ width: 300, height: 300 }}
-				/> */}
 			</View>
 		)
 	}	

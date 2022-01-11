@@ -1,0 +1,49 @@
+{/* <Stack.Screen name="log_sign" component={log_sign} options={{ headerShown: false }}/> */}
+
+<Stack.Screen 
+    name="forgot" 
+    component={forgot} 
+    options={
+        { 	
+            headerShown:false,
+            // title:'Forgot password',
+            // headerStyle: {  
+            // 	backgroundColor: '#f25046',
+            // 	elevation:3,  
+            // },  
+            // headerTintColor: '#ffffff',  
+            // headerTitleStyle: {  
+            // 	fontFamily:'Product',
+            // 	fontSize:16,
+            // },   
+        }
+    }
+/>
+
+
+//Bottom navigation
+const Tab = createMaterialBottomTabNavigator();
+// function log_sign(){
+// 	return(
+// 		<Tab.Navigator shifting='true' barStyle={styles.bottomBar} activeColor="#f25046" >
+// 			<Tab.Screen name="login" component={login} 
+// 				options={{ 
+// 					headerShown: false, 
+// 					title: '',
+// 					tabBarIcon:({ color })=>(<AntDesign name="login" size={24} color={color}/>)
+// 				}}
+// 			/>
+// 			<Tab.Screen name="create" component={create} 
+// 				options={{ 
+// 					headerShown: false, 
+// 					title: '', 
+// 					tabBarIcon:({ color })=>(<Ionicons name="ios-create-outline" size={24} color={color}/>)
+// 				}}
+// 			/>
+// 		</Tab.Navigator>
+// 	)
+// }
+
+
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+

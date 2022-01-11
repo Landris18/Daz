@@ -1,16 +1,9 @@
-// //Importations des modules et des components
-// import 'react-native-gesture-handler';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createStackNavigator } from '@react-navigation/stack';
-// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 
-import { Keyboard,View, Text, Image, ScrollView, Alert, ImageBackground} from 'react-native';
+import { View, Text} from 'react-native';
 import Modal from 'react-native-modal';
 import styles from '../../assets/css/css';
-// import * as Font from 'expo-font';
-import { Ionicons,FontAwesome5, Entypo, MaterialIcons, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
-// import { TextInput } from 'react-native-gesture-handler';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
