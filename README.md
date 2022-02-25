@@ -3,11 +3,11 @@
 Daz est une application de streaming de musique pour conçue pour le monde moderne!
 
 
-<h2>Téléchargement et Lancement</h2>
+<h2>Lancement du projet</h2>
   
 Nous supposons que vous avez déjà expo-cli installer sur votre machine sinon exécuter `npm install -g expo-cli` avant de continuer.
 </br>
-Puis cloner le projet avec la commande `git clone https://github.com/iTeam-S/Daz.git` </br>
+Puis cloner le projet avec la commande `git clone https://github.com/Landris18/Daz.git` </br>
 </br>
 Puis accéder dans le dossier Mobile/ et taper `npm install` pour installer les dépendances et puis `expo start` pour lancer le projet.
 </br>
