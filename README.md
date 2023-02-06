@@ -1,4 +1,4 @@
-# `DAZ`
+# `Daz`
 
 Daz est une application de streaming de musique pour conçue pour le monde moderne!
 
@@ -28,5 +28,5 @@ Puis supprimer la ligne `safe-area-context` dans `Mobile/node_modules/expo/packa
 
 <h3>CONTRIBUTEURS du projet Daz</h3>
 
-![Image des contributeurs GitHub](https://contrib.rocks/image?repo=iTeam-S/Daz)
+![Image des contributeurs GitHub](https://contrib.rocks/image?repo=Landris18/Daz)
 
